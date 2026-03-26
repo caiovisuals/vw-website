@@ -1,4 +1,4 @@
-export default function Dealers() {
+export default function PreOwned() {
     return (
         <div></div>
     )

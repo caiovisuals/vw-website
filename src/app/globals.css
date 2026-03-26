@@ -1,11 +1,59 @@
+@font-face {
+    font-family: 'VWHead';
+    src: url('/fonts/VWHead-Regular.otf') format('opentype');
+}
 @import "tailwindcss";
 
+* {
+    box-sizing: border-box;
+    font-family: "Geologica";
+}
+
 :root {
-    --background: #ffffff;
-    --text: #000000;
+    --white-background: #ffffff;
+    --black-background: #000000;
+    --white-text: #ffffff;
+    --white-text-hover: #cccccc;
+    --white-border: #585858;
+    --white-border-hover: #646464;
+    --black-text: #000000;
+    --dark-blue: #131C5F;
+    --light-blue: #6EA9E3;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--white-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark-blue);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-blue);
 }
 
 body {
-    background: var(--background);
-    color: var(--text);
+    background: var(--white-background);
+    color: var(--black-text);
+}
+
+.vw-font {
+    font-family: "VWHead", sans-serif;
+}
+
+.transition-normal {
+    transition: all 0.3s ease;
+}
+
+.transition-fast {
+    transition: all 0.15s ease;
 }
