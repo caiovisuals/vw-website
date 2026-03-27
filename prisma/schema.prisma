@@ -1,5 +1,5 @@
 generator client {
-    provider = "prisma-client"
+    provider = "prisma-client-js"
     output   = "../src/generated/prisma"
 }
 
@@ -36,10 +36,24 @@ model User {
     lastLoginAt      DateTime?
 
     sessions         Session[]
+    passwordResets   PasswordReset[]
     savedConfigs     SavedConfiguration[]
     leads            Lead[]
 
     @@map("users")
+}
+
+model PasswordReset {
+    id        String   @id @default(cuid())
+    userId    String
+    token     String   @unique
+    expiresAt DateTime
+    usedAt    DateTime?
+    createdAt DateTime @default(now())
+
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("password_resets")
 }
 
 model SavedConfiguration {

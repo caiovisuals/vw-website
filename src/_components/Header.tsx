@@ -29,24 +29,23 @@ export default function Header() {
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.useful}</label>
-                            <Link href="/login" className="hover:text-[var(--black-text-hover)] transition-fast">Logar</Link>
-                            <Link href="/register" className="hover:text-[var(--black-text-hover)] transition-fast">Cadastrar</Link>
-                            <Link href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">Esqueci minha Senha</Link>
+                            <Link href="/login" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.login}</Link>
+                            <Link href="/register" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.register}</Link>
+                            <Link href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.buy}</label>
-                            <Link href="/build-your-model" className="hover:text-[var(--black-text-hover)] transition-fast">Monte seu Modelo</Link>
-                            <Link href="/dealers" className="hover:text-[var(--black-text-hover)] transition-fast">Concessionárias</Link>
-                            <Link href="/consortium" className="hover:text-[var(--black-text-hover)] transition-fast">Consórcio</Link>
-                            <Link href="/sales-and-finance/consortium" className="hover:text-[var(--black-text-hover)] transition-fast">Consórcio</Link>
-                            <Link href="/sales-and-finance/finance" className="hover:text-[var(--black-text-hover)] transition-fast">Financiamento</Link>
-                            <Link href="/sales-and-finance/pre-owned" className="hover:text-[var(--black-text-hover)] transition-fast">Seminovos</Link>
+                            <Link href="/build-your-model" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.buildYourModel}</Link>
+                            <Link href="/dealers" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.dealers}</Link>
+                            <Link href="/sales-and-finance/consortium" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.consortium}</Link>
+                            <Link href="/sales-and-finance/finance" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.finance}</Link>
+                            <Link href="/sales-and-finance/pre-owned" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.preOwned}</Link>
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.legal}</label>
-                            <Link href="/legal-information" className="hover:text-[var(--black-text-hover)] transition-fast">Informação Legal</Link>
-                            <Link href="/terms-of-use" className="hover:text-[var(--black-text-hover)] transition-fast">Termos de Uso</Link>
-                            <Link href="/privacy-policies" className="hover:text-[var(--black-text-hover)] transition-fast">Politicas de Privacidade</Link>
+                            <Link href="/legal-information" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.legalInformation}</Link>
+                            <Link href="/terms-of-use" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.termsOfUse}</Link>
+                            <Link href="/privacy-policies" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.privacyPolicies}</Link>
                         </div>
                     </div>
                 </div>

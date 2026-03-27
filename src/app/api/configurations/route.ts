@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
                 colors: { where: data.colorId ? { id: data.colorId } : { isDefault: true } },
                 wheels: { where: data.wheelId ? { id: data.wheelId } : { isDefault: true } },
                 seats:  { where: data.seatId  ? { id: data.seatId  } : { isDefault: true } },
-                technologies: data.techIds.length ? { where: { id: { in: data.techIds } } } : false,
+                ...(data.techIds.length ? { technologies: { where: { id: { in: data.techIds } } } } : {})
             },
         })
 

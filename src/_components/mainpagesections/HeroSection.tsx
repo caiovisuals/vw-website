@@ -20,12 +20,12 @@ export default function HeroSection() {
         },
         {
             video: "/assets/hero-videos/taos.mp4",
-            title: t.hero.taos.subtitle,
+            title: t.hero.taos.title,
             subtitle: t.hero.taos.subtitle
         },
         {
             video: "/assets/hero-videos/polo.mp4",
-            title: t.hero.polo.subtitle,
+            title: t.hero.polo.title,
             subtitle: t.hero.polo.subtitle
         }
     ]
