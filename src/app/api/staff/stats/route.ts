@@ -62,23 +62,25 @@ export async function GET(_req: NextRequest) {
             }),
         ])
 
-        type TopCar = { carId: string; _count: { carId: number } }
+        type TopCarRaw = { carId: string | null; _count: { carId: number } }
         type LeadStatus = { status: string; _count: { status: number } }
 
-        const topCarIds = topCars
-            .map((c: TopCar) => c.carId)
-            .filter(Boolean) as string[]
+        const topCarIds = (topCars as TopCarRaw[])
+            .map(c => c.carId)
+            .filter((id): id is string => !!id)
 
         const topCarDetails = await prisma.car.findMany({
             where: { id: { in: topCarIds } },
             select: { id: true, name: true, imageUrl: true },
         })
 
-        const topCarsHydrated = topCars.map((c: TopCar) => ({
-            carId: c.carId,
-            count: c._count.carId,
-            car: topCarDetails.find((d: { id: string; name: string; imageUrl: string }) => d.id === c.carId) ?? null,
-        }))
+        const topCarsHydrated = (topCars as TopCarRaw[])
+            .filter((c): c is { carId: string; _count: { carId: number } } => !!c.carId)
+            .map(c => ({
+                carId: c.carId,
+                count: c._count.carId,
+                car: topCarDetails.find(d => d.id === c.carId) ?? null,
+            }))
 
         const leadStatusMap = Object.fromEntries(
             leadsByStatus.map((l: LeadStatus) => [l.status, l._count.status])
