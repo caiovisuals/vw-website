@@ -1,0 +1,239 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../src/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Session {
+    id        String   @id @default(cuid())
+    userId    String
+    token     String   @unique
+    expiresAt DateTime
+    createdAt DateTime @default(now())
+    ipAddress String?
+    userAgent String?
+
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("sessions")
+}
+
+model User {
+    id               String    @id @default(cuid())
+    name             String
+    email            String    @unique
+    emailVerified    DateTime?
+    passwordHash     String?
+    role             Role      @default(USER)
+    avatarUrl        String?
+    phone            String?
+    createdAt        DateTime  @default(now())
+    updatedAt        DateTime  @updatedAt
+    lastLoginAt      DateTime?
+
+    sessions         Session[]
+    savedConfigs     SavedConfiguration[]
+    leads            Lead[]
+
+    @@map("users")
+}
+
+model SavedConfiguration {
+    id           String   @id @default(cuid())
+    userId       String
+    carId        String
+    code         String   @unique
+    colorId      String?
+    wheelId      String?
+    seatId       String?
+    techIds      String[]
+    totalPrice   Decimal  @db.Decimal(12, 2)
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    car          Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@map("saved_configurations")
+}
+
+model Car {
+    id               String           @id @default(cuid())
+    slug             String           @unique
+    name             String
+    tagline          String?
+    description      String?
+    basePrice        Decimal          @db.Decimal(12, 2)
+    fuel             FuelType
+    transmission     TransmissionType
+    isElectric       Boolean          @default(false)
+    isFeatured       Boolean          @default(false)
+    isActive         Boolean          @default(true)
+    year             Int
+    imageUrl         String?
+    interiorImageUrl String?
+    createdAt        DateTime         @default(now())
+    updatedAt        DateTime         @updatedAt
+
+    colors           CarColor[]
+    wheels           CarWheel[]
+    seats            CarSeat[]
+    technologies     CarTechnology[]
+    technicalData    TechnicalData?
+    savedConfigs     SavedConfiguration[]
+    leads            Lead[]
+
+    @@map("cars")
+}
+
+model CarColor {
+    id        String  @id @default(cuid())
+    carId     String
+    name      String
+    hexCode   String
+    imageUrl  String?
+    price     Decimal @default(0) @db.Decimal(10, 2)
+    isDefault Boolean @default(false)
+
+    car       Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@map("car_colors")
+}
+
+model CarWheel {
+    id        String  @id @default(cuid())
+    carId     String
+    name      String
+    sizeInch  Int
+    imageUrl  String?
+    price     Decimal @default(0) @db.Decimal(10, 2)
+    isDefault Boolean @default(false)
+
+    car       Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@map("car_wheels")
+}
+
+model CarSeat {
+    id        String  @id @default(cuid())
+    carId     String
+    name      String
+    material  String?
+    imageUrl  String?
+    price     Decimal @default(0) @db.Decimal(10, 2)
+    isDefault Boolean @default(false)
+
+    car       Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@map("car_seats")
+}
+
+model CarTechnology {
+    id          String  @id @default(cuid())
+    carId       String
+    name        String
+    description String?
+    imageUrl    String?
+    price       Decimal @default(0) @db.Decimal(10, 2)
+
+    car         Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@map("car_technologies")
+}
+
+model TechnicalData {
+    id                  String  @id @default(cuid())
+    carId               String  @unique
+    engineDisplacement  String?
+    enginePower         String?
+    engineTorque        String?
+    acceleration0to100  String?
+    topSpeed            String?
+    fuelConsumptionCity String?
+    fuelConsumptionHwy  String?
+    tankCapacity        String?
+    wheelbase           String?
+    length              String?
+    width               String?
+    height              String?
+    curbWeight          String?
+    cargoVolume         String?
+    frontSuspension     String?
+    rearSuspension      String?
+    brakes              String?
+
+    car                 Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+    @@map("technical_data")
+}
+
+model Dealer {
+    id        String   @id @default(cuid())
+    name      String
+    address   String
+    city      String
+    state     String
+    zip       String?
+    phone     String?
+    email     String?
+    lat       Float?
+    lng       Float?
+    isActive  Boolean  @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    leads     Lead[]
+
+    @@map("dealers")
+}
+
+model Lead {
+    id        String     @id @default(cuid())
+    userId    String?
+    carId     String?
+    dealerId  String?
+    name      String
+    email     String
+    phone     String?
+    message   String?
+    status    LeadStatus @default(PENDING)
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+
+    user      User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+    car       Car?    @relation(fields: [carId], references: [id], onDelete: SetNull)
+    dealer    Dealer? @relation(fields: [dealerId], references: [id], onDelete: SetNull)
+
+    @@map("leads")
+}
+
+enum Role {
+    USER
+    STAFF
+    ADMIN
+}
+
+enum FuelType {
+    FLEX
+    ELECTRIC
+    HYBRID
+    GASOLINE
+    DIESEL
+}
+
+enum TransmissionType {
+    MANUAL
+    AUTOMATIC
+    CVT
+}
+
+enum LeadStatus {
+    PENDING
+    CONTACTED
+    CONVERTED
+    LOST
+}

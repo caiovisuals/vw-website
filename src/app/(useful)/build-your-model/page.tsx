@@ -203,7 +203,7 @@ export default function BuildYourModel() {
                     ) : (
                         filteredCars.map(car => (
                             <Link 
-                                href=""
+                                href="/build-your-model/setting"
                                 key={car.id}
                                 className="group relative flex flex-col gap-3 rounded-2xl py-5 px-5.5 cursor-pointer"
                             >   

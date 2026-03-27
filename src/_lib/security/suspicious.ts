@@ -1,8 +1,8 @@
 import type { NextRequest } from "next/server"
 import { getRequestMeta } from "./requestHelpers"
 
-export function detectSuspiciousActivity( req: NextRequest ): boolean {
-    const { userAgent } = getRequestMeta(req)
+export async function detectSuspiciousActivity(req: NextRequest): Promise<boolean> {
+    const { userAgent } = await getRequestMeta(req)
     const url = req.url
 
     if (url.length > 2048) return true

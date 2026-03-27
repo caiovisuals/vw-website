@@ -29,6 +29,21 @@ export const translations = {
             madeWith: "Feito com carinho e admiração por",
         },
 
+        hero: {
+            nivus: {
+                title: "O novo Nivus",
+                subtitle: "Conectividade, design e um looping de emoções. Com novas tecnologias e agora conectado!",
+            },
+            taos: {
+                title: "Um carro com superpoderes",
+                subtitle: "O SUVW com nota máxima em segurança e interna superconfortável.",
+            },
+            polo: {
+                title: "Mais que um carro, um Polo",
+                subtitle: "Um Volks para você conduzir com mais estilo pelas ruas.",
+            },
+        },
+
         // Build Your Model page
         buildYourModel: {
             title: "Monte seu Modelo",
@@ -97,6 +112,21 @@ export const translations = {
             legal: "Legal",
             socialMedia: "Social Media",
             madeWith: "Made with love and admiration by",
+        },
+
+        hero: {
+            nivus: {
+                title: "The new Nivus",
+                subtitle: "Connectivity, design, and a loop of emotions. With new technologies and now connected!",
+            },
+            taos: {
+                title: "A car with superpowers",
+                subtitle: "The SUVW with top safety rating and super comfortable interior space.",
+            },
+            polo: {
+                title: "More than a car, a Polo",
+                subtitle: "A Volks for you to drive with more style through the streets.",
+            },
         },
 
         // Build Your Model page

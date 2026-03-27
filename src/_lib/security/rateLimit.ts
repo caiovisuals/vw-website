@@ -20,14 +20,49 @@ const CONFIG = {
 
 const suspiciousIPs = new Map<string, SuspiciousIPData>()
 
-export async function isRateLimited(
-    ip: string,
-    type: RateLimitType,
-    fingerprint?: string
-) {
-    try {
+type Entry = { count: number; resetAt: number }
+const store = new Map<string, Entry>()
 
-    } catch (error) {
-        console.error('Erro ao acessar Redis', error)
+export function isRateLimited(ip: string, key: string, type: RateLimitType): {
+    limited: boolean
+    remaining: number
+    resetAt: number
+} {
+    const now = Date.now()
+
+    const suspicious = suspiciousIPs.get(ip)
+    if (suspicious) {
+        if (now < suspicious.blockedUntil) {
+            return { limited: true, remaining: 0, resetAt: suspicious.blockedUntil }
+        } else {
+            suspiciousIPs.delete(ip)
+        }
     }
+
+    const maxRequests = CONFIG.MAX_REQUESTS[type]
+    const windowMs = CONFIG.RATE_LIMIT_WINDOW * 1000
+
+    const storeKey = `${type}:${key}`
+
+    const entry = store.get(storeKey)
+ 
+    if (!entry || entry.resetAt <= now) {
+        store.set(storeKey, { count: 1, resetAt: now + windowMs })
+        return { limited: false, remaining: maxRequests - 1, resetAt: now + windowMs }
+    }
+ 
+    entry.count++
+ 
+    if (entry.count > maxRequests) {
+        return { limited: true, remaining: 0, resetAt: entry.resetAt }
+    }
+ 
+    return { limited: false, remaining: maxRequests - entry.count, resetAt: entry.resetAt }
 }
+
+setInterval(() => {
+    const now = Date.now()
+    for (const [key, entry] of store.entries()) {
+        if (entry.resetAt <= now) store.delete(key)
+    }
+}, 5 * 60 * 1000)

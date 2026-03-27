@@ -31,12 +31,8 @@ function resolveInitialLocale(): Locale {
     const browser = navigator.language as Locale
     if (browser in translations) return browser
 
-    // Fallback: match by language prefix (e.g. "pt" → "pt-BR")
     const prefix = browser.split("-")[0]
-    const match = Object.keys(translations).find((k) =>
-        k.startsWith(prefix)
-    ) as Locale | undefined
-
+    const match = Object.keys(translations).find((k) => k.startsWith(prefix)) as Locale | undefined
     return match ?? DEFAULT_LOCALE
 }
 
@@ -55,8 +51,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
     const toggleLocale = useCallback(() => {
         const locales = Object.keys(translations) as Locale[]
-        const current = locales.indexOf(locale)
-        const next = locales[(current + 1) % locales.length]
+        const currentIndex = locales.indexOf(locale)
+        const next = locales[(currentIndex + 1) % locales.length]
         setLocale(next)
     }, [locale, setLocale])
 
@@ -68,14 +64,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
 
     return (
-        <LanguageContext.Provider 
-            value={{
-                locale,
-                t: translations[locale],
-                setLocale,
-                toggleLocale,
-            }}
-        >
+        <LanguageContext.Provider value={value}>
             {children}
         </LanguageContext.Provider>
     )

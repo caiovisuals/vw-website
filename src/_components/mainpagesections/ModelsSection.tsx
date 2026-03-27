@@ -39,7 +39,7 @@ export default function ModelsSection() {
     return (
         <section id="models" className="flex flex-col items-center justify-center gap-16 px-6 py-6 md:py-10 lg:py-15 xl:py-20 md:px-12 lg:px-20">
             <div className="flex flex-col gap-3 items-center justify-center max-w-250">
-                <h2 className="text-center text-4xl vw-font font-semibold">Encontre o seu Volkswagen</h2>
+                <h2 className="text-center text-4xl vw-font">Encontre o seu <span className="font-semibold">Volkswagen</span></h2>
                 <p className="text-center text-lg leading-tight">Conheça os modelos recomendados, em destaque, veículos elétricos ou explore todos para escolher o seu Volkswagen que mais combine com você.</p>
             </div>
             <div className="flex flex-col gap-3">
