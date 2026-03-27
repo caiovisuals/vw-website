@@ -10,7 +10,7 @@ export default function FilterButton({
     return (
         <button
             onClick={onClick}
-            className={`flex items-center justify-center gap-2 px-3 py-1.5 border-2 rounded-xl transition-normal cursor-pointer ${
+            className={`flex items-center justify-center gap-2 px-3 py-1 border-2 rounded-xl transition-normal cursor-pointer ${
                 active
                     ? "bg-[var(--white-border)]/20 border-[var(--white-border-hover)]"
                     : "border-[var(--white-border)] hover:bg-[var(--white-border)]/10"

@@ -1,33 +1,44 @@
+"use client"
+ 
 import Image from "next/image"
 import Link from "next/link"
+import { useLanguage } from "@/_lib/contexts/LanguageContext"
+import type { Locale } from "@/_lib/i18n/translations"
+ 
+const localeLabels: Record<Locale, string> = {
+    "pt-BR": "Português - BR",
+    "en-US": "English - US",
+}
 
 export default function Footer() {
+    const { t, locale, toggleLocale } = useLanguage()
+
     return (
         <footer className="w-full flex flex-col bg-[var(--black-background)] text-[var(--white-text)] gap-6 px-6 py-8 md:py-10 md:px-12 lg:px-20">
             <div className="flex flex-row items-start gap-2 justify-between">
                 <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
                     <div className="flex flex-col gap-1">
-                        <label className="text-xl vw-font">Úteis</label>
-                        <Link href="/login" className="hover:text-[var(--white-text-hover)] transition-fast">Logar</Link>
-                        <Link href="/register" className="hover:text-[var(--white-text-hover)] transition-fast">Cadastrar</Link>
-                        <Link href="/forgot-password" className="hover:text-[var(--white-text-hover)] transition-fast">Esqueci minha Senha</Link>
+                        <label className="text-xl vw-font">{t.footer.useful}</label>
+                        <Link href="/login" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.login}</Link>
+                        <Link href="/register" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.register}</Link>
+                        <Link href="/forgot-password" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
                     </div>
                     <div className="flex flex-col gap-1">
-                        <label className="text-xl vw-font">Comprar</label>
-                        <Link href="/build-your-model" className="hover:text-[var(--white-text-hover)] transition-fast">Monte seu Modelo</Link>
-                        <Link href="/dealers" className="hover:text-[var(--white-text-hover)] transition-fast">Concessionárias</Link>
-                        <Link href="/sales-and-finance/consortium" className="hover:text-[var(--white-text-hover)] transition-fast">Consórcio</Link>
-                        <Link href="/sales-and-finance/finance" className="hover:text-[var(--white-text-hover)] transition-fast">Financiamento</Link>
-                        <Link href="/sales-and-finance/pre-owned" className="hover:text-[var(--white-text-hover)] transition-fast">Seminovos</Link>
+                        <label className="text-xl vw-font">{t.footer.buy}</label>
+                        <Link href="/build-your-model" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.buildYourModel}</Link>
+                        <Link href="/dealers" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.dealers}</Link>
+                        <Link href="/sales-and-finance/consortium" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.consortium}</Link>
+                        <Link href="/sales-and-finance/finance" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.finance}</Link>
+                        <Link href="/sales-and-finance/pre-owned" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.preOwned}</Link>
                     </div>
                     <div className="flex flex-col gap-1">
-                        <label className="text-xl vw-font">Legal</label>
-                        <Link href="/legal-information" className="hover:text-[var(--white-text-hover)] transition-fast">Informação Legal</Link>
-                        <Link href="/terms-of-use" className="hover:text-[var(--white-text-hover)] transition-fast">Termos de Uso</Link>
-                        <Link href="/privacy-policies" className="hover:text-[var(--white-text-hover)] transition-fast">Politicas de Privacidade</Link>
+                        <label className="text-xl vw-font">{t.footer.legal}</label>
+                        <Link href="/legal-information" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.legalInformation}</Link>
+                        <Link href="/terms-of-use" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.termsOfUse}</Link>
+                        <Link href="/privacy-policies" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.privacyPolicies}</Link>
                     </div>
                     <div className="flex flex-col gap-1">
-                        <label className="text-xl vw-font">Redes Sociais</label>
+                        <label className="text-xl vw-font">{t.footer.socialMedia}</label>
                         <div className="flex flex-row gap-2.5">
                             <Link href="https://www.instagram.com/volkswagen" target="_blank" className="hover:brightness-75 transition-fast">
                                 <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
@@ -48,16 +59,16 @@ export default function Footer() {
             </div>
             <div className="w-full h-0.5 bg-[var(--white-background)]"/>
             <div className="flex flex-row items-center justify-between">
-                <span><b>Volkswagen</b> - Feito com carinho e adimiração por{" "}
+                <span><b>Volkswagen</b> - {t.footer.madeWith}{" "}
                     <Link href="https://www.caiovisuals.com" target="_blank" className="hover:opacity-75 transition-fast">
                         <b>Caiovisuals</b>
                     </Link>
                 </span>
-                <button className="flex flex-row gap-2 items-center justify-center border-2 border-[var(--white-border)] hover:bg-[var(--white-background)]/15 hover:border-[var(--white-border-hover)] px-2.5 py-1.5 rounded-2xl transition-normal cursor-pointer">
+                <button onClick={toggleLocale} className="flex flex-row gap-2 items-center justify-center border-2 border-[var(--white-border)] hover:bg-[var(--white-background)]/15 hover:border-[var(--white-border-hover)] px-2.5 py-1.5 rounded-2xl transition-normal cursor-pointer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
                     </svg>
-                    Portugues - BR
+                    {localeLabels[locale]}
                 </button>
             </div>
         </footer>

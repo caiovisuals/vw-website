@@ -1,6 +1,7 @@
 "use client"
 
 import FilterButton from "@/_components/ui/FilterButton"
+import { useLanguage } from "@/_lib/contexts/LanguageContext"
 
 type Filters = {
     fuel: string[]
@@ -23,43 +24,44 @@ export default function FilterModal({
     isActive,
     clearFilters
 }: Props) {
-
+    const { t } = useLanguage()
+    
     return (
         <div onClick={onClose} className={`fixed inset-0 z-50 bg-black/50 flex items-center justify-center transition-normal ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
             <div onClick={(e) => e.stopPropagation()} className={`relative w-full lg:max-w-xl bg-[var(--white-background)] rounded-3xl p-6 flex flex-col gap-2 z-51 transition-normal ${open ? "scale-100" : "scale-95"}`}>
                 <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-semibold">Filtros</h2>
+                    <h2 className="text-2xl font-semibold">{t.buildYourModel.filtersTitle}</h2>
                     <button onClick={onClose} className="opacity-50 hover:opacity-100 transition-normal active:scale-95 cursor-pointer">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
                         </svg>
                     </button>
                 </div>
-                <div className="flex flex-col gap-2">
-                    <h3 className="text-sm opacity-70">Combustível</h3>
+                <div className="flex flex-col gap-1">
+                    <h3 className="text-sm opacity-75">{t.buildYourModel.fuel}</h3>
                     <div className="flex gap-2.5 flex-wrap">
                         <FilterButton
-                            label="Flex"
+                            label={t.buildYourModel.flex}
                             active={isActive("fuel", "flex")}
                             onClick={() => toggleFilter("fuel", "flex")}
                         />
                         <FilterButton
-                            label="Elétrico"
+                            label={t.buildYourModel.electric}
                             active={isActive("fuel", "electric")}
                             onClick={() => toggleFilter("fuel", "electric")}
                         />
                     </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                    <h3 className="text-sm opacity-70">Transmissão</h3>
+                <div className="flex flex-col gap-1">
+                    <h3 className="text-sm opacity-75">{t.buildYourModel.transmission}</h3>
                     <div className="flex gap-2.5 flex-wrap">
                         <FilterButton
-                            label="Manual"
+                            label={t.buildYourModel.manual}
                             active={isActive("transmission", "manual")}
                             onClick={() => toggleFilter("transmission", "manual")}
                         />
                         <FilterButton
-                            label="Automático"
+                            label={t.buildYourModel.automatic}
                             active={isActive("transmission", "automatic")}
                             onClick={() => toggleFilter("transmission", "automatic")}
                         />
@@ -70,14 +72,14 @@ export default function FilterModal({
                         onClick={onClose}
                         className="flex-1 py-2 border-2 border-[var(--white-border)] hover:border-[var(--white-border-hover)] rounded-xl transition-normal active:scale-95 cursor-pointer"
                     >
-                        Aplicar
+                        {t.buildYourModel.apply}
                     </button>
 
                     <button
                         onClick={clearFilters}
                         className="flex-1 py-2 border-2 border-[var(--white-border)] hover:border-[var(--white-border-hover)] rounded-xl opacity-75 hover:opacity-100 transition-normal active:scale-95 cursor-pointer"
                     >
-                        Limpar
+                        {t.buildYourModel.clear}
                     </button>
                 </div>
             </div>

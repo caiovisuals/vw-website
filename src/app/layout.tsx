@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Geologica } from "next/font/google"
+import { LanguageProvider } from "@/_lib/contexts/LanguageContext"
 import Script from "next/script"
 import Header from "@/_components/Header"
 import Footer from "@/_components/Footer"
@@ -67,9 +68,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 />
             </head>
             <body className="min-h-full flex flex-col">
-                <Header />
-                {children}
-                <Footer />
+                <LanguageProvider>
+                    <Header />
+                    {children}
+                    <Footer />
+                </LanguageProvider>
             </body>
         </html>
     )

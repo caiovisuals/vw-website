@@ -51,6 +51,14 @@ body {
     font-family: "VWHead", sans-serif;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    scrollbar-width: none;
+}
+
 .transition-normal {
     transition: all 0.3s ease;
 }
