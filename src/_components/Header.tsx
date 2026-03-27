@@ -11,22 +11,39 @@ export default function Header() {
 
     return (
         <header className="w-full flex items-center justify-center px-6 py-5 md:py-8 md:px-12 lg:px-20">
-            <Link href="/" className="relative size-15 active:scale-95 hover:scale-105 transition-fast">
-                <Image src="/assets/logo-blue.png" alt="Volkswagen Logo" fill className="object-cover aspect-square select-none" draggable="false" />
-            </Link>
+            <div className="w-[25%] flex justify-start items-center">
+                <button onClick={() => setIsOpen(true)} className="size-15 p-3 rounded-full cursor-pointer">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>
+                    </svg>
+                </button>
+            </div>
+            <div className="w-[50%] h-full flex items-center justify-center">
+                <Link href="/" className="relative size-15 active:scale-95 hover:scale-105 transition-fast">
+                    <Image src="/assets/logo-blue.png" alt="Volkswagen Logo" fill className="object-cover aspect-square select-none" draggable="false" />
+                </Link>
+            </div>
+            <div className="w-[25%] flex justify-end">
+                <button className="group relative size-15 p-3 rounded-full cursor-pointer">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>
+                    </svg>
+                    <div className="absolute bg-[var(--dark-blue)] group-hover:bg-[var(--medium-blue)] p-1.5 rounded-full bottom-3.5 right-4 transition-normal" />
+                </button>
+            </div>
             <div onClick={() => setIsOpen(false)} className={`fixed inset-0 z-50 bg-black/50 transition-normal ${isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0" }`}>
-                <div onClick={(e) => e.stopPropagation()} className={`fixed flex flex-col gap-10 h-full w-[50%] bg-[var(--white-background)] rounded-r-3xl p-6 transition-normal ${isOpen ? "opacity-100 translate-x-0" : "opacity-75 -translate-x-25" }`}>
+                <div onClick={(e) => e.stopPropagation()} className={`fixed flex flex-col gap-10 h-full w-[50%] bg-[var(--white-background)] rounded-r-3xl p-6 lg:p-10 transition-normal ${isOpen ? "opacity-100 translate-x-0" : "opacity-75 -translate-x-25" }`}>
                     <div className="flex flex-row items-start justify-between">
                         <div className="relative size-15">
                             <Image src="/assets/logo-blue.png" alt="Volkswagen Logo" fill className="object-cover aspect-square select-none" draggable="false" />
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="opacity-50 hover:opacity-100 transition-normal active:scale-95 cursor-pointer">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <button onClick={() => setIsOpen(false)} className="p-2 opacity-50 hover:opacity-100 transition-normal active:scale-95 rounded-full cursor-pointer">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
                             </svg>
                         </button>
                     </div>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.useful}</label>
                             <Link href="/login" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.login}</Link>
