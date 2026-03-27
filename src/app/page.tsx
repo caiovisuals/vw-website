@@ -6,6 +6,9 @@ export default function Home() {
             <section id="hero" className="flex flex-col px-6 py-6 md:py-10 md:px-12 lg:px-20">
                 um bom e velho teste
             </section>
+            <section id="models" className="flex flex-col px-6 py-6 md:py-10 md:px-12 lg:px-20">
+                um bom e velho teste
+            </section>
         </div>
     )
 }

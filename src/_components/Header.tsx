@@ -9,7 +9,7 @@ export default function Header() {
 
     return (
         <header className="w-full flex items-center justify-center px-6 py-5 md:py-8 md:px-12 lg:px-20">
-            <Link href="/" className="relative size-15 active:scale-95 transition-fast">
+            <Link href="/" className="relative size-15 active:scale-95 hover:scale-105 transition-fast">
                 <Image src="/assets/logo-blue.png" alt="Volkswagen Logo" fill className="object-cover aspect-square select-none" draggable="false" />
             </Link>
             <div className={`fixed transition-normal ${isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0" }`}>

@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer className="w-full flex flex-col bg-[var(--black-background)] text-[var(--white-text)] gap-6 px-6 py-8 md:py-10 md:px-12 lg:px-20">
             <div className="flex flex-row items-start gap-2 justify-between">
-                <div className="flex flex-row gap-10 lg:gap-14">
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
                     <div className="flex flex-col gap-1">
                         <label className="text-xl vw-font">Úteis</label>
                         <Link href="/login" className="hover:text-[var(--white-text-hover)] transition-fast">Logar</Link>
