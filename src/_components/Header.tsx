@@ -2,10 +2,12 @@
 
 import { useState } from "react"
 import { useLanguage } from "@/_lib/contexts/LanguageContext"
+import { useAuth } from "@/_lib/contexts/AuthContext"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function Header() {
+    const { user, isLoading, logout } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
     const { t } = useLanguage()
 
@@ -28,7 +30,9 @@ export default function Header() {
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>
                     </svg>
-                    <div className="absolute bg-[var(--dark-blue)] group-hover:bg-[var(--medium-blue)] p-1.5 rounded-full bottom-3.5 right-4 transition-normal" />
+                    {!isLoading && user && (
+                        <div className="absolute bg-[var(--dark-blue)] group-hover:bg-[var(--medium-blue)] p-1.5 rounded-full bottom-3.5 right-4 transition-normal" />
+                    )}
                 </button>
             </div>
             <div onClick={() => setIsOpen(false)} className={`fixed inset-0 z-50 bg-black/50 transition-normal ${isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0" }`}>
@@ -46,9 +50,19 @@ export default function Header() {
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.useful}</label>
-                            <Link href="/login" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.login}</Link>
-                            <Link href="/register" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.register}</Link>
-                            <Link href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
+                            {!isLoading && user ? (
+                                <>
+                                    <Link href="/home" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.home}</Link>
+                                    <Link href="/profile" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.profile}</Link>
+                                    <a onClick={logout} href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</a>
+                                </>
+                            ) : (
+                                <>
+                                    <Link href="/login" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.login}</Link>
+                                    <Link href="/register" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.register}</Link>
+                                    <Link href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
+                                </>
+                            )}
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.buy}</label>

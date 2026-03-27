@@ -53,7 +53,7 @@ export default function ModelsSection() {
                     </div>
                     <button
                         onClick={() => scroll("left")}
-                        className={`absolute -left-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md hover:bg-[var(--medium-blue)] transition-normal ${canScrollLeft ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                        className={`absolute -left-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md hover:bg-[var(--medium-blue)] transition-normal cursor-pointer ${canScrollLeft ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                         aria-label="Scroll para a esquerda"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -62,7 +62,7 @@ export default function ModelsSection() {
                     </button>
                     <button
                         onClick={() => scroll("right")}
-                        className={`absolute -right-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md hover:bg-[var(--medium-blue)] transition-normal ${canScrollRight ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                        className={`absolute -right-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md hover:bg-[var(--medium-blue)] transition-normal cursor-pointer ${canScrollRight ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                         aria-label="Scroll para a direita"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

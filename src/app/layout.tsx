@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Geologica } from "next/font/google"
+import { AuthProvider } from "@/_lib/contexts/AuthContext"
 import { LanguageProvider } from "@/_lib/contexts/LanguageContext"
 import Script from "next/script"
 import ScrollToTop from "@/_components/ScrollToTop"
@@ -69,12 +70,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 />
             </head>
             <body className="min-h-full flex flex-col">
-                <LanguageProvider>
-                    <Header />
-                    <ScrollToTop />
-                    {children}
-                    <Footer />
-                </LanguageProvider>
+                <AuthProvider>
+                    <LanguageProvider>
+                        <Header />
+                        <ScrollToTop />
+                        {children}
+                        <Footer />
+                    </LanguageProvider>
+                </AuthProvider>
             </body>
         </html>
     )

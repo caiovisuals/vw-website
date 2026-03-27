@@ -2,14 +2,70 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import ShowPassword from "@/_components/ui/ShowPassword"
+import { useAuth } from "@/_lib/contexts/AuthContext"
+
+type FieldErrors = Partial<Record<"email" | "password", string>>
 
 export default function Login() {
+    const { refetch } = useAuth()
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const justRegistered = searchParams.get("registered") === "1"
+
     const [showPassword, setShowPassword] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [globalError, setGlobalError] = useState<string | null>(null)
+    const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        setGlobalError(null)
+        setFieldErrors({})
+        setIsLoading(true)
+ 
+        const form = e.currentTarget
+        const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim()
+        const password = (form.elements.namedItem("password") as HTMLInputElement).value
+
+        if (!email.includes("@")) {
+            setFieldErrors({ email: "Email inválido." })
+            return
+        }
+ 
+        try {
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ email, password }),
+            })
+ 
+            const json = await res.json()
+ 
+            if (!res.ok) {
+                if (json.fields) {
+                    setFieldErrors(json.fields as FieldErrors)
+                } else {
+                    setGlobalError(json.error ?? "Erro ao fazer login.")
+                }
+                return
+            }
+ 
+            await refetch()
+            router.push("/home")
+            router.refresh()
+        } catch {
+            setGlobalError("Erro de conexão. Tente novamente.")
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <div className="min-h-[75vh] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-124px)] flex flex-col items-center justify-center bg-gradient-to-br from-[#202020] to-[var(--dark-blue)] px-6 py-6 md:py-10 md:px-12 lg:px-20">
-            <form className="w-full max-w-md bg-[var(--white-background)] rounded-2xl p-6 md:p-8 shadow-xl">
+            <form onSubmit={handleSubmit} className="w-full max-w-md bg-[var(--white-background)] rounded-2xl p-6 md:p-8 shadow-xl">
                 <div className="mb-6">
                     <h1 className="text-4xl font-semibold vw-font">
                         Login
@@ -20,12 +76,14 @@ export default function Login() {
                 </div>
                 <div className="flex flex-col gap-4">
                     <input
+                        name="email"
                         type="email"
                         placeholder="Email"
                         className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                     />
                     <div className="relative">
                         <input
+                            name="password"
                             type={showPassword ? "text" : "password"}
                             placeholder="Senha"
                             className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
@@ -36,6 +94,7 @@ export default function Login() {
                     </div>
                     <button
                         type="submit"
+                        disabled={isLoading}
                         className="w-full py-3 rounded-xl bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] text-[var(--white-text)] font-semibold transition-normal active:scale-95 cursor-pointer"
                     >
                         Entrar

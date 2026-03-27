@@ -18,6 +18,8 @@ export const translations = {
             legalInformation: "Informação Legal",
             termsOfUse: "Termos de Uso",
             privacyPolicies: "Políticas de Privacidade",
+            home: "Início",
+            profile: "Perfil",
         },
 
         // Footer
@@ -103,6 +105,8 @@ export const translations = {
             legalInformation: "Legal Information",
             termsOfUse: "Terms of Use",
             privacyPolicies: "Privacy Policies",
+            home: "Home",
+            profile: "Profile",
         },
 
         // Footer
