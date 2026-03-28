@@ -27,7 +27,7 @@ export default function Dealers() {
     }, [markers])
     
     if (loadError) return <NotFound />
-    if (!isLoaded) return <div>Carregando mapa...</div>
+    if (!isLoaded) return 
 
     return (
         <div className="flex flex-col items-center justify-center gap-16 pt-6 md:pt-10 lg:pt-15 xl:pt-20">

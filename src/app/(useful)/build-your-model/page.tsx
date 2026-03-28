@@ -21,6 +21,48 @@ const cars = [
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/nivus.webp"
+    },
+    {
+        id: 3,
+        name: "T-Cross",
+        fuel: "flex",
+        transmission: "automatic",
+        image: "/assets/cars/t-cross.webp"
+    },
+    {
+        id: 4,
+        name: "Taos",
+        fuel: "flex",
+        transmission: "automatic",
+        image: "/assets/cars/taos.webp"
+    },
+    {
+        id: 5,
+        name: "Polo",
+        fuel: "flex",
+        transmission: "automatic",
+        image: "/assets/cars/polo.webp"
+    },
+    {
+        id: 6,
+        name: "Saveiro",
+        fuel: "flex",
+        transmission: "manual",
+        image: "/assets/cars/saveiro.webp"
+    },
+    {
+        id: 7,
+        name: "ID.4",
+        fuel: "electric",
+        transmission: "automatic",
+        image: "/assets/cars/id4.webp"
+    },
+    {
+        id: 8,
+        name: "Amarok",
+        fuel: "flex",
+        transmission: "automatic",
+        image: "/assets/cars/amarok.webp"
     }
 ]
 
@@ -190,7 +232,7 @@ export default function BuildYourModel() {
                         {t.buildYourModel.filters}
                     </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
                     {filteredCars.length === 0 ? (
                         <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
                             <h3 className="text-2xl">

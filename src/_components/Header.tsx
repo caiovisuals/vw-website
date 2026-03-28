@@ -11,6 +11,10 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState(false)
     const { t } = useLanguage()
 
+    const handleNavigate = () => {
+        setIsOpen(false)
+    }
+
     return (
         <header className="w-full flex items-center justify-center px-6 py-5 md:py-8 md:px-12 lg:px-20">
             <div className="w-[25%] flex justify-start items-center">
@@ -52,31 +56,35 @@ export default function Header() {
                             <label className="text-xl vw-font">{t.footer.useful}</label>
                             {!isLoading && user ? (
                                 <>
-                                    <Link href="/home" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.home}</Link>
-                                    <Link href="/profile" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.profile}</Link>
-                                    <a onClick={logout} href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</a>
+                                    <Link href="/home" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.home}</Link>
+                                    <Link href="/home/profile" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.profile}</Link>
+                                    <a onClick={() => {
+                                            logout()
+                                            handleNavigate()
+                                        }} className="hover:text-[var(--black-text-hover)] transition-fast cursor-pointer">{t.nav.logout}
+                                    </a>
                                 </>
                             ) : (
                                 <>
-                                    <Link href="/login" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.login}</Link>
-                                    <Link href="/register" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.register}</Link>
-                                    <Link href="/forgot-password" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
+                                    <Link href="/login" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.login}</Link>
+                                    <Link href="/register" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.register}</Link>
+                                    <Link href="/forgot-password" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
                                 </>
                             )}
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.buy}</label>
-                            <Link href="/build-your-model" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.buildYourModel}</Link>
-                            <Link href="/dealers" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.dealers}</Link>
-                            <Link href="/sales-and-finance/consortium" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.consortium}</Link>
-                            <Link href="/sales-and-finance/finance" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.finance}</Link>
-                            <Link href="/sales-and-finance/pre-owned" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.preOwned}</Link>
+                            <Link href="/build-your-model" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.buildYourModel}</Link>
+                            <Link href="/dealers" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.dealers}</Link>
+                            <Link href="/sales-and-finance/consortium" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.consortium}</Link>
+                            <Link href="/sales-and-finance/finance" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.finance}</Link>
+                            <Link href="/sales-and-finance/pre-owned" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.preOwned}</Link>
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.legal}</label>
-                            <Link href="/legal-information" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.legalInformation}</Link>
-                            <Link href="/terms-of-use" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.termsOfUse}</Link>
-                            <Link href="/privacy-policies" className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.privacyPolicies}</Link>
+                            <Link href="/legal-information" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.legalInformation}</Link>
+                            <Link href="/terms-of-use" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.termsOfUse}</Link>
+                            <Link href="/privacy-policies" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.privacyPolicies}</Link>
                         </div>
                     </div>
                 </div>

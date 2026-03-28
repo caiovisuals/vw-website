@@ -22,11 +22,12 @@ export default function Home() {
     }
 
     return(
-        <div className="px-6 md:px-12 lg:px-20 py-8 md:py-10 lg:py-15">
+        <div className="flex flex-col px-6 md:px-12 lg:px-20 py-8 md:py-10 lg:py-15">
             <div className="flex flex-col">
                 <h1 className="text-3xl font-semibold vw-font">Boa tarde, {user.name}!</h1>
                 <h3 className="text-xl vw-font">Confira as novidades enquanto você esteve fora.</h3>
             </div>
+            <section></section>
         </div>
     )
 }

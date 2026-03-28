@@ -1,5 +1,7 @@
+import { NextRequest } from "next/server"
 import { cookies } from "next/headers"
 import { prisma } from "@/_lib/prisma"
+import { getRequestMeta } from "@/_lib/security/requestHelpers"
 
 export type Role = "USER" | "STAFF" | "ADMIN"
 
@@ -13,7 +15,19 @@ export type SessionUser = {
 
 export const SESSION_COOKIE = "vw_session"
 
-export async function getCurrentUser(): Promise<SessionUser | null> {
+function isSameSubnet(ip1: string, ip2: string): boolean {
+    if (!ip1 || !ip2) return true
+
+    const a = ip1.split(".")
+    const b = ip2.split(".")
+
+    if (a.length !== 4 || b.length !== 4) return true
+
+    return a.slice(0, 3).join(".") === b.slice(0, 3).join(".")
+}
+
+
+export async function getCurrentUser(req?: NextRequest): Promise<SessionUser | null> {
     const cookieStore = await cookies()
     const token = cookieStore.get(SESSION_COOKIE)?.value
 
@@ -39,6 +53,30 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
             await prisma.session.delete({ where: { token } }).catch(() => null)
         }
         return null
+    }
+
+    if (req) {
+        const meta = await getRequestMeta(req)
+
+        const currentIP = meta.ip
+        const currentUA = meta.userAgent
+
+        if (
+            session.ipAddress &&
+            currentIP !== session.ipAddress &&
+            !isSameSubnet(currentIP, session.ipAddress)
+        ) {
+            await prisma.session.delete({ where: { token } })
+            return null
+        }
+
+        if (
+            session.userAgent &&
+            currentUA !== session.userAgent
+        ) {
+            await prisma.session.delete({ where: { token } })
+            return null
+        }
     }
 
     return session.user

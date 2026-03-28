@@ -58,7 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                             "sameAs": [
                                 "https://www.facebook.com/volkswagendobrasil",
                                 "https://www.instagram.com/volkswagen",
-                                "https://www.youtube.com/@volkswagendobrasil",
+                                "https:/www.youtube.com/@volkswagendobrasil",
                                 "https://www.linkedin.com/company/volkswagen-do-brasil"
                             ],
                             "contactPoint": {
