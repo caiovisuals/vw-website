@@ -3,13 +3,13 @@ import { z } from "zod"
 
 export const env = createEnv({
     server: {
-        DATABASE_URL: z.string().url(),
+        DATABASE_URL: z.string().min(16).url(),
         NEXTAUTH_SECRET: z.string().min(32),
-        NEXTAUTH_URL: z.string().url(),
+        NEXTAUTH_URL: z.string().min(8).url(),
         NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
     },
     client: {
-        NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string(),
+        NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string().min(16),
     },
     runtimeEnv: {
         DATABASE_URL: process.env.DATABASE_URL,

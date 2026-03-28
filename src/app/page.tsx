@@ -1,5 +1,5 @@
-import HeroSection from "@/_components/mainpagesections/HeroSection"
-import ModelsSection from "@/_components/mainpagesections/ModelsSection"
+import HeroSection from "@/_components/main-page-sections/HeroSection"
+import ModelsSection from "@/_components/main-page-sections/ModelsSection"
 
 export default function Home() {
     return (

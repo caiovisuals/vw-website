@@ -12,9 +12,9 @@ export default function NotFound() {
                 <h1 className="text-center text-4xl vw-font font-semibold">
                     {t.notFound.title}
                 </h1>
-                <p className="text-center text-2xl vw-font">
+                <h3 className="text-center text-2xl vw-font">
                     {t.notFound.description}
-                </p>
+                </h3>
             </div>
             <Link
                 href="/"

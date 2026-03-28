@@ -68,9 +68,9 @@ export default function HeroSection() {
                     <h1 className="text-[clamp(2rem,5vw,4rem)] vw-font text-[var(--white-text)] leading-none text-center md:text-start">
                         {slides[currentSlide].title}
                     </h1>
-                    <h1 className="text-[clamp(1rem,2.2vw,1.5rem)] vw-font text-[var(--white-text)] leading-tight text-center md:text-start">
+                    <h2 className="text-[clamp(1rem,2.2vw,1.5rem)] vw-font text-[var(--white-text)] leading-tight text-center md:text-start">
                         {slides[currentSlide].subtitle}
-                    </h1>
+                    </h2>
                 </div>
             </div>
         </section>
