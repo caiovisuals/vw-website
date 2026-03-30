@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { detectSuspiciousActivity } from "@/_lib/security/suspicious"
 import { isRateLimited } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
+import { SESSION_COOKIE } from "@/_lib/utils/session"
+import { prisma } from "@/_lib/prisma"
 
 const AUTH_ROUTES = [
     "/api/me", 
@@ -33,8 +35,25 @@ const ROLE_LEVEL: Record<string, number> = {
     ADMIN: 2,
 }
 
-const SESSION_COOKIE = "vw_session"
 const JWT_COOKIE = "vw_jwt" 
+
+async function getSessionUser(token: string | undefined) {
+    if (!token) return null
+
+    try {
+        const session = await prisma.session.findUnique({
+            where: { token },
+            select: {
+                expiresAt: true,
+                user: { select: { id: true, role: true } },
+            },
+        })
+        if (!session || session.expiresAt < new Date()) return null
+        return session.user
+    } catch {
+        return null
+    }
+}
 
 function buildSecurityHeaders(nonce: string): Record<string, string> {
     const isProd = process.env.NODE_ENV === "production"
@@ -54,15 +73,9 @@ function buildSecurityHeaders(nonce: string): Record<string, string> {
     }
 }
 
-function extractUserFromToken(token: string | undefined) {
-    if (!token) return null
-}
-
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl
     const { ip } = await getRequestMeta(req)
-
-    const nonce = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("base64")
 
     if (await detectSuspiciousActivity(req)) {
         return new NextResponse(
@@ -98,7 +111,7 @@ export async function middleware(req: NextRequest) {
     }
     
     const token = req.cookies.get(SESSION_COOKIE)?.value
-    const user = extractUserFromToken(token)
+    const user = await getSessionUser(token)
 
     const needsAuth  = AUTH_ROUTES.some(r  => pathname.startsWith(r))
     const needsStaff = STAFF_ROUTES.some(r => pathname.startsWith(r))
@@ -122,6 +135,8 @@ export async function middleware(req: NextRequest) {
             )
         }
     }
+
+    const nonce = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("base64")
 
     const response = NextResponse.next()
     applySecurityHeaders(response, buildSecurityHeaders(nonce))

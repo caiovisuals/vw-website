@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     other: {
         "google": "notranslate",
         "application-name": "Volkswagen Brasil",
+        "news_keywords": "caio visuals",
     }
 }
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                             "@context": "https://schema.org",
                             "@type": "Organization",
                             "name": "Volkswagen Brasil",
+                            "inLanguage": ["pt-BR", "en-US"],
                             "sameAs": [
                                 "https://www.facebook.com/volkswagendobrasil",
                                 "https://www.instagram.com/volkswagen",

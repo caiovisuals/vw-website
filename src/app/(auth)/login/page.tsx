@@ -3,14 +3,16 @@
 import Link from "next/link"
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import ShowPassword from "@/_components/ui/ShowPassword"
 import { useAuth } from "@/_lib/contexts/AuthContext"
+import { useLanguage } from "@/_lib/contexts/LanguageContext"
+import ShowPassword from "@/_components/ui/ShowPassword"
 
 type FieldErrors = Partial<Record<"email" | "password", string>>
 
 export default function Login() {
     const { refetch } = useAuth()
     const router = useRouter()
+    const { t } = useLanguage()
     const searchParams = useSearchParams()
     const justRegistered = searchParams.get("registered") === "1"
 
@@ -64,14 +66,14 @@ export default function Login() {
     }
 
     return (
-        <div className="min-h-[75vh] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-124px)] flex flex-col items-center justify-center bg-gradient-to-br from-[#202020] to-[var(--dark-blue)] px-6 py-6 md:py-10 md:px-12 lg:px-20">
+        <div className="min-h-[75vh] max-h-[calc(110vh-100px)] md:max-h-[calc(100vh-124px)] flex flex-col items-center justify-center bg-gradient-to-br from-[#202020] to-[var(--dark-blue)] px-6 py-6 md:py-10 md:px-12 lg:px-20">
             <form onSubmit={handleSubmit} className="w-full max-w-md bg-[var(--white-background)] rounded-2xl p-6 md:p-8 shadow-xl">
                 <div className="mb-6">
                     <h1 className="text-4xl font-semibold vw-font mb-1">
-                        Login
+                        {t.auth.login.title}
                     </h1>
                     <h2 className="text-lg vw-font leading-none">
-                        Faça login com suas credenciais
+                        {t.auth.login.caption}
                     </h2>
                 </div>
                 <div className="flex flex-col gap-4">

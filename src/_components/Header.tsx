@@ -127,13 +127,13 @@ export default function Header() {
                             <span className="whitespace-nowrap truncate vw-font leading-tight">{user.email}</span>
                         </div>
                         <Link href="/home/profile" onClick={() => setIsProfileModalOpen(false)} className="px-5 py-1.5 rounded-2xl text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] transition-normal">
-                            Ver Perfil
+                            {t.header.profileModal.seeProfile}
                         </Link>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-2">
                         <div>
-                            <h1 className="text-xl font-semibold vw-font">Entre com a sua conta</h1>
+                            <h1 className="text-xl font-semibold vw-font">{t.header.profileModal.LogWithYourAccount}</h1>
                         </div>
                         <div className="flex flex-row gap-2">
                             <Link

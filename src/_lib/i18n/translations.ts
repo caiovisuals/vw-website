@@ -1,3 +1,5 @@
+import { caption } from "framer-motion/client"
+
 export type Locale = "pt-BR" | "en-US"
 
 export const translations = {
@@ -5,7 +7,14 @@ export const translations = {
         locale: "pt-BR" as Locale,
         label: "Português - BR",
 
-        // Header / Nav
+        header: {
+            profileModal: {
+                seeProfile: "Ver Perfil",
+                LogWithYourAccount: "Entre com a sua conta"
+            }
+        },
+
+        // Nav
         nav: {
             login: "Logar",
             register: "Cadastrar",
@@ -32,6 +41,21 @@ export const translations = {
             madeWith: "Feito com carinho e admiração por",
         },
 
+        auth: {
+            register: {
+                title: "Cadastrar",
+                caption: "Crie a sua conta de forma simples e fácil"
+            },
+            login: {
+                title: "Logar",
+                caption: "Faça login com suas credenciais"
+            },
+            forgotPassword: {
+                title: "Esqueci minha Senha",
+                caption: "Troque a sua senha confirmando pelo seu email"
+            }
+        },
+
         hero: {
             nivus: {
                 title: "O novo Nivus",
@@ -45,6 +69,10 @@ export const translations = {
                 title: "Mais que um carro, um Polo",
                 subtitle: "Um Volks para você conduzir com mais estilo pelas ruas.",
             },
+        },
+
+        home: {
+
         },
 
         // Build Your Model page
@@ -82,6 +110,30 @@ export const translations = {
                 "Os valores não incluem frete doméstico. Preços públicos sugeridos. Valores válidos para versões básicas. Consulte um revendedor sobre a disponibilidade de sua configuração.",
         },
 
+        conditions:{
+            termsOfUse: {
+                title: "Termos de Uso",
+                captions: "Regras e condições para utilização da plataforma.",
+                firstParagraph: "Ao acessar e utilizar esta plataforma, o usuário concorda com os presentes Termos de Uso e compromete-se a respeitar todas as condições aqui estabelecidas. Este site é um projeto independente, desenvolvido com fins educacionais e demonstrativos, não possuindo vínculo oficial com a Volkswagen.",
+                secondParagraph: "A plataforma oferece funcionalidades como visualização de veículos, configuração personalizada (incluindo cores, rodas, acabamentos e tecnologias), simulações e interação com conteúdos institucionais. Algumas funcionalidades podem exigir autenticação, sendo o usuário responsável por fornecer informações verídicas e manter a confidencialidade de suas credenciais de acesso.",
+                thirdParagraph: "O uso indevido da plataforma, incluindo tentativas de acesso não autorizado, exploração de vulnerabilidades sem aviso prévio, envio de informações falsas ou qualquer atividade que comprometa a integridade do sistema, é estritamente proibido e poderá resultar em bloqueio de acesso.",
+                fourthParagraph: "As informações, simulações e configurações apresentadas não possuem valor contratual, podendo sofrer alterações sem aviso prévio. Este site não realiza vendas, transações financeiras ou vínculos comerciais diretos."
+            },
+            privacyPolicies: {
+                title: "Políticas de Privacidade",
+                captions: "Como seus dados são coletados, utilizados e protegidos.",
+                firstParagraph: "Esta Política de Privacidade descreve como as informações dos usuários são coletadas, utilizadas e protegidas ao utilizar esta plataforma. Ao acessar o site, o usuário concorda com as práticas descritas neste documento.",
+                secondParagraph: "Durante a utilização da plataforma, podem ser coletados dados fornecidos diretamente pelo usuário, como nome, e-mail e informações de autenticação, além de dados de navegação, como endereço IP, tipo de dispositivo e interações realizadas no sistema.",
+                thirdParagraph: "Esta Política de Privacidade pode ser atualizada periodicamente para refletir melhorias ou alterações legais, sendo recomendada sua revisão regular."
+            },
+            legalInformation: {
+                title: "Informação Legal",
+                captions: "Informações importantes sobre uso, privacidade e segurança.",
+                firstParagraph: "Este site foi desenvolvido por um entusiasta da marca Volkswagen, não possuindo vínculo oficial com a empresa. Tanto o desenvolvedor quanto a plataforma buscam seguir as boas práticas, diretrizes e princípios presentes nos termos institucionais e legais da Volkswagen, prezando sempre pela transparência, respeito e segurança dos usuários.",
+                secondParagraph: "As informações disponibilizadas neste site têm caráter informativo e podem ser atualizadas, modificadas ou removidas a qualquer momento, sem aviso prévio. Apesar dos esforços para manter os dados corretos e atualizados, não garantimos a total precisão, integridade ou atualidade das informações apresentadas."
+            }
+        },
+
         notFound: {
             title: "Erro 404. Sentimos muito!",
             description: "A página que você está tentando acessar não existe ou foi removida.",
@@ -93,7 +145,14 @@ export const translations = {
         locale: "en-US" as Locale,
         label: "English - US",
 
-        // Header / Nav
+        header: {
+            profileModal: {
+                seeProfile: "See Profile",
+                LogWithYourAccount: "Log in with your account"
+            }
+        },
+
+        // Nav
         nav: {
             login: "Login",
             register: "Register",
@@ -109,6 +168,21 @@ export const translations = {
             privacyPolicies: "Privacy Policies",
             home: "Home",
             profile: "Profile",
+        },
+
+        auth: {
+            register: {
+                title: "Register",
+                caption: "Create your account in a simple and easy way"
+            },
+            login: {
+                title: "Login",
+                caption: "Log in with your credentials"
+            },
+            forgotPassword: {
+                title: "Forgot Password",
+                caption: "Change your password by confirming via email"
+            }
         },
 
         // Footer
@@ -133,6 +207,10 @@ export const translations = {
                 title: "More than a car, a Polo",
                 subtitle: "A Volks for you to drive with more style through the streets.",
             },
+        },
+
+        home: {
+
         },
 
         // Build Your Model page
@@ -168,6 +246,30 @@ export const translations = {
             createCode: "Create customization code",
             priceDisclaimer:
                 "Prices do not include domestic shipping. Suggested public prices. Prices valid for base versions. Consult a dealer for the availability of your configuration.",
+        },
+
+        conditions:{
+            termsOfUse: {
+                title: "Terms of Use",
+                captions: "Rules and conditions for using the platform.",
+                firstParagraph: "By accessing and using this platform, the user agrees to these Terms of Use and undertakes to respect all the conditions established herein. This website is an independent project, developed for educational and demonstrative purposes, and has no official link with Volkswagen.",
+                secondParagraph: "The platform offers features such as vehicle visualization, customized configuration (including colors, wheels, finishes, and technologies), simulations, and interaction with institutional content. Some features may require authentication, and the user is responsible for providing truthful information and maintaining the confidentiality of their access credentials.",
+                thirdParagraph: "Misuse of the platform, including attempts at unauthorized access, exploitation of vulnerabilities without prior notice, submission of false information, or any activity that compromises the integrity of the system, is strictly prohibited and may result in access being blocked.",
+                fourthParagraph: "The information, simulations, and configurations presented are not contractual and may be subject to change without notice. This website does not conduct sales, financial transactions, or have direct commercial ties."
+            },
+            privacyPolicies: {
+                title: "Privacy Policies",
+                captions: "How your data is collected, used, and protected.",
+                firstParagraph: "This Privacy Policy describes how user information is collected, used, and protected when using this platform. By accessing the website, the user agrees to the practices described in this document.",
+                secondParagraph: "During the use of the platform, data provided directly by the user may be collected, such as name, email, and authentication information, in addition to browsing data, such as IP address, device type, and interactions performed on the system.",
+                thirdParagraph: "This Privacy Policy may be updated periodically to reflect improvements or legal changes, and regular review is recommended."
+            },
+            legalInformation: {
+                title: "Legal Information",
+                captions: "Important information regarding usage, privacy, and security.",
+                firstParagraph: "This website was developed by a Volkswagen enthusiast and has no official affiliation with the company. Both the developer and the platform strive to follow the best practices, guidelines, and principles outlined in Volkswagen's institutional and legal terms, always prioritizing transparency, respect, and user safety.",
+                secondParagraph: "The information provided on this website is for informational purposes only and may be updated, modified, or removed at any time without prior notice. Despite our efforts to keep the data accurate and up-to-date, we do not guarantee the complete accuracy, integrity, or timeliness of the information presented."
+            }
         },
 
         notFound: {

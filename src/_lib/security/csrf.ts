@@ -12,6 +12,20 @@ export function generateCSRFToken(): string {
 }
 
 export async function csrfProtection(request: NextRequest): Promise<NextResponse | null> {
+    const method = request.method.toUpperCase()
+    if (!["POST", "PUT", "PATCH", "DELETE"].includes(method)) return null
+
+    const cookieStore = await cookies()
+    const cookieToken = cookieStore.get(CSRF_TOKEN_NAME)?.value
+    const headerToken = request.headers.get("x-csrf-token")
+
+    if (!cookieToken || !headerToken || cookieToken !== headerToken) {
+        return NextResponse.json(
+            { success: false, error: "Token CSRF inválido." },
+            { status: 403 }
+        )
+    }
+
     return null
 }
 
