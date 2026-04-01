@@ -12,14 +12,14 @@ export default function Consortium() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center gap-16 px-6 md:px-12 lg:px-20 py-8 md:py-10 lg:py-15">
-            <div className="w-full">
+        <div className="flex flex-col items-center justify-center px-6 md:px-12 lg:px-20">
+            <div className="w-full pt-8 sm:pt-10 md:pt-12 lg:pt-16">
                 <h1 className="text-2xl lg:text-3xl font-semibold vw-font">O seu Consórcio Volkswagen está aqui</h1>
                 <h3 className="text-xl vw-font">Mais de 700 mil carros, 700 mil histórias</h3>
             </div>
-            <section className="flex flex-col gap-6 items-center justify-center max-w-400">
+            <section className="flex flex-col gap-6 items-center justify-center max-w-400 py-6 md:py-10 lg:py-15 xl:py-20">
                 <h1 className="text-center text-2xl vw-font max-w-150">O carro que você sempre sonhou, <span className="font-semibold">com parcelas que você nunca imaginou.</span></h1>
-                <ul className="grid grid-cols-3 gap-4">
+                <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                         <div>
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
@@ -28,7 +28,7 @@ export default function Consortium() {
                         <Image src="/assets/cars/polo.webp" alt="Polo" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                         <div>
                             <h2 className="text-xl font-semibold text-center">Consórcio Polo</h2>
-                            <h2 className="text-lg">Parcelas a partir de <span className="font-semibold">R$ 1.228,13</span></h2>
+                            <h2 className="text-lg text-center">Parcelas a partir de <span className="font-semibold">R$ 1.228,13</span></h2>
                         </div>
                         <Link href="" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit scale-y-95 translate-y-2 hover:scale-y-100 group-hover:translate-y-0">
                             Simule Aqui
@@ -42,7 +42,7 @@ export default function Consortium() {
                         <Image src="/assets/cars/nivus.webp" alt="Nivus" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                         <div>
                             <h2 className="text-xl font-semibold text-center">Consórcio Nivus</h2>
-                            <h2 className="text-lg">Parcelas a partir de <span className="font-semibold">R$ 1.767,19</span></h2>
+                            <h2 className="text-lg text-center">Parcelas a partir de <span className="font-semibold">R$ 1.767,19</span></h2>
                         </div>
                         <Link href="" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit scale-y-95 translate-y-2 hover:scale-y-100 group-hover:translate-y-0">
                             Simule Aqui
@@ -56,7 +56,7 @@ export default function Consortium() {
                         <Image src="/assets/cars/jetta.webp" alt="Jetta" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                         <div>
                             <h2 className="text-xl font-semibold text-center">Consórcio Jetta</h2>
-                            <h2 className="text-lg">Parcelas a partir de <span className="font-semibold">R$ 1.897,56</span></h2>
+                            <h2 className="text-lg text-center">Parcelas a partir de <span className="font-semibold">R$ 1.897,56</span></h2>
                         </div>
                         <Link href="" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit scale-y-95 translate-y-2 hover:scale-y-100 group-hover:translate-y-0">
                             Simule Aqui
@@ -64,7 +64,7 @@ export default function Consortium() {
                     </div>
                 </ul>
             </section>
-            <section className="w-full flex flex-col-reverse lg:flex-row items-stretch justify-center gap-8 md:max-w-5xl xl:max-w-6xl">
+            <section className="w-full flex flex-col-reverse lg:flex-row items-stretch justify-center gap-12 lg:gap-16 md:max-w-6xl xl:max-w-7xl py-6 md:py-10 lg:py-15 xl:py-20">
                 <div className="w-full lg:w-[50%] flex flex-col gap-6 justify-between h-full">
                     <h2 className="text-3xl md:text-4xl vw-font">O que é <span className="font-semibold">consórcio?</span></h2>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
@@ -89,9 +89,9 @@ export default function Consortium() {
                     <Image src="/assets/consortium/t-cross-photo.webp" alt="Jetta" className="object-cover select-none" fill draggable="false" />
                 </div>
             </section>
-            <section className="flex flex-col gap-6 items-center justify-center">
+            <section className="flex flex-col gap-6 items-center justify-center py-6 md:py-10 lg:py-15 xl:py-20">
                 <h2 className="text-3xl md:text-4xl vw-font">Vantagens do <span className="font-semibold">Consórcio Volkswagen</span></h2>
-                <div className="grid md:grid-cols-3 max-w-6xl gap-4">
+                <div className="grid md:grid-cols-3 max-w-7xl gap-4">
                     <div className="flex h-48 lg:h-64 flex-col items-center justify-center gap-4 p-6 md:p-8 text-center">
                         <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 size-12">
                             <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
@@ -148,7 +148,7 @@ export default function Consortium() {
                     </div>
                 </div>
             </section>
-            <section className="flex flex-col md:flex-row gap-8 items-start justify-center md:max-w-5xl xl:max-w-6xl">
+            <section className="flex flex-col md:flex-row gap-8 items-start justify-center md:max-w-6xl xl:max-w-7xl py-6 md:py-10 lg:py-15 xl:py-20">
                 <div className="w-full md:w-[50%]">
                     <h2 className="text-3xl md:text-4xl vw-font">Restou alguma <span className="font-semibold">dúvida?</span></h2>
                     <h3 className="text-lg vw-font">Tudo o que você precisa saber sobre os consórcios.</h3>

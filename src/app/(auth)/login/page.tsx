@@ -80,14 +80,14 @@ export default function Login() {
                     <input
                         name="email"
                         type="email"
-                        placeholder="Email"
+                        placeholder={t.auth.login.inputs.email}
                         className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                     />
                     <div className="relative">
                         <input
                             name="password"
                             type={showPassword ? "text" : "password"}
-                            placeholder="Senha"
+                            placeholder={t.auth.login.inputs.password}
                             className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                             minLength={8}
                             maxLength={128}
@@ -99,12 +99,12 @@ export default function Login() {
                         disabled={isLoading}
                         className="w-full py-3 rounded-xl bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] text-[var(--white-text)] font-semibold transition-normal active:scale-95 cursor-pointer"
                     >
-                        Entrar
+                        {t.auth.login.button[isLoading ? "loading" : "login"]}
                     </button>
                 </div>
                 <div className="mt-3">
-                    <p className="text-sm">Ainda não tem uma conta?{" "}
-                        <Link href="/register" className="font-semibold">Registre-se</Link>
+                    <p className="text-sm">{t.auth.footerText.noAccount}{" "}
+                        <Link href="/register" className="font-semibold">{t.auth.footerText.register}</Link>
                     </p>
                 </div>
             </form>

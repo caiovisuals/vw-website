@@ -1,5 +1,3 @@
-import { caption } from "framer-motion/client"
-
 export type Locale = "pt-BR" | "en-US"
 
 export const translations = {
@@ -44,15 +42,53 @@ export const translations = {
         auth: {
             register: {
                 title: "Cadastrar",
-                caption: "Crie a sua conta de forma simples e fácil"
+                caption: "Crie a sua conta de forma simples e fácil",
+                inputs: {
+                    name: "Nome",
+                    email: "Email",
+                    password: "Senha",
+                    confirmPassword: "Confirmar Senha"
+                },
+                button: {
+                    register: "Criar Conta",
+                    loading: "Criando Conta..."
+                }
             },
             login: {
                 title: "Logar",
-                caption: "Faça login com suas credenciais"
+                caption: "Faça login com suas credenciais",
+                inputs: {
+                    email: "Email",
+                    password: "Senha",
+                },
+                button: {
+                    login: "Entrar",
+                    loading: "Entrando..."
+                }
             },
             forgotPassword: {
                 title: "Esqueci minha Senha",
-                caption: "Troque a sua senha confirmando pelo seu email"
+                caption: "Troque a sua senha confirmando pelo seu email",
+                inputs: {
+
+                },
+                button: {
+                    forgotPassword: "Enviar Código",
+                    loading: "Enviando Código..."
+                }
+            },
+            errors: {
+
+            },
+            footerText: {
+                agreeTerms: "Ao criar a sua conta, você está declarando estar de acordo com os nossos",
+                termsOfUse: "Termos de Uso",
+                alreadyHaveAccount: "Já tem uma conta?",
+                login: "Faça login",
+                noAccount: "Ainda não tem uma conta?",
+                register: "Registre-se",
+                rememberedYourPassword: "Lembrou sua senha?",
+                loginToYourAccount: "Entre na sua Conta"
             }
         },
 
@@ -173,15 +209,53 @@ export const translations = {
         auth: {
             register: {
                 title: "Register",
-                caption: "Create your account in a simple and easy way"
+                caption: "Create your account in a simple and easy way",
+                inputs: {
+                    name: "Name",
+                    email: "Email",
+                    password: "Password",
+                    confirmPassword: "Confirm Password"
+                },
+                button: {
+                    register: "Create Account",
+                    loading: "Creating Account..."
+                }
             },
             login: {
                 title: "Login",
-                caption: "Log in with your credentials"
+                caption: "Log in with your credentials",
+                inputs: {
+                    email: "Email",
+                    password: "Password",
+                },
+                button: {
+                    login: "LogIn",
+                    loading: "Logging In..."
+                }
             },
             forgotPassword: {
                 title: "Forgot Password",
-                caption: "Change your password by confirming via email"
+                caption: "Change your password by confirming via email",
+                inputs: {
+
+                },
+                button: {
+                    forgotPassword: "Send Code",
+                    loading: "Sending Code..."
+                }
+            },
+            errors: {
+
+            },
+            footerText: {
+                agreeTerms: "By creating your account, you agree to our",
+                termsOfUse: "Terms of Use",
+                alreadyHaveAccount: "Already have an account?",
+                login: "Log in",
+                noAccount: "Don't have an account?",
+                register: "Sign up",
+                rememberedYourPassword: "Remember your password?",
+                loginToYourAccount: "Log in to your account"
             }
         },
 

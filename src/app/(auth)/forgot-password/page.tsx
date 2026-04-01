@@ -25,12 +25,12 @@ export default function ForgotPassword() {
                         disabled={isLoading}
                         className="w-full py-3 rounded-xl bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] text-[var(--white-text)] font-semibold transition-normal active:scale-95 cursor-pointer"
                     >
-                        Enviar Código
+                        {t.auth.forgotPassword.button[isLoading ? "loading" : "forgotPassword"]}
                     </button>
                 </div>
                 <div className="mt-3">
-                    <p className="text-sm">Lembrou sua senha?{" "}
-                        <Link href="/login" className="font-semibold">Entre na sua Conta</Link>
+                    <p className="text-sm">{t.auth.footerText.rememberedYourPassword}{" "}
+                        <Link href="/login" className="font-semibold">{t.auth.footerText.loginToYourAccount}</Link>
                     </p>
                 </div>
             </form>

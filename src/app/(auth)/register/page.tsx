@@ -81,14 +81,14 @@ export default function Register() {
                     <input
                         name="name"
                         type="text"
-                        placeholder="Nome"
+                        placeholder={t.auth.register.inputs.name}
                         className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                         maxLength={512}
                     />
                     <input
                         name="email"
                         type="email"
-                        placeholder="Email"
+                        placeholder={t.auth.register.inputs.email}
                         className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                         minLength={4}
                         maxLength={256}
@@ -97,7 +97,7 @@ export default function Register() {
                         <input
                             name="password"
                             type={showPassword ? "text" : "password"}
-                            placeholder="Senha"
+                            placeholder={t.auth.register.inputs.password}
                             className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                             minLength={8}
                             maxLength={128}
@@ -108,7 +108,7 @@ export default function Register() {
                         <input
                             name="confirmPassword"
                             type={showPassword ? "text" : "password"}
-                            placeholder="Confirmar Senha"
+                            placeholder={t.auth.register.inputs.confirmPassword}
                             className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                             minLength={8}
                             maxLength={128}
@@ -119,15 +119,15 @@ export default function Register() {
                         disabled={isLoading}
                         className="w-full py-3 rounded-xl bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] text-[var(--white-text)] font-semibold transition-normal active:scale-95 cursor-pointer"
                     >
-                        Criar Conta
+                        {t.auth.register.button[isLoading ? "loading" : "register"]}
                     </button>
                 </div>
                 <div className="flex flex-col mt-3">
-                    <p className="text-sm">Ao criar a sua conta, você está declarando estar de acordo com os nossos{" "}
-                        <Link href="terms-of-use" className="font-semibold">Termos de Uso</Link>.
+                    <p className="text-sm">{t.auth.footerText.agreeTerms}{" "}
+                        <Link href="terms-of-use" className="font-semibold">{t.auth.footerText.termsOfUse}</Link>.
                     </p>
-                    <p className="text-sm">Já tem uma conta?{" "}
-                        <Link href="/login" className="font-semibold">Faça login</Link>
+                    <p className="text-sm">{t.auth.footerText.alreadyHaveAccount}{" "}
+                        <Link href="/login" className="font-semibold">{t.auth.footerText.login}</Link>
                     </p>
                 </div>
             </form>

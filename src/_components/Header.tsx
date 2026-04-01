@@ -67,7 +67,7 @@ export default function Header() {
                 </div>
             </div>
             <div onClick={() => setIsMenuOpen(false)} className={`fixed inset-0 z-50 bg-black/50 shadow-[0_0_15px_rgba(0,0,0,0.25)] transition-normal ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0" }`}>
-                <div onClick={(e) => e.stopPropagation()} className={`fixed flex flex-col gap-10 h-full w-[50%] bg-[var(--white-background)] rounded-r-3xl p-6 lg:p-10 transition-normal ${isMenuOpen ? "opacity-100 translate-x-0" : "opacity-75 -translate-x-25" }`}>
+                <div onClick={(e) => e.stopPropagation()} className={`fixed flex flex-col gap-10 h-full w-[90%] sm:w-[80%] md:w-[65%] lg:w-[50%] bg-[var(--white-background)] rounded-r-3xl p-6 lg:p-10 transition-normal ${isMenuOpen ? "opacity-100 translate-x-0" : "opacity-75 -translate-x-25" }`}>
                     <div className="flex flex-row items-start justify-between">
                         <div className="relative size-15">
                             <Image src="/assets/logo-blue.png" alt="Volkswagen Logo" fill className="object-cover aspect-square select-none" draggable="false" />
@@ -116,7 +116,7 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-            <div ref={profileModalRef} className={`absolute right-20 top-24 z-50 max-w-130 w-fit p-4 lg:p-5 rounded-xl bg-[var(--white-background)] shadow-[0_0_15px_rgba(0,0,0,0.25)] transition-normal ${isProfileModalOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-95"}`}>
+            <div ref={profileModalRef} className={`absolute right-6 md:right-12 lg:right-20 top-20 md:top-24 z-50 max-w-130 w-fit p-4 lg:p-5 rounded-xl bg-[var(--white-background)] shadow-[0_0_15px_rgba(0,0,0,0.25)] transition-normal ${isProfileModalOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-95"}`}>
                 {!isLoading && user ? (
                     <div className="flex flex-row gap-4 items-center">
                         <div className="relative size-12 rounded-full overflow-hidden cursor-pointer">

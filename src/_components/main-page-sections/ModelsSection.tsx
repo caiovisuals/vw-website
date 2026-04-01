@@ -37,14 +37,14 @@ export default function ModelsSection() {
     }
 
     return (
-        <section id="models" className="flex flex-col items-center justify-center gap-16 px-6 py-6 md:py-10 lg:py-15 xl:py-20 md:px-12 lg:px-20">
+        <section id="models" className="flex flex-col items-center justify-center gap-16 px-6 py-6 md:py-10 lg:py-15 xl:py-20 md:px-12 lg:px-20 -mb-6 md:-mb-12 lg:-mb-20">
             <div className="flex flex-col gap-3 items-center justify-center max-w-250">
                 <h2 className="text-center text-4xl vw-font">Encontre o seu <span className="font-semibold">Volkswagen</span></h2>
                 <p className="text-center text-lg leading-tight">Conheça os modelos recomendados, em destaque, veículos elétricos ou explore todos para escolher o seu Volkswagen que mais combine com você.</p>
             </div>
             <div className="flex flex-col gap-3">
                 <h2 className="text-center text-3xl vw-font font-semibold">Modelos Recomendados</h2>
-                <div className="relative flex flex-col gap-4">
+                <div className="relative flex flex-col gap-4 w-full">
                     <div className="flex flex-row items-center justify-between gap-2">
                         <Link href="/build-your-model" className="px-3 py-1 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-xl transition-normal active:95">
                             Vê todos disponíveis
@@ -53,7 +53,7 @@ export default function ModelsSection() {
                     </div>
                     <button
                         onClick={() => scroll("left")}
-                        className={`absolute -left-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md hover:bg-[var(--medium-blue)] transition-normal cursor-pointer ${canScrollLeft ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                        className={`absolute -left-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md transition-normal cursor-pointer ${canScrollLeft ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                         aria-label="Scroll para a esquerda"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -62,92 +62,92 @@ export default function ModelsSection() {
                     </button>
                     <button
                         onClick={() => scroll("right")}
-                        className={`absolute -right-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md hover:bg-[var(--medium-blue)] transition-normal cursor-pointer ${canScrollRight ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                        className={`absolute -right-6 top-1/2 -translate-y-1/2 z-20 bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] text-[var(--white-text)] p-3 rounded-full shadow-md transition-normal cursor-pointer ${canScrollRight ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                         aria-label="Scroll para a direita"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
                         </svg>
                     </button>
-                    <ul role="listbox" aria-orientation="horizontal" ref={listRef} onScroll={updateScrollButtons} className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory hide-scrollbar">
-                        <div onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
+                    <ul role="listbox" aria-orientation="horizontal" aria-label="Controle deslizante de seleção de carros" ref={listRef} onScroll={updateScrollButtons} className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory hide-scrollbar max-w-full">
+                        <li onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                             <div>
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                             </div>
-                            <Image src="/assets/cars/jetta.webp" alt="Jetta" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                            <Image src="/assets/cars/jetta.webp" alt="Jetta" className="w-full h-35 lg:h-40 xl:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                             <div>
                                 <h2 className="text-xl font-semibold text-center">Jetta</h2>
                             </div>
                             <Link href="/build-your-model/setting" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                 Montar o seu
                             </Link>
-                        </div>
-                        <div onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
+                        </li>
+                        <li onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                             <div>
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                             </div>
-                            <Image src="/assets/cars/nivus.webp" alt="Nivus" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                            <Image src="/assets/cars/nivus.webp" alt="Nivus" className="w-full h-35 lg:h-40 xl:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                             <div>
                                 <h2 className="text-xl font-semibold text-center">Nivus</h2>
                             </div>
                             <Link href="/build-your-model/setting" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                 Montar o seu
                             </Link>
-                        </div>
-                        <div onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
+                        </li>
+                        <li onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                             <div>
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                             </div>
-                            <Image src="/assets/cars/taos.webp" alt="Taos" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                            <Image src="/assets/cars/taos.webp" alt="Taos" className="w-full h-35 lg:h-40 xl:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                             <div>
                                 <h2 className="text-xl font-semibold text-center">Taos</h2>
                             </div>
                             <Link href="/build-your-model/setting" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                 Montar o seu
                             </Link>
-                        </div>
-                        <div onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
+                        </li>
+                        <li onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                             <div>
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                             </div>
-                            <Image src="/assets/cars/amarok.webp" alt="Amarok" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                            <Image src="/assets/cars/amarok.webp" alt="Amarok" className="w-full h-35 lg:h-40 xl:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                             <div>
                                 <h2 className="text-xl font-semibold text-center">Amarok</h2>
                             </div>
                             <Link href="/build-your-model/setting" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                 Montar o seu
                             </Link>
-                        </div>
-                        <div onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
+                        </li>
+                        <li onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                             <div>
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                             </div>
-                            <Image src="/assets/cars/saveiro.webp" alt="Saveiro" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                            <Image src="/assets/cars/saveiro.webp" alt="Saveiro" className="w-full h-35 lg:h-40 xl:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                             <div>
                                 <h2 className="text-xl font-semibold text-center">Saveiro</h2>
                             </div>
                             <Link href="/build-your-model/setting" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                 Montar o seu
                             </Link>
-                        </div>
-                        <div onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
+                        </li>
+                        <li onClick={() => router.push("/car")} role="option" className="flex-shrink-0 snap-start group relative flex flex-col items-center gap-3 rounded-2xl py-5 px-2.5 cursor-pointer">   
                             <div>
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                                 <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                             </div>
-                            <Image src="/assets/cars/polo.webp" alt="Polo" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                            <Image src="/assets/cars/polo.webp" alt="Polo" className="w-full h-35 lg:h-40 xl:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                             <div>
                                 <h2 className="text-xl font-semibold text-center">Polo</h2>
                             </div>
                             <Link href="/build-your-model/setting" className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                 Montar o seu
                             </Link>
-                        </div>
+                        </li>
                     </ul>
                 </div>
             </div>

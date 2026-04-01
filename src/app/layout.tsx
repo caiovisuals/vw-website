@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     other: {
         "google": "notranslate",
         "application-name": "Volkswagen Brasil",
-        "news_keywords": "caio visuals",
+        "news_keywords": "caio visuals, vw",
     }
 }
 
