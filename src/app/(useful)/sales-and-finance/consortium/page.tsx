@@ -12,7 +12,7 @@ export default function Consortium() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 md:px-12 lg:px-20">
+        <div className="flex flex-col items-center justify-center py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
             <div className="w-full pt-8 sm:pt-10 md:pt-12 lg:pt-16">
                 <h1 className="text-2xl lg:text-3xl font-semibold vw-font">O seu Consórcio Volkswagen está aqui</h1>
                 <h3 className="text-xl vw-font">Mais de 700 mil carros, 700 mil histórias</h3>
@@ -25,7 +25,7 @@ export default function Consortium() {
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                         </div>
-                        <Image src="/assets/cars/polo.webp" alt="Polo" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                        <Image src="/assets/cars/polo/polo.webp" alt="Polo" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                         <div>
                             <h2 className="text-xl font-semibold text-center">Consórcio Polo</h2>
                             <h2 className="text-lg text-center">Parcelas a partir de <span className="font-semibold">R$ 1.228,13</span></h2>
@@ -39,7 +39,7 @@ export default function Consortium() {
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                         </div>
-                        <Image src="/assets/cars/nivus.webp" alt="Nivus" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                        <Image src="/assets/cars/nivus/nivus.webp" alt="Nivus" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                         <div>
                             <h2 className="text-xl font-semibold text-center">Consórcio Nivus</h2>
                             <h2 className="text-lg text-center">Parcelas a partir de <span className="font-semibold">R$ 1.767,19</span></h2>
@@ -53,7 +53,7 @@ export default function Consortium() {
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#BCBCBC_0%,_#999999_100%)] rounded-2xl transition-normal z-8" />
                             <div className="absolute inset-0 w-full h-[50%] lg:h-[58%] bg-[radial-gradient(circle,_#CCCECE_0%,_#AFAFAF_100%)] group-hover:opacity-0 rounded-2xl transition-normal z-9" />
                         </div>
-                        <Image src="/assets/cars/jetta.webp" alt="Jetta" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
+                        <Image src="/assets/cars/jetta/jetta.webp" alt="Jetta" className="w-full h-40 lg:h-50 group-hover:scale-105 group-active:scale-95 object-contain transition-normal z-11 select-none" width={864} height={432} draggable="false" />
                         <div>
                             <h2 className="text-xl font-semibold text-center">Consórcio Jetta</h2>
                             <h2 className="text-lg text-center">Parcelas a partir de <span className="font-semibold">R$ 1.897,56</span></h2>
@@ -64,7 +64,7 @@ export default function Consortium() {
                     </div>
                 </ul>
             </section>
-            <section className="w-full flex flex-col-reverse lg:flex-row items-stretch justify-center gap-12 lg:gap-16 md:max-w-6xl xl:max-w-7xl py-6 md:py-10 lg:py-15 xl:py-20">
+            <section className="w-full flex flex-col-reverse lg:flex-row items-stretch justify-center gap-12 lg:gap-16 md:max-w-6xl xl:max-w-7xl py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
                 <div className="w-full lg:w-[50%] flex flex-col gap-6 justify-between h-full">
                     <h2 className="text-3xl md:text-4xl vw-font">O que é <span className="font-semibold">consórcio?</span></h2>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
@@ -89,7 +89,7 @@ export default function Consortium() {
                     <Image src="/assets/consortium/t-cross-photo.webp" alt="Jetta" className="object-cover select-none" fill draggable="false" />
                 </div>
             </section>
-            <section className="flex flex-col gap-6 items-center justify-center py-6 md:py-10 lg:py-15 xl:py-20">
+            <section className="flex flex-col gap-6 items-center justify-center py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
                 <h2 className="text-3xl md:text-4xl vw-font">Vantagens do <span className="font-semibold">Consórcio Volkswagen</span></h2>
                 <div className="grid md:grid-cols-3 max-w-7xl gap-4">
                     <div className="flex h-48 lg:h-64 flex-col items-center justify-center gap-4 p-6 md:p-8 text-center">
@@ -148,7 +148,7 @@ export default function Consortium() {
                     </div>
                 </div>
             </section>
-            <section className="flex flex-col md:flex-row gap-8 items-start justify-center md:max-w-6xl xl:max-w-7xl py-6 md:py-10 lg:py-15 xl:py-20">
+            <section className="flex flex-col md:flex-row gap-8 items-start justify-center md:max-w-6xl xl:max-w-7xl py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
                 <div className="w-full md:w-[50%]">
                     <h2 className="text-3xl md:text-4xl vw-font">Restou alguma <span className="font-semibold">dúvida?</span></h2>
                     <h3 className="text-lg vw-font">Tudo o que você precisa saber sobre os consórcios.</h3>
@@ -167,7 +167,7 @@ export default function Consortium() {
                             </div>
                         </div>
                         <div className={`overflow-hidden transition-normal ${activeIndex === 0 ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}>
-                            <p>O Consórcio Volkswagen é uma administradora de consórcio dos veículos Volkswagen.</p>
+                            <p className="indent-4">O Consórcio Volkswagen é uma administradora de consórcio dos veículos Volkswagen.</p>
                         </div>
                     </div>
                     <div onClick={() => toggleFAQ(1)} className="w-full flex flex-col gap-2">
@@ -183,7 +183,7 @@ export default function Consortium() {
                             </div>
                         </div>
                         <div className={`overflow-hidden transition-normal ${activeIndex === 1 ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}>
-                            <p>Sim! Quando você escolher um plano de consórcio que se ajuste às suas necessidades, juntaremos você a um grupo de pessoas que buscam créditos similares ao seu (pode haver valores até 50% maiores ou menores).</p>
+                            <p className="indent-4">Sim! Quando você escolher um plano de consórcio que se ajuste às suas necessidades, juntaremos você a um grupo de pessoas que buscam créditos similares ao seu (pode haver valores até 50% maiores ou menores).</p>
                         </div>
                     </div>
                     <div onClick={() => toggleFAQ(2)} className="w-full flex flex-col gap-2">
@@ -199,7 +199,7 @@ export default function Consortium() {
                             </div>
                         </div>
                         <div className={`overflow-hidden transition-normal ${activeIndex === 2 ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}>
-                            <p>O consórcio de carros chama a atenção de investidores pacientes, isso porque é a maneira mais vantajosa, barata e segura do mercado para adquirir um veículo. Aliás, o carro dos seus sonhos é bem acessível com essa modalidade. Quer mais vantagens de adquirir um Consórcio Volkswagen?</p>
+                            <p className="indent-4">O consórcio de carros chama a atenção de investidores pacientes, isso porque é a maneira mais vantajosa, barata e segura do mercado para adquirir um veículo. Aliás, o carro dos seus sonhos é bem acessível com essa modalidade. Quer mais vantagens de adquirir um Consórcio Volkswagen?</p>
                             <ul className="ml-10">
                                 <li>Parcelas que cabem no seu porta-luvas sem juros e sem taxa de adesão</li>
                                 <li>Maior garantia para o seu investimento</li>

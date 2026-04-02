@@ -2,7 +2,7 @@ import TermsOfUseSection from "@/_components/conditions-section/TermsOfUseSectio
 
 export default function TermsOfUse() {
     return (
-        <div className="flex flex-col items-center justify-center gap-12 px-6 md:px-12 lg:px-20 py-8 md:py-10 lg:py-15">
+        <div className="flex flex-col items-center justify-center gap-12 py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
             <TermsOfUseSection />
         </div>
     )

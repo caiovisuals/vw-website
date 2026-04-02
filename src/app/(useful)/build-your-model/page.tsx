@@ -13,56 +13,56 @@ const cars = [
         name: "Jetta",
         fuel: "flex",
         transmission: "automatic",
-        image: "/assets/cars/jetta.webp"
+        image: "/assets/cars/jetta/jetta.webp"
     },
     {
         id: 2,
         name: "Nivus",
         fuel: "flex",
         transmission: "automatic",
-        image: "/assets/cars/nivus.webp"
+        image: "/assets/cars/nivus/nivus.webp"
     },
     {
         id: 3,
         name: "T-Cross",
         fuel: "flex",
         transmission: "automatic",
-        image: "/assets/cars/t-cross.webp"
+        image: "/assets/cars/t-cross/t-cross.webp"
     },
     {
         id: 4,
         name: "Taos",
         fuel: "flex",
         transmission: "automatic",
-        image: "/assets/cars/taos.webp"
+        image: "/assets/cars/taos/taos.webp"
     },
     {
         id: 5,
         name: "Polo",
         fuel: "flex",
         transmission: "automatic",
-        image: "/assets/cars/polo.webp"
+        image: "/assets/cars/polo/polo.webp"
     },
     {
         id: 6,
         name: "Saveiro",
         fuel: "flex",
         transmission: "manual",
-        image: "/assets/cars/saveiro.webp"
+        image: "/assets/cars/saveiro/saveiro.webp"
     },
     {
         id: 7,
         name: "ID.4",
         fuel: "electric",
         transmission: "automatic",
-        image: "/assets/cars/id4.webp"
+        image: "/assets/cars/id4/id4.webp"
     },
     {
         id: 8,
         name: "Amarok",
         fuel: "flex",
         transmission: "automatic",
-        image: "/assets/cars/amarok.webp"
+        image: "/assets/cars/amarok/amarok.webp"
     }
 ]
 
@@ -133,7 +133,7 @@ export default function BuildYourModel() {
     }
 
     return (
-        <div className="flex flex-col gap-4 px-6 py-6 md:py-10 md:px-12 lg:px-20">
+        <div className="flex flex-col gap-4 py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
             <div className="flex flex-row items-center justify-between">
                 <h1 className="text-2xl lg:text-3xl vw-font font-semibold">{t.buildYourModel.title}</h1>
                 <div className="relative flex items-center justify-center h-[28px] min-w-[20px] overflow-hidden">

@@ -107,6 +107,18 @@ export const translations = {
             },
         },
 
+        initialPage: {
+            ModelsSection: {
+                
+            },
+            FeaturedSection: {
+
+            },
+            ServicesSection: {
+
+            }
+        },
+
         home: {
 
         },
@@ -281,6 +293,18 @@ export const translations = {
                 title: "More than a car, a Polo",
                 subtitle: "A Volks for you to drive with more style through the streets.",
             },
+        },
+
+        initialPage: {
+            ModelsSection: {
+
+            },
+            FeaturedSection: {
+
+            },
+            ServicesSection: {
+                
+            }
         },
 
         home: {

@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function FeaturedSection() {
     return (
-        <section id="featured" className="flex flex-col items-center justify-center gap-16 px-6 py-6 md:py-10 lg:py-15 xl:py-20 md:px-12 lg:px-20">
+        <section id="featured" className="flex flex-col items-center justify-center gap-16 py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20">
             <h2 className="text-center text-4xl vw-font">Modelos em <span className="font-semibold">Destaque</span></h2>
             <div className="w-full flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 md:max-w-7xl xl:max-w-8xl">
                 <div className="w-full lg:w-[50%] flex flex-col gap-8">
