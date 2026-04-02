@@ -41,6 +41,18 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
+CREATE TABLE "password_resets" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+    "usedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "password_resets_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "saved_configurations" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
@@ -198,6 +210,9 @@ CREATE UNIQUE INDEX "sessions_token_key" ON "sessions"("token");
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "password_resets_token_key" ON "password_resets"("token");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "saved_configurations_code_key" ON "saved_configurations"("code");
 
 -- CreateIndex
@@ -208,6 +223,9 @@ CREATE UNIQUE INDEX "technical_data_carId_key" ON "technical_data"("carId");
 
 -- AddForeignKey
 ALTER TABLE "sessions" ADD CONSTRAINT "sessions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "password_resets" ADD CONSTRAINT "password_resets_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "saved_configurations" ADD CONSTRAINT "saved_configurations_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

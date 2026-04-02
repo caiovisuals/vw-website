@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useAuth } from "@/_lib/contexts/AuthContext"
 import { useLanguage } from "@/_lib/contexts/LanguageContext"
 import ShowPassword from "@/_components/ui/ShowPassword"
@@ -13,8 +13,6 @@ export default function Login() {
     const { refetch } = useAuth()
     const router = useRouter()
     const { t } = useLanguage()
-    const searchParams = useSearchParams()
-    const justRegistered = searchParams.get("registered") === "1"
 
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, setIsLoading] = useState(false)

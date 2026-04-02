@@ -1,9 +1,8 @@
-import { NextRequest } from "next/server"
 import { prisma } from "@/_lib/prisma"
 import { ok, handleRoute } from "@/_lib/utils/apiResponse"
 import { requireRole } from "@/_lib/utils/session"
 
-export async function GET(_req: NextRequest) {
+export async function GET() {
     return handleRoute(async () => {
         await requireRole("STAFF")
 
@@ -69,10 +68,11 @@ export async function GET(_req: NextRequest) {
             .map(c => c.carId)
             .filter((id): id is string => !!id)
 
-        const topCarDetails = await prisma.car.findMany({
-            where: { id: { in: topCarIds } },
-            select: { id: true, name: true, imageUrl: true },
-        })
+        const topCarDetails: { id: string; name: string; imageUrl: string | null }[] =
+            await prisma.car.findMany({
+                where: { id: { in: topCarIds } },
+                select: { id: true, name: true, imageUrl: true },
+            })
 
         const topCarsHydrated = (topCars as TopCarRaw[])
             .filter((c): c is { carId: string; _count: { carId: number } } => !!c.carId)
