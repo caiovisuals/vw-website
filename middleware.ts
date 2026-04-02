@@ -3,7 +3,6 @@ import { detectSuspiciousActivity } from "@/_lib/security/suspicious"
 import { isRateLimited } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { SESSION_COOKIE } from "@/_lib/utils/session"
-import { prisma } from "@/_lib/prisma"
 
 const AUTH_ROUTES = [
     "/api/me", 
@@ -13,7 +12,8 @@ const AUTH_ROUTES = [
 ]
 
 const STAFF_ROUTES = [
-    "/api/staff/users"
+    "/api/staff/users",
+    "/staff"
 ]
 
 const AUTH_API_ROUTES = [
@@ -37,19 +37,10 @@ const ROLE_LEVEL: Record<string, number> = {
 
 const JWT_COOKIE = "vw_jwt" 
 
-async function getSessionUser(token: string | undefined) {
-    if (!token) return null
-
+function getRoleFromToken(token: string): string | null {
     try {
-        const session = await prisma.session.findUnique({
-            where: { token },
-            select: {
-                expiresAt: true,
-                user: { select: { id: true, role: true } },
-            },
-        })
-        if (!session || session.expiresAt < new Date()) return null
-        return session.user
+        const payload = JSON.parse(atob(token.split(".")[1]))
+        return payload.role
     } catch {
         return null
     }
@@ -111,12 +102,13 @@ export async function middleware(req: NextRequest) {
     }
     
     const token = req.cookies.get(SESSION_COOKIE)?.value
-    const user = await getSessionUser(token)
+
+    const role = token ? getRoleFromToken(token) : null
 
     const needsAuth  = AUTH_ROUTES.some(r  => pathname.startsWith(r))
     const needsStaff = STAFF_ROUTES.some(r => pathname.startsWith(r))
  
-    if (needsAuth && !user) {
+    if (needsAuth && !token) {
         const token = req.cookies.get(SESSION_COOKIE)?.value
         if (!token) {
             return new NextResponse(
@@ -126,12 +118,18 @@ export async function middleware(req: NextRequest) {
         }
     }
 
-    if (needsStaff && !user) {
-        const token = req.cookies.get(SESSION_COOKIE)?.value
+    if (needsStaff) {
         if (!token) {
             return new NextResponse(
                 JSON.stringify({ success: false, error: "Não autorizado." }),
                 { status: 401, headers: { "Content-Type": "application/json" } }
+            )
+        }
+
+        if (!role || ROLE_LEVEL[role] < ROLE_LEVEL.STAFF) {
+            return new NextResponse(
+                JSON.stringify({ success: false, error: "Acesso negado." }),
+                { status: 403, headers: { "Content-Type": "application/json" } }
             )
         }
     }
