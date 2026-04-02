@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 import { detectSuspiciousActivity } from "@/_lib/security/suspicious"
-import { isRateLimited } from "@/_lib/security/rateLimit"
-import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { SESSION_COOKIE } from "@/_lib/utils/session"
 
 const AUTH_ROUTES = [
@@ -14,13 +12,6 @@ const AUTH_ROUTES = [
 const STAFF_ROUTES = [
     "/api/staff/users",
     "/staff"
-]
-
-const AUTH_API_ROUTES = [
-    "/api/auth/login",
-    "/api/auth/register",
-    "/api/auth/forgot-password",
-    "/api/auth/reset-password"
 ]
 
 const ROLE_LEVEL: Record<string, number> = {
@@ -64,39 +55,12 @@ function applySecurityHeaders(response: NextResponse, headers: Record<string, st
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl
-    const { ip } = await getRequestMeta(req)
 
     if (await detectSuspiciousActivity(req)) {
         return new NextResponse(
             JSON.stringify({ success: false, error: "Requisição bloqueada." }),
             { status: 403, headers: { "Content-Type": "application/json" } }
         )
-    }
-
-    if (AUTH_API_ROUTES.some(r => pathname.startsWith(r))) {
-        const rl = isRateLimited(ip, ip, "auth")
-        if (rl.limited) {
-            return new NextResponse(
-                JSON.stringify({ success: false, error: "Muitas tentativas. Aguarde alguns minutos." }),
-                {
-                    status: 429,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Retry-After": String(Math.ceil((rl.resetAt - Date.now()) / 1000)),
-                    },
-                }
-            )
-        }
-    }
-
-    if (pathname.startsWith("/api/")) {
-        const rl = isRateLimited(ip, ip, "general")
-        if (rl.limited) {
-            return new NextResponse(
-                JSON.stringify({ success: false, error: "Rate limit excedido." }),
-                { status: 429, headers: { "Content-Type": "application/json" } }
-            )
-        }
     }
     
     const token = req.cookies.get(SESSION_COOKIE)?.value
