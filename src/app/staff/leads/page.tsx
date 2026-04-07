@@ -75,7 +75,7 @@ export default function StaffLeads() {
                     <button
                         key={s}
                         onClick={() => { setStatusFilter(s); setPage(1) }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-normal ${
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border-2 transition-normal ${
                             statusFilter === s
                                 ? "bg-[var(--dark-blue)] text-white border-[var(--dark-blue)]"
                                 : "bg-white text-[var(--black-text-hover)] border-[var(--white-border)]/50 hover:border-[var(--dark-blue)]/40"
@@ -86,7 +86,7 @@ export default function StaffLeads() {
                 ))}
             </div>
 
-            <div className="bg-white rounded-xl border border-[var(--white-border)]/30 overflow-hidden">
+            <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>
@@ -130,7 +130,7 @@ export default function StaffLeads() {
                                             }
                                         </td>
                                         <td className="px-4 py-3">
-                                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${STATUS_COLOR[lead.status]}`}>
+                                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium border-2 ${STATUS_COLOR[lead.status]}`}>
                                                 {STATUS_LABEL[lead.status]}
                                             </span>
                                         </td>
@@ -178,17 +178,17 @@ export default function StaffLeads() {
                 </div>
 
                 {pagination && pagination.pages > 1 && (
-                    <div className="flex items-center justify-between px-4 py-3 border-t border-[var(--white-border)]/20">
+                    <div className="flex items-center justify-between px-4 py-3 border-t-2 border-[var(--white-border)]/20">
                         <span className="text-xs text-[var(--black-text-hover)]">
                             Página {pagination.page} de {pagination.pages}
                         </span>
                         <div className="flex gap-2">
                             <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
-                                className="px-3 py-1 text-xs rounded-lg border border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
+                                className="px-3 py-1 text-xs rounded-lg border-2 border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
                                 Anterior
                             </button>
                             <button onClick={() => setPage(p => Math.min(pagination.pages, p + 1))} disabled={page === pagination.pages}
-                                className="px-3 py-1 text-xs rounded-lg border border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
+                                className="px-3 py-1 text-xs rounded-lg border-2 border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
                                 Próxima
                             </button>
                         </div>

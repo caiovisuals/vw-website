@@ -11,7 +11,7 @@ type Offer = {
     model: string
     type: "novo" | "seminovo"
     price: number
-    image: string
+    imageUrl: string
 }
 
 const offers: Offer[] = [
@@ -23,7 +23,7 @@ const offers: Offer[] = [
         model: "jetta",
         type: "novo",
         price: 145000,
-        image: "/assets/cars/jetta/offer.webp",
+        imageUrl: "/assets/cars/jetta/offer.webp",
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ const offers: Offer[] = [
         model: "nivus",
         type: "novo",
         price: 110000,
-        image: "/assets/cars/nivus/offer.webp",
+        imageUrl: "/assets/cars/nivus/offer.webp",
     },
     {
         id: 3,
@@ -43,7 +43,7 @@ const offers: Offer[] = [
         model: "polo",
         type: "seminovo",
         price: 45000,
-        image: "/assets/cars/polo/offer.webp",
+        imageUrl: "/assets/cars/polo/offer.webp",
     },
 ]
 
@@ -93,7 +93,7 @@ export default function Offers() {
                             <div key={offer.id} className="border-2 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                                 
                                 <Image
-                                    src={offer.image}
+                                    src={offer.imageUrl}
                                     alt={offer.name}
                                     width={400}
                                     height={200}

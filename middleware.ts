@@ -106,7 +106,7 @@ export async function middleware(req: NextRequest) {
         }
     }
 
-    if (pathname.startsWith("/api/")) {
+    if (pathname.startsWith("/api/") && pathname !== "/api/auth/csrf") {
         const csrfError = await csrfProtection(req)
         if (csrfError) return csrfError
     }

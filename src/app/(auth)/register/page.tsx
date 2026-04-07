@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useLanguage } from "@/_lib/contexts/LanguageContext"
+import { getCSRFToken } from "@/_hooks/useCSRF"
 import ShowPassword from "@/_components/ui/ShowPassword"
 
 type FieldErrors = Partial<Record<"name" | "email" | "password" | "confirmPassword" | "phone", string>>
@@ -41,9 +42,14 @@ export default function Register() {
         setIsLoading(true)
  
         try {
+            const csrf = await getCSRFToken()
+
             const res = await fetch("/api/auth/register", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-csrf-token": csrf,
+                },
                 body: JSON.stringify({ name, email, password }),
             })
  

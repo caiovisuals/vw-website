@@ -131,7 +131,7 @@ export default function StaffFinance() {
                     <button
                         key={s}
                         onClick={() => setStatusFilter(statusFilter === s ? "" : s)}
-                        className={`rounded-xl border p-3 flex flex-col gap-1 text-left transition-normal ${
+                        className={`rounded-xl border-2 p-3 flex flex-col gap-1 text-left transition-normal ${
                             statusFilter === s
                                 ? "border-[var(--dark-blue)] bg-[var(--dark-blue)]/5"
                                 : "border-[var(--white-border)]/30 bg-white hover:border-[var(--dark-blue)]/30"
@@ -143,11 +143,11 @@ export default function StaffFinance() {
                 ))}
             </div>
 
-            <div className="bg-white rounded-xl border border-[var(--white-border)]/30 overflow-hidden">
+            <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className="border-b border-[var(--white-border)]/20 text-left">
+                            <tr className="border-b-2 border-[var(--white-border)]/20 text-left">
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)]">Cliente</th>
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)] hidden md:table-cell">Veículo</th>
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)]">Valor / Parcela</th>
@@ -241,7 +241,7 @@ export default function StaffFinance() {
                                                             <select
                                                                 value={editingStatus.status}
                                                                 onChange={e => setEditingStatus(prev => prev ? { ...prev, status: e.target.value as FinanceStatus } : null)}
-                                                                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] bg-white focus:outline-none"
+                                                                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] bg-white focus:outline-none"
                                                             >
                                                                 {(Object.entries(STATUS_LABEL) as [FinanceStatus, string][]).map(([k, v]) => (
                                                                     <option key={k} value={k}>{v}</option>
@@ -255,14 +255,14 @@ export default function StaffFinance() {
                                                                 value={editNotes}
                                                                 onChange={e => setEditNotes(e.target.value)}
                                                                 placeholder="Adicione uma nota..."
-                                                                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] bg-white"
+                                                                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] bg-white"
                                                             />
                                                         </div>
                                                         <div className="flex gap-2">
                                                             <button onClick={saveStatus} className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal">
                                                                 Salvar
                                                             </button>
-                                                            <button onClick={() => setEditingStatus(null)} className="px-4 py-2 rounded-lg border border-[var(--white-border)] text-sm hover:bg-[var(--white-border)]/10 transition-normal">
+                                                            <button onClick={() => setEditingStatus(null)} className="px-4 py-2 rounded-lg border-2 border-[var(--white-border)] text-sm hover:bg-[var(--white-border)]/10 transition-normal">
                                                                 Cancelar
                                                             </button>
                                                         </div>

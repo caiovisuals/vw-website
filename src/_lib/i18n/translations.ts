@@ -8,7 +8,8 @@ export const translations = {
         header: {
             profileModal: {
                 seeProfile: "Ver Perfil",
-                LogWithYourAccount: "Entre com a sua conta"
+                manage: "Administrar",
+                logWithYourAccount: "Entre com a sua conta"
             }
         },
 
@@ -28,12 +29,20 @@ export const translations = {
             privacyPolicies: "Políticas de Privacidade",
             home: "Início",
             profile: "Perfil",
+            dashboard: "Painel",
+            offers: "Ofertas",
+            st_finance: "Financiamentos",
+            st_dealers: "Concessionárias",
+            leads: "Leads",
+            cars: "Carros",
+            users: "Usuários"
         },
 
         // Footer
         footer: {
             useful: "Úteis",
             buy: "Comprar",
+            administrative: "Administrativo",
             legal: "Legal",
             socialMedia: "Redes Sociais",
             madeWith: "Feito com carinho e admiração por",
@@ -196,7 +205,8 @@ export const translations = {
         header: {
             profileModal: {
                 seeProfile: "See Profile",
-                LogWithYourAccount: "Log in with your account"
+                manage: "Manage",
+                logWithYourAccount: "Log in with your account"
             }
         },
 
@@ -216,6 +226,13 @@ export const translations = {
             privacyPolicies: "Privacy Policies",
             home: "Home",
             profile: "Profile",
+            dashboard: "Dashboard",
+            offers: "Offers",
+            st_finance: "Financing",
+            st_dealers: "Dealers",
+            leads: "Leads",
+            cars: "Cars",
+            users: "Users"
         },
 
         auth: {
@@ -275,6 +292,7 @@ export const translations = {
         footer: {
             useful: "Useful",
             buy: "Buy",
+            administrative: "Administrative",
             legal: "Legal",
             socialMedia: "Social Media",
             madeWith: "Made with love and admiration by",

@@ -4,8 +4,6 @@ import { AuthProvider } from "@/_lib/contexts/AuthContext"
 import { LanguageProvider } from "@/_lib/contexts/LanguageContext"
 import Script from "next/script"
 import ScrollToTop from "@/_components/ScrollToTop"
-import Header from "@/_components/Header"
-import Footer from "@/_components/Footer"
 import "./globals.css"
 
 const geologica = Geologica({
@@ -74,10 +72,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body className="min-h-full flex flex-col">
                 <AuthProvider>
                     <LanguageProvider>
-                        <Header />
                         <ScrollToTop />
                         {children}
-                        <Footer />
                     </LanguageProvider>
                 </AuthProvider>
             </body>

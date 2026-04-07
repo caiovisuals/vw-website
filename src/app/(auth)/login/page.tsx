@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/_lib/contexts/AuthContext"
 import { useLanguage } from "@/_lib/contexts/LanguageContext"
+import { getCSRFToken } from "@/_hooks/useCSRF"
 import ShowPassword from "@/_components/ui/ShowPassword"
 
 type FieldErrors = Partial<Record<"email" | "password", string>>
@@ -22,9 +23,7 @@ export default function Login() {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setGlobalError(null)
-        setFieldErrors({})
-        setIsLoading(true)
- 
+        setFieldErrors({}) 
         const form = e.currentTarget
         const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim()
         const password = (form.elements.namedItem("password") as HTMLInputElement).value
@@ -33,11 +32,18 @@ export default function Login() {
             setFieldErrors({ email: "Email inválido." })
             return
         }
+
+        setIsLoading(true)
  
         try {
+            const csrf = await getCSRFToken()
+
             const res = await fetch("/api/auth/login", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "x-csrf-token": csrf
+                },
                 credentials: "include",
                 body: JSON.stringify({ email, password }),
             })

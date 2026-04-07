@@ -103,7 +103,7 @@ export default function StaffOffers() {
                     const val = type === "number" ? (e.target.value ? Number(e.target.value) : 0) : e.target.value
                     setForm(prev => ({ ...prev, [key]: val }))
                 }}
-                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] transition-normal"
+                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] transition-normal"
             />
         </div>
     )
@@ -115,13 +115,13 @@ export default function StaffOffers() {
                     <h1 className="text-2xl font-semibold vw-font">Ofertas</h1>
                     <p className="text-sm text-[var(--black-text-hover)]">{offers.length} ofertas · {offers.filter(o => o.active).length} ativas</p>
                 </div>
-                <button onClick={openCreate} className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0">
+                <button onClick={openCreate} className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0 cursor-pointer">
                     + Nova Oferta
                 </button>
             </div>
 
             {showForm && (
-                <div className="bg-white rounded-xl border border-[var(--white-border)]/30 p-5 flex flex-col gap-4">
+                <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 p-5 flex flex-col gap-4">
                     <h2 className="font-semibold text-sm">{editingOffer ? "Editar Oferta" : "Nova Oferta"}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         {field("name", "Nome do Modelo", "text", "Ex: Jetta")}
@@ -135,14 +135,14 @@ export default function StaffOffers() {
                         <div className="flex flex-col gap-1">
                             <label className="text-xs text-[var(--black-text-hover)]">Categoria</label>
                             <select value={form.category} onChange={e => setForm(prev => ({ ...prev, category: e.target.value as OfferCategory }))}
-                                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none bg-white transition-normal">
+                                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none bg-white transition-normal">
                                 {Object.entries(CATEGORY_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                             </select>
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-xs text-[var(--black-text-hover)]">Tipo</label>
                             <select value={form.type} onChange={e => setForm(prev => ({ ...prev, type: e.target.value as OfferType }))}
-                                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none bg-white transition-normal">
+                                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none bg-white transition-normal">
                                 <option value="novo">Novo</option>
                                 <option value="seminovo">Seminovo</option>
                             </select>
@@ -156,7 +156,7 @@ export default function StaffOffers() {
                         <button onClick={handleSave} className="px-5 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal">
                             {editingOffer ? "Salvar Alterações" : "Criar Oferta"}
                         </button>
-                        <button onClick={() => setShowForm(false)} className="px-5 py-2 rounded-lg border border-[var(--white-border)] text-sm hover:bg-[var(--white-border)]/10 transition-normal">
+                        <button onClick={() => setShowForm(false)} className="px-5 py-2 rounded-lg border-2 border-[var(--white-border)] text-sm hover:bg-[var(--white-border)]/10 transition-normal">
                             Cancelar
                         </button>
                     </div>
@@ -165,7 +165,7 @@ export default function StaffOffers() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {offers.map(offer => (
-                    <div key={offer.id} className={`bg-white rounded-xl border overflow-hidden transition-normal ${offer.active ? "border-[var(--white-border)]/30" : "border-[var(--white-border)]/20 opacity-60"}`}>
+                    <div key={offer.id} className={`bg-white rounded-xl border-2 overflow-hidden transition-normal ${offer.active ? "border-[var(--white-border)]/30" : "border-[var(--white-border)]/20 opacity-60"}`}>
                         <div className="relative h-44 bg-[#e8e8e6]">
                             <Image
                                 src={offer.imageUrl || "/assets/cars/jetta/jetta.webp"}
@@ -185,9 +185,9 @@ export default function StaffOffers() {
                         </div>
                         <div className="p-4 flex flex-col gap-2">
                             <div>
-                                <p className="text-xs text-[var(--black-text-hover)]">{CATEGORY_LABEL[offer.category]} · {offer.type}</p>
+                                <p className="text-xs">{CATEGORY_LABEL[offer.category]} · {offer.type}</p>
                                 <h3 className="font-semibold text-sm leading-snug">{offer.title}</h3>
-                                {offer.subtitle && <p className="text-xs text-[var(--black-text-hover)] mt-0.5">{offer.subtitle}</p>}
+                                {offer.subtitle && <p className="text-xs mt-0.5">{offer.subtitle}</p>}
                             </div>
                             <div className="flex items-baseline gap-2">
                                 <span className="font-semibold">{offer.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
@@ -195,16 +195,20 @@ export default function StaffOffers() {
                                     <span className="text-xs text-green-600 font-medium">-{offer.discount.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
                                 )}
                             </div>
-                            {offer.validUntil && (
-                                <p className="text-xs text-[var(--black-text-hover)]">
+                            {offer.validUntil ? (
+                                <p className="text-xs">
                                     Válido até {new Intl.DateTimeFormat("pt-BR").format(new Date(offer.validUntil))}
+                                </p>
+                            ) : (
+                                <p className="text-xs">
+                                    Sem data de validade
                                 </p>
                             )}
                             <div className="flex gap-2 mt-1">
-                                <button onClick={() => openEdit(offer)} className="flex-1 text-xs py-1.5 rounded-lg border border-[var(--white-border)] hover:bg-[var(--white-border)]/10 transition-normal">
+                                <button onClick={() => openEdit(offer)} className="flex-1 text-xs py-1.5 bg-[var(--dark-blue)] text-[var(--white-text)] rounded-lg hover:bg-[var(--medium-blue)] transition-normal">
                                     Editar
                                 </button>
-                                <button onClick={() => toggleActive(offer.id)} className="flex-1 text-xs py-1.5 rounded-lg border border-[var(--white-border)] hover:bg-[var(--white-border)]/10 transition-normal">
+                                <button onClick={() => toggleActive(offer.id)} className="flex-1 text-xs py-1.5 bg-[var(--dark-blue)] text-[var(--white-text)] rounded-lg hover:bg-[var(--medium-blue)] transition-normal">
                                     {offer.active ? "Desativar" : "Ativar"}
                                 </button>
                                 {deleteConfirm === offer.id ? (
@@ -212,12 +216,12 @@ export default function StaffOffers() {
                                         <button onClick={() => handleDelete(offer.id)} className="text-xs py-1.5 px-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-normal">
                                             Confirmar
                                         </button>
-                                        <button onClick={() => setDeleteConfirm(null)} className="text-xs py-1.5 px-2 rounded-lg border border-[var(--white-border)] transition-normal">
+                                        <button onClick={() => setDeleteConfirm(null)} className="text-xs py-1.5 px-2 rounded-lg transition-normal">
                                             ✕
                                         </button>
                                     </div>
                                 ) : (
-                                    <button onClick={() => setDeleteConfirm(offer.id)} className="text-xs py-1.5 px-2 rounded-lg border border-red-200 text-red-500 hover:bg-red-50 transition-normal">
+                                    <button onClick={() => setDeleteConfirm(offer.id)} className="text-xs py-1.5 px-3 rounded-lg bg-red-500 text-[var(--white-text)] hover:bg-red-900 transition-normal">
                                         Excluir
                                     </button>
                                 )}

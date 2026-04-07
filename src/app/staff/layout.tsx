@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/_lib/contexts/AuthContext"
 import StaffSidebar from "@/_components/staff/StaffSidebar"
+import StaffFooter from "@/_components/staff/StaffFooter"
 
 export default function StaffLayout({ children }: { children: React.ReactNode }) {
     const { user, isLoading } = useAuth()
@@ -20,7 +21,6 @@ export default function StaffLayout({ children }: { children: React.ReactNode })
             <div className="flex items-center justify-center min-h-screen">
                 <div className="flex flex-col items-center gap-3">
                     <div className="size-8 border-2 border-[var(--dark-blue)] border-t-transparent rounded-full animate-spin" />
-                    <span className="text-sm text-[var(--black-text-hover)]">Verificando acesso...</span>
                 </div>
             </div>
         )
@@ -33,8 +33,11 @@ export default function StaffLayout({ children }: { children: React.ReactNode })
     return (
         <div className="flex min-h-screen">
             <StaffSidebar />
-            <main className="flex-1 ml-56 min-h-screen overflow-auto">
-                {children}
+            <main className="flex-1 ml-64 min-h-screen overflow-auto">
+                <div className="h-[100vh]">
+                    {children}
+                </div>
+                <StaffFooter />
             </main>
         </div>
     )

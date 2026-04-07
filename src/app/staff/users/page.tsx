@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useState, useCallback } from "react"
 
 type Role = "USER" | "STAFF" | "ADMIN"
@@ -10,6 +11,7 @@ interface User {
     email: string
     role: Role
     phone: string | null
+    avatarUrl: string | null
     createdAt: string
     lastLoginAt: string | null
     emailVerified: string | null
@@ -101,12 +103,12 @@ export default function StaffUsers() {
                     placeholder="Buscar por nome ou email..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
-                    className="flex-1 min-w-48 px-3 py-2 rounded-lg border border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] text-sm transition-normal"
+                    className="flex-1 min-w-48 px-3 py-2 rounded-lg border-2 border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] text-sm transition-normal"
                 />
                 <select
                     value={role}
                     onChange={e => { setRole(e.target.value as Role | ""); setPage(1) }}
-                    className="px-3 py-2 rounded-lg border border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] text-sm transition-normal bg-white"
+                    className="px-3 py-2 rounded-lg border-2 border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] text-sm transition-normal bg-white"
                 >
                     <option value="">Todos os cargos</option>
                     <option value="USER">Cliente</option>
@@ -115,17 +117,17 @@ export default function StaffUsers() {
                 </select>
                 <button
                     type="submit"
-                    className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal"
+                    className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal cursor-pointer"
                 >
                     Buscar
                 </button>
             </form>
 
-            <div className="bg-white rounded-xl border border-[var(--white-border)]/30 overflow-hidden">
+            <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className="border-b border-[var(--white-border)]/20 text-left">
+                            <tr className="border-b-2 border-[var(--white-border)]/20 text-left">
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)]">Usuário</th>
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)]">Cargo</th>
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)] hidden md:table-cell">Cadastro</th>
@@ -151,8 +153,8 @@ export default function StaffUsers() {
                                 <tr key={user.id} className="hover:bg-[#f9f9f8] transition-fast">
                                     <td className="px-4 py-3">
                                         <div className="flex items-center gap-2.5">
-                                            <div className="size-8 rounded-full bg-[var(--dark-blue)]/10 flex items-center justify-center text-xs font-semibold text-[var(--dark-blue)] flex-shrink-0">
-                                                {user.name.charAt(0).toUpperCase()}
+                                            <div className="relative size-8 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <Image src={user.avatarUrl || "/assets/avatar-default.jpg"} alt={user.name} width={32} height={32} className="rounded-full" draggable={false} />
                                             </div>
                                             <div className="min-w-0">
                                                 <p className="font-medium truncate">{user.name}</p>
@@ -167,7 +169,7 @@ export default function StaffUsers() {
                                                     defaultValue={user.role}
                                                     onChange={e => changeRole(user.id, e.target.value as Role)}
                                                     disabled={editLoading}
-                                                    className="text-xs px-2 py-1 rounded border border-[var(--white-border)] bg-white"
+                                                    className="text-xs px-2 py-1 rounded border-2 border-[var(--white-border)] bg-[var(--white-background)]"
                                                 >
                                                     <option value="USER">Cliente</option>
                                                     <option value="STAFF">Equipe</option>
@@ -210,7 +212,7 @@ export default function StaffUsers() {
                 </div>
 
                 {pagination && pagination.pages > 1 && (
-                    <div className="flex items-center justify-between px-4 py-3 border-t border-[var(--white-border)]/20">
+                    <div className="flex items-center justify-between px-4 py-3 border-t-2 border-[var(--white-border)]/20">
                         <span className="text-xs text-[var(--black-text-hover)]">
                             Página {pagination.page} de {pagination.pages}
                         </span>
@@ -218,14 +220,14 @@ export default function StaffUsers() {
                             <button
                                 onClick={() => setPage(p => Math.max(1, p - 1))}
                                 disabled={pagination.page === 1}
-                                className="px-3 py-1 text-xs rounded-lg border border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast"
+                                className="px-3 py-1 text-xs rounded-lg border-2 border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast"
                             >
                                 Anterior
                             </button>
                             <button
                                 onClick={() => setPage(p => Math.min(pagination.pages, p + 1))}
                                 disabled={pagination.page === pagination.pages}
-                                className="px-3 py-1 text-xs rounded-lg border border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast"
+                                className="px-3 py-1 text-xs rounded-lg border-2 border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast"
                             >
                                 Próxima
                             </button>

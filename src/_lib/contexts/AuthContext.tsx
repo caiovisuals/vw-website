@@ -9,6 +9,7 @@ import {
     type ReactNode,
 } from "react"
 import { useRouter } from "next/navigation"
+import { getCSRFToken, invalidateCSRFCache } from "@/_hooks/useCSRF"
 
 export type Role = "USER" | "STAFF" | "ADMIN"
 
@@ -55,10 +56,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, [refetch])
 
     const logout = useCallback(async () => {
-        await fetch("/api/auth/logout", { method: "POST", credentials: "include" })
-        setUser(null)
-        router.push("/")
-        router.refresh()
+        try {
+            await fetch("/api/auth/logout", { method: "POST", credentials: "include" })
+
+            const csrf = await getCSRFToken()
+            await fetch("/api/auth/logout", {
+                method: "POST",
+                headers: { "x-csrf-token": csrf },
+                credentials: "include",
+            })
+        } finally {
+            invalidateCSRFCache()
+            setUser(null)
+            router.push("/")
+            router.refresh()
+        }
     }, [router])
 
     return (

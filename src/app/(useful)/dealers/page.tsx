@@ -27,7 +27,14 @@ export default function Dealers() {
     }, [markers])
     
     if (loadError) return <NotFound />
-    if (!isLoaded) return 
+    
+    if (!isLoaded) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="size-8 border-2 border-[var(--dark-blue)] border-t-transparent rounded-full animate-spin" />
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col items-center justify-center gap-16 pt-6 md:pt-10 lg:pt-15 xl:pt-20">

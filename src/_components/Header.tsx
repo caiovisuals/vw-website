@@ -1,10 +1,10 @@
 "use client"
 
+import Link from "next/link"
+import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { useLanguage } from "@/_lib/contexts/LanguageContext"
 import { useAuth } from "@/_lib/contexts/AuthContext"
-import Image from "next/image"
-import Link from "next/link"
 
 export default function Header() {
     const { user, isLoading, logout } = useAuth()
@@ -99,6 +99,22 @@ export default function Header() {
                                 </>
                             )}
                         </div>
+                        {!isLoading && user ? (
+                            <>
+                                {(user.role === "STAFF" || user.role === "ADMIN") && (
+                                    <div className="flex flex-col gap-1">
+                                        <label className="text-xl vw-font">Administrativo</label>
+                                        <Link href="/staff" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.dashboard}</Link>
+                                        <Link href="/staff/offers" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.offers}</Link>
+                                        <Link href="/staff/finance" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.st_finance}</Link>
+                                        <Link href="/staff/dealers" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.st_dealers}</Link>
+                                        <Link href="/staff/leads" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.leads}</Link>
+                                        <Link href="/staff/cars" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.cars}</Link>
+                                        <Link href="/staff/users" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.users}</Link>
+                                    </div>
+                                )}
+                            </>
+                        ) : null }
                         <div className="flex flex-col gap-1">
                             <label className="text-xl vw-font">{t.footer.buy}</label>
                             <Link href="/build-your-model" onClick={handleNavigate} className="hover:text-[var(--black-text-hover)] transition-fast">{t.nav.buildYourModel}</Link>
@@ -116,7 +132,7 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-            <div ref={profileModalRef} className={`absolute right-6 md:right-12 lg:right-20 top-20 md:top-24 z-50 max-w-130 w-fit p-4 lg:p-5 rounded-xl bg-[var(--white-background)] shadow-[0_0_15px_rgba(0,0,0,0.25)] transition-normal ${isProfileModalOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-95"}`}>
+            <div ref={profileModalRef} className={`absolute right-6 md:right-12 lg:right-20 top-20 md:top-24 z-50 max-w-250 w-fit p-4 lg:p-5 rounded-xl bg-[var(--white-background)] shadow-[0_0_15px_rgba(0,0,0,0.25)] transition-normal ${isProfileModalOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-95"}`}>
                 {!isLoading && user ? (
                     <div className="flex flex-row gap-4 items-center">
                         <div className="relative size-12 rounded-full overflow-hidden cursor-pointer">
@@ -126,14 +142,21 @@ export default function Header() {
                             <span className="whitespace-nowrap text-lg font-semibold vw-font leading-tight">{user.name}</span>
                             <span className="whitespace-nowrap truncate vw-font leading-tight">{user.email}</span>
                         </div>
-                        <Link href="/home/profile" onClick={() => setIsProfileModalOpen(false)} className="px-5 py-1.5 rounded-2xl text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] transition-normal">
-                            {t.header.profileModal.seeProfile}
-                        </Link>
+                        <div className="flex flex-row gap-2 items-center">
+                            <Link href="/home/profile" onClick={() => setIsProfileModalOpen(false)} className="px-5 py-1.5 rounded-2xl text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] transition-normal">
+                                {t.header.profileModal.seeProfile}
+                            </Link>
+                            {(user.role === "STAFF" || user.role === "ADMIN") ? (
+                                <Link href="/staff" onClick={() => setIsProfileModalOpen(false)} className="px-5 py-1.5 rounded-2xl text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] transition-normal">
+                                    {t.header.profileModal.manage}
+                                </Link>
+                            ) : null }
+                        </div>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-2">
                         <div>
-                            <h1 className="text-xl font-semibold vw-font">{t.header.profileModal.LogWithYourAccount}</h1>
+                            <h1 className="text-xl font-semibold vw-font">{t.header.profileModal.logWithYourAccount}</h1>
                         </div>
                         <div className="flex flex-row gap-2">
                             <Link

@@ -39,7 +39,7 @@ function StatCard({
     label, value, sub, subColor,
 }: { label: string; value: string | number; sub?: string; subColor?: string }) {
     return (
-        <div className="bg-white rounded-xl border border-[var(--white-border)]/30 p-4 flex flex-col gap-1">
+        <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 p-4 flex flex-col gap-1">
             <span className="text-xs text-[var(--black-text-hover)]">{label}</span>
             <span className="text-2xl font-semibold vw-font">{value}</span>
             {sub && (
@@ -127,8 +127,8 @@ export default function StaffDashboard() {
             </div>
 
             <div className="grid lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2 bg-white rounded-xl border border-[var(--white-border)]/30 overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--white-border)]/20">
+                <div className="lg:col-span-2 bg-white rounded-xl border-2 border-[var(--white-border)]/30 overflow-hidden">
+                    <div className="flex items-center justify-between px-4 py-3 border-b-2 border-[var(--white-border)]/20">
                         <h2 className="font-semibold text-sm">Leads Recentes</h2>
                         <Link href="/staff/leads" className="text-xs text-[var(--dark-blue)] hover:underline">Ver todos</Link>
                     </div>
@@ -152,8 +152,8 @@ export default function StaffDashboard() {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl border border-[var(--white-border)]/30 overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--white-border)]/20">
+                <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 overflow-hidden">
+                    <div className="flex items-center justify-between px-4 py-3 border-b-2 border-[var(--white-border)]/20">
                         <h2 className="font-semibold text-sm">Top Modelos</h2>
                         <Link href="/staff/leads" className="text-xs text-[var(--dark-blue)] hover:underline">Leads</Link>
                     </div>
@@ -190,7 +190,7 @@ export default function StaffDashboard() {
                     <Link
                         key={item.href}
                         href={item.href}
-                        className="bg-white rounded-xl border border-[var(--white-border)]/30 p-4 flex items-center gap-3 hover:border-[var(--dark-blue)]/40 hover:shadow-sm transition-normal"
+                        className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 p-4 flex items-center gap-3 hover:border-[var(--dark-blue)]/40 hover:shadow-sm transition-normal"
                     >
                         <span className="text-xl">{item.icon}</span>
                         <span className="text-sm font-medium">{item.label}</span>

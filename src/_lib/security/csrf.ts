@@ -14,6 +14,7 @@ function generateCSRFToken(): string {
 
 export async function csrfProtection(request: NextRequest): Promise<NextResponse | null> {
     const method = request.method.toUpperCase()
+    if (request.nextUrl.pathname === "/api/auth/csrf") return null
     if (!["POST", "PUT", "PATCH", "DELETE"].includes(method)) return null
 
     const cookieStore = await cookies()
@@ -32,19 +33,18 @@ export async function csrfProtection(request: NextRequest): Promise<NextResponse
 
 export async function getCSRFTokenForClient(): Promise<string> {
     const cookieStore = await cookies()
-    let token = cookieStore.get(CSRF_TOKEN_NAME)?.value
+    const existing = cookieStore.get(CSRF_TOKEN_NAME)?.value
+    if (existing) return existing
 
-    if (!token) {
-        token = generateCSRFToken()
+    const token = generateCSRFToken()
 
-        cookieStore.set(CSRF_TOKEN_NAME, token, {
-            httpOnly: true,
-            secure: env.NODE_ENV === "production",
-            sameSite: "strict",
-            maxAge: COOKIE_MAX_AGE_SECONDS,
-            path: "/",
-        })
-    }
+    cookieStore.set(CSRF_TOKEN_NAME, token, {
+        httpOnly: true,
+        secure: env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: COOKIE_MAX_AGE_SECONDS,
+        path: "/",
+    })
     
     return token
 }

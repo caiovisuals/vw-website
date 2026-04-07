@@ -98,7 +98,7 @@ export default function StaffDealers() {
                 placeholder={placeholder}
                 value={form[key]}
                 onChange={e => setForm(prev => ({ ...prev, [key]: e.target.value }))}
-                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] transition-normal"
+                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] transition-normal"
             />
         </div>
     )
@@ -113,18 +113,18 @@ export default function StaffDealers() {
                     <p className="text-sm text-[var(--black-text-hover)]">
                         {pagination ? `${pagination.total} no total` : "Carregando..."}
                     </p>
-                </div>
-                <button onClick={() => setShowForm(v => !v)} className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0">
+                </div> 
+                <button onClick={() => setShowForm(v => !v)} className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0 cursor-pointer">
                     {showForm ? "Cancelar" : "+ Nova Concessionária"}
                 </button>
             </div>
 
             {formSuccess && (
-                <div className="px-4 py-3 rounded-lg bg-green-50 border border-green-200 text-green-800 text-sm">{formSuccess}</div>
+                <div className="px-4 py-3 rounded-lg bg-green-50 border-2 border-green-200 text-green-800 text-sm">{formSuccess}</div>
             )}
 
             {showForm && (
-                <form onSubmit={handleCreate} className="bg-white rounded-xl border border-[var(--white-border)]/30 p-5 flex flex-col gap-4">
+                <form onSubmit={handleCreate} className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 p-5 flex flex-col gap-4">
                     <h2 className="font-semibold text-sm">Cadastrar concessionária</h2>
                     {formError && <p className="text-red-600 text-sm">{formError}</p>}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -147,12 +147,12 @@ export default function StaffDealers() {
             )}
 
             <div className="flex gap-2 flex-wrap">
-                <button onClick={() => setStateFilter("")} className={`px-3 py-1.5 text-xs rounded-lg border transition-normal ${!stateFilter ? "bg-[var(--dark-blue)] text-white border-[var(--dark-blue)]" : "bg-white border-[var(--white-border)]/50 text-[var(--black-text-hover)] hover:border-[var(--dark-blue)]/40"}`}>
+                <button onClick={() => setStateFilter("")} className={`px-3 py-1.5 text-xs rounded-lg border-2 transition-normal ${!stateFilter ? "bg-[var(--dark-blue)] text-white border-[var(--dark-blue)]" : "bg-white border-[var(--white-border)]/50 text-[var(--black-text-hover)] hover:border-[var(--dark-blue)]/40"}`}>
                     Todos
                 </button>
                 {states.map(s => (
                     <button key={s} onClick={() => setStateFilter(s === stateFilter ? "" : s)}
-                        className={`px-3 py-1.5 text-xs rounded-lg border transition-normal ${stateFilter === s ? "bg-[var(--dark-blue)] text-white border-[var(--dark-blue)]" : "bg-white border-[var(--white-border)]/50 text-[var(--black-text-hover)] hover:border-[var(--dark-blue)]/40"}`}>
+                        className={`px-3 py-1.5 text-xs rounded-lg border-2 transition-normal ${stateFilter === s ? "bg-[var(--dark-blue)] text-white border-[var(--dark-blue)]" : "bg-white border-[var(--white-border)]/50 text-[var(--black-text-hover)] hover:border-[var(--dark-blue)]/40"}`}>
                         {s}
                     </button>
                 ))}
@@ -164,7 +164,7 @@ export default function StaffDealers() {
                 ) : dealers.length === 0 ? (
                     <p className="text-sm text-[var(--black-text-hover)] col-span-full text-center py-8">Nenhuma concessionária encontrada.</p>
                 ) : dealers.map(dealer => (
-                    <div key={dealer.id} className={`bg-white rounded-xl border p-4 flex flex-col gap-3 transition-normal ${dealer.isActive ? "border-[var(--white-border)]/30" : "border-[var(--white-border)]/20 opacity-60"}`}>
+                    <div key={dealer.id} className={`bg-white rounded-xl border-2 p-4 flex flex-col gap-3 transition-normal ${dealer.isActive ? "border-[var(--white-border)]/30" : "border-[var(--white-border)]/20 opacity-60"}`}>
                         <div className="flex items-start justify-between gap-2">
                             <div>
                                 <h3 className="font-semibold text-sm">{dealer.name}</h3>
@@ -193,12 +193,12 @@ export default function StaffDealers() {
             {pagination && pagination.pages > 1 && (
                 <div className="flex items-center justify-end gap-2">
                     <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
-                        className="px-3 py-1 text-xs rounded-lg border border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
+                        className="px-3 py-1 text-xs rounded-lg border-2 border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
                         Anterior
                     </button>
                     <span className="text-xs text-[var(--black-text-hover)]">{page} / {pagination.pages}</span>
                     <button onClick={() => setPage(p => Math.min(pagination.pages, p + 1))} disabled={page === pagination.pages}
-                        className="px-3 py-1 text-xs rounded-lg border border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
+                        className="px-3 py-1 text-xs rounded-lg border-2 border-[var(--white-border)] disabled:opacity-40 hover:bg-[var(--white-border)]/10 transition-fast">
                         Próxima
                     </button>
                 </div>

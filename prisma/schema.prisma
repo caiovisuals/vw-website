@@ -224,6 +224,27 @@ model Lead {
     @@map("leads")
 }
 
+model Offer {
+    id         String   @id @default(cuid())
+    name       String
+    title      String
+    subtitle   String?
+    category   OfferCategory
+    model      String
+    type       OfferType
+    price      Decimal  @db.Decimal(12, 2)
+    discount   Decimal? @db.Decimal(12, 2)
+    imageUrl   String
+    active     Boolean  @default(true)
+    validUntil DateTime?
+    badge      String?
+
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    @@map("offers")
+}
+
 enum Role {
     USER
     STAFF
@@ -249,4 +270,16 @@ enum LeadStatus {
     CONTACTED
     CONVERTED
     LOST
+}
+
+enum OfferCategory {
+    hatch
+    suv
+    sedan
+    picape
+}
+
+enum OfferType {
+    novo
+    seminovo
 }

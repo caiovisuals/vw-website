@@ -11,7 +11,7 @@ const localeLabels: Record<Locale, string> = {
     "en-US": "English - US",
 }
 
-export default function Footer() {
+export default function StaffFooter() {
     const { user, isLoading } = useAuth()
     const { t, locale, toggleLocale } = useLanguage()
 
@@ -20,12 +20,6 @@ export default function Footer() {
             <div className="flex flex-row items-start gap-2 justify-between">
                 <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
                     <div className="flex flex-col gap-1">
-                        <label className="text-xl vw-font">{t.footer.useful}</label>
-                        <Link href="/login" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.login}</Link>
-                        <Link href="/register" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.register}</Link>
-                        <Link href="/forgot-password" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.forgotPassword}</Link>
-                    </div>
-                    <div className="flex flex-col gap-1">
                         <label className="text-xl vw-font">{t.footer.buy}</label>
                         <Link href="/build-your-model" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.buildYourModel}</Link>
                         <Link href="/dealers" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.dealers}</Link>
@@ -33,27 +27,15 @@ export default function Footer() {
                         <Link href="/sales-and-finance/finance" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.finance}</Link>
                         <Link href="/sales-and-finance/pre-owned" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.preOwned}</Link>
                     </div>
-                    {!isLoading && user ? (
-                        <>
-                            {(user.role === "STAFF" || user.role === "ADMIN") && (
-                                <div className="flex flex-col gap-1">
-                                    <label className="text-xl vw-font">{t.footer.administrative}</label>
-                                    <Link href="/staff" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.dashboard}</Link>
-                                    <Link href="/staff/offers" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.offers}</Link>
-                                    <Link href="/staff/finance" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.st_finance}</Link>
-                                    <Link href="/staff/dealers" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.st_dealers}</Link>
-                                    <Link href="/staff/leads" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.leads}</Link>
-                                    <Link href="/staff/cars" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.cars}</Link>
-                                    <Link href="/staff/users" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.users}</Link>
-                                </div>
-                            )}
-                        </>
-                    ) : null }
                     <div className="flex flex-col gap-1">
-                        <label className="text-xl vw-font">{t.footer.legal}</label>
-                        <Link href="/legal-information" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.legalInformation}</Link>
-                        <Link href="/terms-of-use" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.termsOfUse}</Link>
-                        <Link href="/privacy-policies" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.privacyPolicies}</Link>
+                        <label className="text-xl vw-font">{t.footer.administrative}</label>
+                        <Link href="/staff" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.dashboard}</Link>
+                        <Link href="/staff/offers" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.offers}</Link>
+                        <Link href="/staff/finance" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.st_finance}</Link>
+                        <Link href="/staff/dealers" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.st_dealers}</Link>
+                        <Link href="/staff/leads" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.leads}</Link>
+                        <Link href="/staff/cars" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.cars}</Link>
+                        <Link href="/staff/users" className="hover:text-[var(--white-text-hover)] transition-fast">{t.nav.users}</Link>
                     </div>
                     <div className="flex flex-col gap-1">
                         <label className="text-xl vw-font">{t.footer.socialMedia}</label>

@@ -17,12 +17,12 @@ const navItems = [
         ),
     },
     {
-        href: "/staff/users",
-        label: "Usuários",
+        href: "/staff/offers",
+        label: "Ofertas",
         icon: (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
             </svg>
         ),
     },
@@ -48,16 +48,6 @@ const navItems = [
         ),
     },
     {
-        href: "/staff/offers",
-        label: "Ofertas",
-        icon: (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
-                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
-            </svg>
-        ),
-    },
-    {
         href: "/staff/dealers",
         label: "Concessionárias",
         icon: (
@@ -76,6 +66,16 @@ const navItems = [
             </svg>
         ),
     },
+    {
+        href: "/staff/users",
+        label: "Usuários",
+        icon: (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+        ),
+    },
 ]
 
 export default function StaffSidebar() {
@@ -83,13 +83,13 @@ export default function StaffSidebar() {
     const { user, logout } = useAuth()
 
     return (
-        <aside className="fixed left-0 top-0 h-full w-56 bg-[var(--dark-blue)] flex flex-col z-40 overflow-y-auto">
-            <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10">
+        <aside className="fixed left-0 top-0 h-full w-64 bg-[var(--dark-blue)] flex flex-col z-40 overflow-y-auto">
+            <div className="flex items-center gap-3 px-4 py-5">
                 <div className="relative size-8 flex-shrink-0">
-                    <Image src="/assets/logo-white.png" alt="VW" fill className="object-contain" draggable="false" />
+                    <Image src="/assets/logo-white.png" alt="Volkswagen Logo" fill className="object-contain" draggable="false" />
                 </div>
                 <div className="flex flex-col leading-tight">
-                    <span className="text-white text-sm font-semibold vw-font">Staff Panel</span>
+                    <span className="text-[var(--white-text)] text-md vw-font">Staff Panel</span>
                     <span className="text-white/50 text-xs">{user?.role}</span>
                 </div>
             </div>
@@ -105,8 +105,8 @@ export default function StaffSidebar() {
                             href={item.href}
                             className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-normal ${
                                 isActive
-                                    ? "bg-white/15 text-white"
-                                    : "text-white/60 hover:text-white hover:bg-white/10"
+                                    ? "bg-white/15 text-[var(--white-text)]"
+                                    : "text-white/60 hover:text-[var(--white-text)] hover:bg-white/10"
                             }`}
                         >
                             {item.icon}
@@ -116,27 +116,27 @@ export default function StaffSidebar() {
                 })}
             </nav>
 
-            <div className="p-3 border-t border-white/10">
+            <div className="p-3">
                 {user && (
                     <div className="flex items-center gap-2 px-2 py-1.5 mb-2">
-                        <div className="size-7 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
-                            {user.name.charAt(0).toUpperCase()}
+                        <div className="relative size-8 rounded-full flex items-center justify-center flex-shrink-0">
+                            <Image src={user.avatarUrl || "/assets/avatar-default.jpg"} alt={user.name} width={32} height={32} className="rounded-full" draggable={false} />
                         </div>
-                        <span className="text-white/70 text-xs truncate">{user.name}</span>
+                        <span className="text-[var(--white-text)] text-base truncate">{user.name}</span>
                     </div>
                 )}
                 <Link
                     href="/"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/10 transition-normal"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/60 hover:text-[var(--white-text)] hover:bg-white/10 transition-normal"
                 >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
                     </svg>
-                    Ir ao Site
+                    Voltar para o Site
                 </Link>
                 <button
                     onClick={logout}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/10 transition-normal cursor-pointer"
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/60 hover:text-[var(--white-text)] hover:bg-white/10 transition-normal cursor-pointer"
                 >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>

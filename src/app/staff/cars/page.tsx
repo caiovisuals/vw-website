@@ -111,20 +111,20 @@ export default function StaffCars() {
                 </div>
                 <button
                     onClick={() => setShowForm(v => !v)}
-                    className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0"
+                    className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0 cursor-pointer"
                 >
                     {showForm ? "Cancelar" : "+ Novo Carro"}
                 </button>
             </div>
 
             {formSuccess && (
-                <div className="px-4 py-3 rounded-lg bg-green-50 border border-green-200 text-green-800 text-sm">
+                <div className="px-4 py-3 rounded-lg bg-green-50 border-2 border-green-200 text-green-800 text-sm">
                     {formSuccess}
                 </div>
             )}
 
             {showForm && (
-                <form onSubmit={handleCreate} className="bg-white rounded-xl border border-[var(--white-border)]/30 p-5 flex flex-col gap-4">
+                <form onSubmit={handleCreate} className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 p-5 flex flex-col gap-4">
                     <h2 className="font-semibold text-sm">Cadastrar novo modelo</h2>
                     {formError && (
                         <p className="text-red-600 text-sm">{formError}</p>
@@ -145,7 +145,7 @@ export default function StaffCars() {
                                     placeholder={placeholder}
                                     value={(form as Record<string, unknown>)[key] as string}
                                     onChange={e => setForm(prev => ({ ...prev, [key]: e.target.value }))}
-                                    className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] transition-normal"
+                                    className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none focus:border-[var(--dark-blue)] transition-normal"
                                 />
                             </div>
                         ))}
@@ -154,7 +154,7 @@ export default function StaffCars() {
                             <select
                                 value={form.fuel}
                                 onChange={e => setForm(prev => ({ ...prev, fuel: e.target.value as FuelType }))}
-                                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none bg-white transition-normal"
+                                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none bg-white transition-normal"
                             >
                                 {Object.entries(FUEL_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                             </select>
@@ -164,7 +164,7 @@ export default function StaffCars() {
                             <select
                                 value={form.transmission}
                                 onChange={e => setForm(prev => ({ ...prev, transmission: e.target.value as TransmissionType }))}
-                                className="px-3 py-2 text-sm rounded-lg border border-[var(--white-border)] focus:outline-none bg-white transition-normal"
+                                className="px-3 py-2 text-sm rounded-lg border-2 border-[var(--white-border)] focus:outline-none bg-white transition-normal"
                             >
                                 {Object.entries(TRANS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                             </select>
@@ -192,11 +192,11 @@ export default function StaffCars() {
                 </form>
             )}
 
-            <div className="bg-white rounded-xl border border-[var(--white-border)]/30 overflow-hidden">
+            <div className="bg-white rounded-xl border-2 border-[var(--white-border)]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className="border-b border-[var(--white-border)]/20 text-left">
+                            <tr className="border-b-2 border-[var(--white-border)]/20 text-left">
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)]">Modelo</th>
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)]">Preço</th>
                                 <th className="px-4 py-3 font-medium text-[var(--black-text-hover)] hidden md:table-cell">Combustível</th>
