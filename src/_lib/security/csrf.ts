@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import crypto from "crypto"
 import { cookies } from "next/headers"
 import { env } from "./../env"
 
@@ -7,8 +6,10 @@ const CSRF_TOKEN_NAME = "csrf_token"
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24
 const TOKEN_LENGTH = 32
 
-export function generateCSRFToken(): string {
-    return crypto.randomBytes(TOKEN_LENGTH).toString("hex")
+function generateCSRFToken(): string {
+    const array = new Uint8Array(TOKEN_LENGTH)
+    crypto.getRandomValues(array)
+    return Array.from(array).map(b => b.toString(16).padStart(2, "0")).join("")
 }
 
 export async function csrfProtection(request: NextRequest): Promise<NextResponse | null> {

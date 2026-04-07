@@ -4,6 +4,7 @@ import { isRateLimited } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { SESSION_COOKIE } from "@/_lib/utils/session"
 import { csrfProtection } from "@/_lib/security/csrf"
+import { jwtVerify } from "jose"
 
 const AUTH_ROUTES = [
     "/api/me", 
@@ -28,6 +29,16 @@ const ROLE_LEVEL: Record<string, number> = {
     USER:  0,
     STAFF: 1,
     ADMIN: 2,
+}
+
+async function getRoleFromToken(token: string): Promise<string | null> {
+    try {
+        const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET)
+        const { payload } = await jwtVerify(token, secret)
+        return typeof payload.role === "string" ? payload.role : null
+    } catch {
+        return null
+    }
 }
 
 function buildSecurityHeaders(nonce: string): Record<string, string> {
@@ -101,7 +112,7 @@ export async function middleware(req: NextRequest) {
     }
     
     const token = req.cookies.get(SESSION_COOKIE)?.value
-    const role = null
+    const role = token ? await getRoleFromToken(token) : null
 
     const needsAuth  = AUTH_ROUTES.some(r  => pathname.startsWith(r))
     const needsStaff = STAFF_ROUTES.some(r => pathname.startsWith(r))
@@ -131,7 +142,7 @@ export async function middleware(req: NextRequest) {
         }
     }
 
-    const nonce = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
+    const nonce = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("base64")
     const response = NextResponse.next()
     applySecurityHeaders(response, buildSecurityHeaders(nonce))
 
