@@ -2,6 +2,8 @@ import { NextRequest } from "next/server"
 import { prisma } from "@/_lib/prisma"
 import { ok, notFound, forbidden, handleRoute } from "@/_lib/utils/apiResponse"
 import { requireRole } from "@/_lib/utils/session"
+import { auditLog } from "@/_lib/utils/auditLog"
+import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { z } from "zod"
 
 type Params = { params: Promise<{ id: string }> }
@@ -64,6 +66,17 @@ export async function PATCH(req: NextRequest, { params }: Params) {
             where: { id },
             data: { role },
             select: { id: true, name: true, email: true, role: true },
+        })
+
+        const { ip } = await getRequestMeta(req)
+        await auditLog({
+            actorId: requester.id,
+            actorEmail: requester.email,
+            action: "USER_ROLE_CHANGED",
+            targetId: id,
+            targetType: "User",
+            metadata: { previousRole: target.role, newRole: role },
+            ip,
         })
 
         return ok(updated, `Cargo alterado para ${role}.`)

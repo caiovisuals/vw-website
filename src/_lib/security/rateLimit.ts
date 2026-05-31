@@ -1,10 +1,11 @@
-type RateLimitType = "auth" | "api" | "general"
-
+import Redis from "ioredis"
 interface SuspiciousIPData {
     blockedUntil: number
     violations: number
     lastViolation: number
 }
+
+type RateLimitType = "auth" | "api" | "general"
 
 const CONFIG = {
     RATE_LIMIT_WINDOW: 15 * 60, // 15 minutos
@@ -22,6 +23,21 @@ const suspiciousIPs = new Map<string, SuspiciousIPData>()
 
 type Entry = { count: number; resetAt: number }
 const store = new Map<string, Entry>()
+
+let redis: Redis | null = null
+
+function getRedis(): Redis | null {
+    if (redis) return redis
+    const url = process.env.REDIS_URL
+    if (!url) return null
+    try {
+        redis = new Redis(url, { lazyConnect: true, enableOfflineQueue: false, maxRetriesPerRequest: 1 })
+        redis.on("error", () => { redis = null })
+        return redis
+    } catch {
+        return null
+    }
+}
 
 export function isRateLimited(ip: string, key: string, type: RateLimitType): {
     limited: boolean

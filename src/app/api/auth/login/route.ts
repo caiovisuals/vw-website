@@ -37,6 +37,8 @@ export async function POST(req: NextRequest) {
         const valid = await verifyPassword(data.password, user.passwordHash)
         if (!valid) return unauthorized(GENERIC_ERROR)
 
+        await prisma.session.deleteMany({ where: { userId: user.id } })
+
         const token = generateSecureToken()
         const expiresAt = getSessionExpiry()
 

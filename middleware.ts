@@ -7,22 +7,22 @@ import { csrfProtection } from "@/_lib/security/csrf"
 import { jwtVerify } from "jose"
 
 const AUTH_ROUTES = [
-    "/api/me", 
+    "/api/me",
     "/api/configurations",
     "/home",
-    "/home/profile"
+    "/home/profile",
 ]
 
 const STAFF_ROUTES = [
     "/api/staff/users",
-    "/staff"
+    "/staff",
 ]
 
 const AUTH_API_ROUTES = [
     "/api/auth/login",
     "/api/auth/register",
     "/api/auth/forgot-password",
-    "/api/auth/reset-password"
+    "/api/auth/reset-password",
 ]
 
 const ROLE_LEVEL: Record<string, number> = {
@@ -47,9 +47,13 @@ function buildSecurityHeaders(nonce: string): Record<string, string> {
     const csp = [
         "default-src 'self'",
         `script-src 'self' 'nonce-${nonce}' maps.googleapis.com`,
-        "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: blob:",
-        "connect-src 'self'",
+        isProd ? "style-src 'self'" : "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: blob: maps.gstatic.com maps.googleapis.com *.googleapis.com",
+        "connect-src 'self' maps.googleapis.com *.sentry.io",
+        "font-src 'self' fonts.gstatic.com",
+        "frame-src 'none'",
+        "object-src 'none'",
+        "base-uri 'self'",
     ].join("; ")
 
     return {
@@ -57,6 +61,8 @@ function buildSecurityHeaders(nonce: string): Record<string, string> {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
         "X-Nonce": nonce,
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(self)",
         ...(isProd
             ? { "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload" }
             : {}),
@@ -81,7 +87,7 @@ export async function middleware(req: NextRequest) {
     }
 
     if (AUTH_API_ROUTES.some(r => pathname.startsWith(r))) {
-        const rl = isRateLimited(ip, ip, "auth")
+        const rl = await isRateLimited(ip, ip, "auth")
         if (rl.limited) {
             return new NextResponse(
                 JSON.stringify({ success: false, error: "Muitas tentativas. Aguarde alguns minutos." }),
@@ -97,7 +103,7 @@ export async function middleware(req: NextRequest) {
     }
 
     if (pathname.startsWith("/api/")) {
-        const rl = isRateLimited(ip, ip, "general")
+        const rl = await isRateLimited(ip, ip, "general")
         if (rl.limited) {
             return new NextResponse(
                 JSON.stringify({ success: false, error: "Rate limit excedido." }),
@@ -118,12 +124,10 @@ export async function middleware(req: NextRequest) {
     const needsStaff = STAFF_ROUTES.some(r => pathname.startsWith(r))
  
     if (needsAuth && !token) {
-        if (!token) {
-            return new NextResponse(
-                JSON.stringify({ success: false, error: "Não autorizado." }),
-                { status: 401, headers: { "Content-Type": "application/json" } }
-            )
-        }
+        return new NextResponse(
+            JSON.stringify({ success: false, error: "Não autorizado." }),
+            { status: 401, headers: { "Content-Type": "application/json" } }
+        )
     }
 
     if (needsStaff) {
@@ -145,13 +149,6 @@ export async function middleware(req: NextRequest) {
     const nonce = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("base64")
     const response = NextResponse.next()
     applySecurityHeaders(response, buildSecurityHeaders(nonce))
-
-    if (process.env.NODE_ENV === "production") {
-        response.headers.set(
-            "Strict-Transport-Security",
-            "max-age=31536000; includeSubDomains; preload"
-        )
-    }
 
     return response
 }
