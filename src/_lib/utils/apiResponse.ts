@@ -45,8 +45,8 @@ export function conflict(error: string): NextResponse<ApiError> {
     return NextResponse.json({ success: false, error }, { status: 409 })
 }
 
-export function tooManyRequests(error = "Muitas requisições. Tente novamente mais tarde."): NextResponse<ApiError> {
-    return NextResponse.json({ success: false, error }, { status: 429 })
+export function tooManyRequests(error = "Muitas requisições. Tente novamente mais tarde.", headers?: Record<string, string>): NextResponse<ApiError> {
+    return NextResponse.json({ success: false, error }, { status: 429, headers })
 }
 
 export function serverError(error = "Erro interno. Tente novamente."): NextResponse<ApiError> {

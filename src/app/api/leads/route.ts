@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server"
 import { prisma } from "@/_lib/prisma"
 import { leadSchema } from "@/_lib/validations/cars"
-import { ok, created, handleRoute } from "@/_lib/utils/apiResponse"
+import { ok, created, tooManyRequests, handleRoute } from "@/_lib/utils/apiResponse"
 import { getCurrentUser, requireRole } from "@/_lib/utils/session"
-import { isRateLimited } from "@/_lib/security/rateLimit"
+import { isRateLimited, rateLimitHeaders } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { z } from "zod"
 
@@ -19,12 +19,9 @@ export async function POST(req: NextRequest) {
     return handleRoute(async () => {
         const { ip } = await getRequestMeta(req)
 
-        const rl = isRateLimited(ip, `lead:${ip}`, "auth")
+        const rl = await isRateLimited(ip, `lead:${ip}`, "auth")
         if (rl.limited) {
-            return Response.json(
-                { success: false, error: "Muitas solicitações. Aguarde alguns minutos." },
-                { status: 429 }
-            ) as never
+            return tooManyRequests("Muitas solicitações. Aguarde alguns minutos.", rateLimitHeaders(rl))
         }
 
         const body = await req.json()

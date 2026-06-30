@@ -2,8 +2,9 @@ import { NextRequest } from "next/server"
 import { cookies } from "next/headers"
 import { prisma } from "@/_lib/prisma"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
-
-export type Role = "USER" | "STAFF" | "ADMIN"
+import { ROLE_HIERARCHY, SESSION_COOKIE, type Role } from "@/_lib/utils/sessionConstants"
+export type { Role } from "@/_lib/utils/sessionConstants"
+export { SESSION_COOKIE } from "@/_lib/utils/sessionConstants"
 
 export type SessionUser = {
     id: string
@@ -12,8 +13,6 @@ export type SessionUser = {
     role: Role
     avatarUrl: string | null
 }
-
-export const SESSION_COOKIE = "vw_session"
 
 function isSameSubnet(ip1: string, ip2: string): boolean {
     if (!ip1 || !ip2) return true
@@ -93,9 +92,8 @@ export async function requireAuth(): Promise<SessionUser> {
 export async function requireRole(role: Role): Promise<SessionUser> {
     const user = await requireAuth()
 
-    const hierarchy: Role[] = ["USER", "STAFF", "ADMIN"]
-    const userLevel = hierarchy.indexOf(user.role)
-    const requiredLevel = hierarchy.indexOf(role)
+    const userLevel = ROLE_HIERARCHY.indexOf(user.role)
+    const requiredLevel = ROLE_HIERARCHY.indexOf(role)
 
     if (userLevel < requiredLevel) {
         throw new AuthError("Forbidden", 403)

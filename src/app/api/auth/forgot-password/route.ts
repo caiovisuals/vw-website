@@ -13,7 +13,8 @@ const GENERIC_MSG = "Se o e-mail estiver cadastrado, você receberá um link de 
 export async function POST(req: NextRequest) {
     return handleRoute(async () => {
         const { ip } = await getRequestMeta(req)
-        const rl = isRateLimited(ip, ip, "auth")
+        
+        const rl = await isRateLimited(ip, `forgot:${ip}`, "auth")
         if (rl.limited) return ok(null, GENERIC_MSG)
 
         const body = await req.json()

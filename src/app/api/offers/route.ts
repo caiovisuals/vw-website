@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { OfferCategory, OfferType } from "@prisma/client"
 import { prisma } from "@/_lib/prisma"
 import { ok, tooManyRequests, handleRoute } from "@/_lib/utils/apiResponse"
-import { isRateLimited } from "@/_lib/security/rateLimit"
+import { isRateLimited, rateLimitHeaders } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { z } from "zod"
 
@@ -15,8 +15,10 @@ const offerQuerySchema = z.object({
 export async function GET(req: NextRequest) {
     return handleRoute(async () => {
         const { ip } = await getRequestMeta(req)
-        if (isRateLimited(ip, ip, "api").limited) {
-            return tooManyRequests("Rate limit excedido.")
+
+        const rl = await isRateLimited(ip, ip, "api")
+        if (rl.limited) {
+            return tooManyRequests("Rate limit excedido.", rateLimitHeaders(rl))
         }
         
         const { searchParams } = new URL(req.url)

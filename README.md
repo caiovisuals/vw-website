@@ -59,6 +59,17 @@ A aplicação web full-stack que replica a experiência do site oficial. O proje
 - Fortalecer o portfólio com um projeto de alto nível, demonstrando capacidade técnica e atenção a detalhes
 - Aumentar visibilidade profissional e criar uma oportunidade de ser notado por empresas como a Volkswagen
 
+## Testes
+
+Testes unitários com **Vitest** + Testing Library, em `src/__tests__/`:
+
+```bash
+npm run test            # roda toda a suíte
+npm run test:coverage   # com cobertura
+```
+
+Cobertura atual: helpers de resposta da API, utilitários de autenticação, schemas de validação (Zod) de carros e auth, detecção de atividade suspeita e o sistema de rate limiting (limites, bloqueio escalonado e headers).
+
 # VW WEBSITE - ᴇɴ
 
 Corporate website, landing page, and vehicle configurator for Volkswagen Brazil, developed using Next.js 16, Prisma, TailwindCSS v4, and custom authentication with secure sessions.
@@ -111,6 +122,17 @@ A full-stack web application replicating the official site's experience. The pro
 - Simulate real business workflows, such as vehicle configuration and lead generation
 - Strengthen my portfolio with a high-level project that demonstrates technical proficiency and attention to detail
 - Increase professional visibility and create an opportunity to be noticed by companies like Volkswagen
+
+## Tests
+
+Unit tests using **Vitest** + Testing Library, located in `src/__tests__/`:
+
+```bash
+npm run test            # runs the entire suite
+npm run test:coverage   # with coverage
+```
+
+Current coverage: API response helpers, authentication utilities, validation schemas (Zod) for cars and auth, suspicious activity detection, and the rate limiting system (limits, tiered blocking, and headers).
 
 by caiothevisual<br/>
 #caiobavisuals #volkswagen #nextjs #typescript #prisma #website

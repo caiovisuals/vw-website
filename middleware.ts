@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { detectSuspiciousActivity } from "@/_lib/security/suspicious"
-import { isRateLimited } from "@/_lib/security/rateLimit"
+import { isRateLimited, rateLimitHeaders } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
-import { SESSION_COOKIE } from "@/_lib/utils/session"
+import { SESSION_COOKIE, ROLE_LEVEL } from "@/_lib/utils/sessionConstants"
 import { csrfProtection } from "@/_lib/security/csrf"
 import { jwtVerify } from "jose"
 
@@ -24,14 +24,6 @@ const AUTH_API_ROUTES = [
     "/api/auth/forgot-password",
     "/api/auth/reset-password",
 ]
-
-const MUTATING_METHODS = ["POST", "PUT", "PATCH", "DELETE"]
-
-const ROLE_LEVEL: Record<string, number> = {
-    USER: 0,
-    STAFF: 1,
-    ADMIN: 2,
-}
 
 async function getRoleFromToken(token: string): Promise<string | null> {
     try {
@@ -95,10 +87,7 @@ export async function middleware(req: NextRequest) {
                 JSON.stringify({ success: false, error: "Muitas tentativas. Aguarde alguns minutos." }),
                 {
                     status: 429,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Retry-After": String(Math.ceil((rl.resetAt - Date.now()) / 1000)),
-                    },
+                    headers: { "Content-Type": "application/json", ...rateLimitHeaders(rl) },
                 }
             )
         }
@@ -109,7 +98,10 @@ export async function middleware(req: NextRequest) {
         if (rl.limited) {
             return new NextResponse(
                 JSON.stringify({ success: false, error: "Rate limit excedido." }),
-                { status: 429, headers: { "Content-Type": "application/json" } }
+                {
+                    status: 429,
+                    headers: { "Content-Type": "application/json", ...rateLimitHeaders(rl) },
+                }
             )
         }
     }

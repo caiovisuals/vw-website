@@ -2,20 +2,17 @@ import { NextRequest } from "next/server"
 import { prisma } from "@/_lib/prisma"
 import { hashPassword } from "@/_lib/utils/auth"
 import { registerSchema } from "@/_lib/validations/auth"
-import { ok, conflict, handleRoute } from "@/_lib/utils/apiResponse"
-import { isRateLimited } from "@/_lib/security/rateLimit"
+import { ok, conflict, tooManyRequests, handleRoute } from "@/_lib/utils/apiResponse"
+import { isRateLimited, rateLimitHeaders } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 
 export async function POST(req: NextRequest) {
     return handleRoute(async () => {
         const { ip } = await getRequestMeta(req)
 
-        const rl = isRateLimited(ip, ip, "auth")
+        const rl = await isRateLimited(ip, `register:${ip}`, "auth")
         if (rl.limited) {
-            return Response.json(
-                { success: false, error: "Muitas tentativas. Aguarde alguns minutos." },
-                { status: 429 }
-            ) as never
+            return tooManyRequests("Rate limit excedido.", rateLimitHeaders(rl))
         }
  
         const body = await req.json()

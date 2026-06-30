@@ -1,17 +1,18 @@
 import { NextRequest } from "next/server"
 import { prisma } from "@/_lib/prisma"
 import { carFiltersSchema, createCarSchema } from "@/_lib/validations/cars"
-import { ok, created, handleRoute } from "@/_lib/utils/apiResponse"
+import { ok, created, tooManyRequests, handleRoute } from "@/_lib/utils/apiResponse"
 import { requireRole } from "@/_lib/utils/session"
-import { isRateLimited } from "@/_lib/security/rateLimit"
+import { isRateLimited, rateLimitHeaders } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 
 export async function GET(req: NextRequest) {
     return handleRoute(async () => {
         const { ip } = await getRequestMeta(req)
         
-        if (isRateLimited(ip, ip, "api").limited) {
-            return Response.json({ success: false, error: "Rate limit excedido." }, { status: 429 }) as never
+        const rl = await isRateLimited(ip, ip, "api")
+        if (rl.limited) {
+            return tooManyRequests("Rate limit excedido.", rateLimitHeaders(rl))
         }
 
         const { searchParams } = new URL(req.url)

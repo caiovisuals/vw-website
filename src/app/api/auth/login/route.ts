@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     return handleRoute(async () => {
         const { ip, userAgent } = await getRequestMeta(req)
 
-        const rl = isRateLimited(ip, ip, "auth")
+        const rl = await isRateLimited(ip, `login:${ip}`, "auth")
         if (rl.limited) {
             return Response.json(
                 { success: false, error: "Muitas tentativas. Aguarde alguns minutos." },
