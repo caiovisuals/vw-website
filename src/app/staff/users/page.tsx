@@ -93,7 +93,7 @@ export default function StaffUsers() {
             <div>
                 <h1 className="text-2xl font-semibold vw-font">Usuários</h1>
                 <p className="text-sm text-[var(--black-text-hover)]">
-                    {pagination ? `${pagination.total} usuários cadastrados` : "Carregando..."}
+                    {pagination ? `${pagination.total} usuários cadastrados` : "Carregando"}
                 </p>
             </div>
 
@@ -140,7 +140,7 @@ export default function StaffUsers() {
                             {isLoading ? (
                                 <tr>
                                     <td colSpan={6} className="px-4 py-8 text-center text-[var(--black-text-hover)]">
-                                        Carregando...
+                                        Carregando
                                     </td>
                                 </tr>
                             ) : users.length === 0 ? (

@@ -111,7 +111,7 @@ export default function StaffDealers() {
                 <div>
                     <h1 className="text-2xl font-semibold vw-font">Concessionárias</h1>
                     <p className="text-sm text-[var(--black-text-hover)]">
-                        {pagination ? `${pagination.total} no total` : "Carregando..."}
+                        {pagination ? `${pagination.total} no total` : "Carregando"}
                     </p>
                 </div> 
                 <button onClick={() => setShowForm(v => !v)} className="px-4 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal flex-shrink-0 cursor-pointer">
@@ -140,7 +140,7 @@ export default function StaffDealers() {
                     </div>
                     <div>
                         <button type="submit" disabled={formLoading} className="px-6 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal disabled:opacity-60">
-                            {formLoading ? "Salvando..." : "Cadastrar"}
+                            {formLoading ? "Salvando" : "Cadastrar"}
                         </button>
                     </div>
                 </form>
@@ -160,7 +160,7 @@ export default function StaffDealers() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {isLoading ? (
-                    <p className="text-sm text-[var(--black-text-hover)] col-span-full text-center py-8">Carregando...</p>
+                    <p className="text-sm text-[var(--black-text-hover)] col-span-full text-center py-8">Carregando</p>
                 ) : dealers.length === 0 ? (
                     <p className="text-sm text-[var(--black-text-hover)] col-span-full text-center py-8">Nenhuma concessionária encontrada.</p>
                 ) : dealers.map(dealer => (

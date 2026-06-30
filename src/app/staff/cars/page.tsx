@@ -186,7 +186,7 @@ export default function StaffCars() {
                             disabled={formLoading}
                             className="px-6 py-2 rounded-lg bg-[var(--dark-blue)] text-white text-sm hover:bg-[var(--medium-blue)] transition-normal disabled:opacity-60"
                         >
-                            {formLoading ? "Salvando..." : "Cadastrar Modelo"}
+                            {formLoading ? "Salvando" : "Cadastrar Modelo"}
                         </button>
                     </div>
                 </form>
@@ -207,7 +207,7 @@ export default function StaffCars() {
                         </thead>
                         <tbody className="divide-y divide-[var(--white-border)]/10">
                             {isLoading ? (
-                                <tr><td colSpan={6} className="px-4 py-8 text-center text-[var(--black-text-hover)]">Carregando...</td></tr>
+                                <tr><td colSpan={6} className="px-4 py-8 text-center text-[var(--black-text-hover)]">Carregando</td></tr>
                             ) : cars.length === 0 ? (
                                 <tr><td colSpan={6} className="px-4 py-8 text-center text-[var(--black-text-hover)]">Nenhum carro cadastrado.</td></tr>
                             ) : cars.map(car => (

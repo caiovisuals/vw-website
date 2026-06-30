@@ -14,6 +14,14 @@ export default function ForgotPassword() {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setError(null)
+
+        const form = e.currentTarget
+        const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim()
+
+        if (!email.includes("@")) {
+            setError("Informe um e-mail válido.")
+            return
+        }
  
         setIsLoading(true)
 
@@ -27,6 +35,7 @@ export default function ForgotPassword() {
                     "x-csrf-token": csrf,
                 },
                 credentials: "include",
+                body: JSON.stringify({ email }),
             })
  
             const json = await res.json()
@@ -56,6 +65,13 @@ export default function ForgotPassword() {
                     </h2>
                 </div>
                 <div>
+                    <input
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        placeholder="seu@email.com"
+                        className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
+                    />
                     <button
                         type="submit"
                         disabled={isLoading}

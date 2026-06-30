@@ -5,6 +5,8 @@ import { forgotPasswordSchema } from "@/_lib/validations/auth"
 import { ok, handleRoute } from "@/_lib/utils/apiResponse"
 import { isRateLimited } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
+import { sendPasswordResetEmail } from "@/_lib/utils/email"
+import { env } from "@/_lib/env"
 
 const GENERIC_MSG = "Se o e-mail estiver cadastrado, você receberá um link de recuperação em breve."
 
@@ -34,6 +36,13 @@ export async function POST(req: NextRequest) {
                 expiresAt: getResetTokenExpiry(),
             },
         })
+
+        const resetUrl = `${env.NEXTAUTH_URL}/reset-password?token=${token}`
+        try {
+            await sendPasswordResetEmail({ to: user.email, name: user.name, resetUrl })
+        } catch (err) {
+            console.error("[forgot-password] falha ao enviar e-mail", err)
+        }
 
         return ok(null, GENERIC_MSG)
     })

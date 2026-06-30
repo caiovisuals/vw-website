@@ -25,8 +25,10 @@ const AUTH_API_ROUTES = [
     "/api/auth/reset-password",
 ]
 
+const MUTATING_METHODS = ["POST", "PUT", "PATCH", "DELETE"]
+
 const ROLE_LEVEL: Record<string, number> = {
-    USER:  0,
+    USER: 0,
     STAFF: 1,
     ADMIN: 2,
 }

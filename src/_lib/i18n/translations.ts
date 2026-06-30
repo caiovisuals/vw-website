@@ -60,7 +60,7 @@ export const translations = {
                 },
                 button: {
                     register: "Criar Conta",
-                    loading: "Criando Conta..."
+                    loading: "Criando Conta"
                 }
             },
             login: {
@@ -72,7 +72,7 @@ export const translations = {
                 },
                 button: {
                     login: "Entrar",
-                    loading: "Entrando..."
+                    loading: "Entrando"
                 }
             },
             forgotPassword: {
@@ -83,7 +83,7 @@ export const translations = {
                 },
                 button: {
                     forgotPassword: "Enviar Código",
-                    loading: "Enviando Código..."
+                    loading: "Enviando Código"
                 }
             },
             errors: {
@@ -247,7 +247,7 @@ export const translations = {
                 },
                 button: {
                     register: "Create Account",
-                    loading: "Creating Account..."
+                    loading: "Creating Account"
                 }
             },
             login: {
@@ -259,7 +259,7 @@ export const translations = {
                 },
                 button: {
                     login: "LogIn",
-                    loading: "Logging In..."
+                    loading: "Logging In"
                 }
             },
             forgotPassword: {
@@ -270,7 +270,7 @@ export const translations = {
                 },
                 button: {
                     forgotPassword: "Send Code",
-                    loading: "Sending Code..."
+                    loading: "Sending Code"
                 }
             },
             errors: {

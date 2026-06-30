@@ -66,7 +66,7 @@ export default function StaffLeads() {
             <div>
                 <h1 className="text-2xl font-semibold vw-font">Leads</h1>
                 <p className="text-sm text-[var(--black-text-hover)]">
-                    {pagination ? `${pagination.total} leads no total` : "Carregando..."}
+                    {pagination ? `${pagination.total} leads no total` : "Carregando"}
                 </p>
             </div>
 
@@ -103,7 +103,7 @@ export default function StaffLeads() {
                             {isLoading ? (
                                 <tr>
                                     <td colSpan={6} className="px-4 py-8 text-center text-[var(--black-text-hover)]">
-                                        Carregando...
+                                        Carregando
                                     </td>
                                 </tr>
                             ) : leads.length === 0 ? (

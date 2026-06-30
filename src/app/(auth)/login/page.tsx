@@ -84,6 +84,7 @@ export default function Login() {
                     <input
                         name="email"
                         type="email"
+                        aria-invalid={fieldErrors.email ? true : undefined}
                         placeholder={t.auth.login.inputs.email}
                         className="w-full px-3 py-2 rounded-lg hover:bg-[var(--white-border)]/10 outline-none border-2 border-[var(--white-border)] focus:border-[var(--white-border-hover)] transition-normal"
                     />
