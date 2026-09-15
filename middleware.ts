@@ -41,7 +41,7 @@ function buildSecurityHeaders(nonce: string): Record<string, string> {
     const csp = [
         "default-src 'self'",
         `script-src 'self' 'nonce-${nonce}' maps.googleapis.com`,
-        isProd ? "style-src 'self'" : "style-src 'self' 'unsafe-inline'",
+        "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: maps.gstatic.com maps.googleapis.com *.googleapis.com",
         "connect-src 'self' maps.googleapis.com *.sentry.io",
         "font-src 'self' fonts.gstatic.com",
@@ -67,6 +67,19 @@ function applySecurityHeaders(response: NextResponse, headers: Record<string, st
     for (const [key, value] of Object.entries(headers)) {
         response.headers.set(key, value)
     }
+}
+
+function denyAccess(req: NextRequest, status: 401 | 403, error: string): NextResponse {
+    if (req.nextUrl.pathname.startsWith("/api/")) {
+        return new NextResponse(
+            JSON.stringify({ success: false, error }),
+            { status, headers: { "Content-Type": "application/json" } }
+        )
+    }
+
+    const loginUrl = new URL("/login", req.url)
+    loginUrl.searchParams.set("next", req.nextUrl.pathname + req.nextUrl.search)
+    return NextResponse.redirect(loginUrl)
 }
 
 export async function middleware(req: NextRequest) {
@@ -106,7 +119,7 @@ export async function middleware(req: NextRequest) {
         }
     }
 
-    if (pathname.startsWith("/api/") && pathname !== "/api/auth/csrf") {
+    if (pathname.startsWith("/api/") && pathname !== "/api/csrf") {
         const csrfError = await csrfProtection(req)
         if (csrfError) return csrfError
     }
@@ -118,31 +131,28 @@ export async function middleware(req: NextRequest) {
     const needsStaff = STAFF_ROUTES.some(r => pathname.startsWith(r))
  
     if (needsAuth && !token) {
-        return new NextResponse(
-            JSON.stringify({ success: false, error: "Não autorizado." }),
-            { status: 401, headers: { "Content-Type": "application/json" } }
-        )
+        return denyAccess(req, 401, "Não autorizado.")
     }
 
     if (needsStaff) {
         if (!token) {
-            return new NextResponse(
-                JSON.stringify({ success: false, error: "Não autorizado." }),
-                { status: 401, headers: { "Content-Type": "application/json" } }
-            )
+            return denyAccess(req, 401, "Não autorizado.")
         }
 
         if (!role || ROLE_LEVEL[role] < ROLE_LEVEL.STAFF) {
-            return new NextResponse(
-                JSON.stringify({ success: false, error: "Acesso negado." }),
-                { status: 403, headers: { "Content-Type": "application/json" } }
-            )
+            return denyAccess(req, 403, "Acesso negado.")
         }
     }
 
     const nonce = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("base64")
-    const response = NextResponse.next()
-    applySecurityHeaders(response, buildSecurityHeaders(nonce))
+    const securityHeaders = buildSecurityHeaders(nonce)
+
+    const requestHeaders = new Headers(req.headers)
+    requestHeaders.set("Content-Security-Policy", securityHeaders["Content-Security-Policy"])
+    requestHeaders.set("x-nonce", nonce)
+
+    const response = NextResponse.next({ request: { headers: requestHeaders } })
+    applySecurityHeaders(response, securityHeaders)
 
     return response
 }

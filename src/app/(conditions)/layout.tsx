@@ -5,7 +5,9 @@ export default function ConditionsLayout({ children }: Readonly<{ children: Reac
     return (
         <div className="flex flex-col">
             <Header />
-            {children}
+            <div className="min-h-[75vh]">
+                {children}
+            </div>
             <Footer />
         </div>
     )

@@ -49,7 +49,28 @@ export const resetPasswordSchema = z
         path: ["confirmPassword"],
     })
 
+export const changePasswordSchema = z
+    .object({
+        currentPassword: z.string().min(1, "Informe a senha atual."),
+        password: z
+            .string()
+            .min(8, "Senha deve ter pelo menos 8 caracteres.")
+            .max(128)
+            .regex(/[A-Z]/, "Senha deve ter pelo menos uma letra maiúscula.")
+            .regex(/[0-9]/, "Senha deve ter pelo menos um número."),
+        confirmPassword: z.string(),
+    })
+    .refine((d) => d.password === d.confirmPassword, {
+        message: "As senhas não conferem.",
+        path: ["confirmPassword"],
+    })
+    .refine((d) => d.password !== d.currentPassword, {
+        message: "A nova senha deve ser diferente da atual.",
+        path: ["password"],
+    })
+
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>

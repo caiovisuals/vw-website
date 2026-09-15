@@ -48,11 +48,11 @@ export default function ModelsSection() {
     return (
         <section id="models" className="flex flex-col items-center justify-center gap-16 py-6 md:py-10 lg:py-15 xl:py-20 px-6 md:px-10 lg:px-15 xl:px-20 -mb-6 md:-mb-12 lg:-mb-20">
             <div className="flex flex-col gap-3 items-center justify-center max-w-250">
-                <h2 className="text-center text-4xl vw-font">Encontre o seu <span className="font-semibold">Volkswagen</span></h2>
-                <p className="text-center text-lg leading-tight">Conheça os modelos recomendados, em destaque, veículos elétricos ou explore todos para escolher o seu Volkswagen que mais combine com você.</p>
+                <h2 className="text-center text-2xl sm:text-3xl md:text-4xl vw-font">Encontre o seu <span className="font-semibold">Volkswagen</span></h2>
+                <p className="text-center text-sm sm:text-base md:text-lg leading-tight">Conheça os modelos recomendados, em destaque, veículos elétricos ou explore todos para escolher o seu Volkswagen que mais combine com você.</p>
             </div>
             <div className="flex flex-col gap-3">
-                <h2 className="text-center text-3xl vw-font font-semibold">Modelos Recomendados</h2>
+                <h2 className="text-center text-xl sm:text-2xl md:text-3xl vw-font font-semibold">Modelos Recomendados</h2>
                 <div className="relative flex flex-col gap-4 w-full">
                     <div className="flex flex-row items-center justify-between gap-2">
                         <Link href="/build-your-model" className="px-3 py-1 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-xl transition-normal active:95">

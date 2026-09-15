@@ -7,7 +7,7 @@ let cachedToken: string | null = null
 export async function getCSRFToken(): Promise<string> {
     if (cachedToken) return cachedToken
 
-    const res = await fetch("/api/auth/csrf", { credentials: "include" })
+    const res = await fetch("/api/csrf", { credentials: "include" })
     const json = await res.json()
     cachedToken = json.token as string
     return cachedToken

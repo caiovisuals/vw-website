@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     if (!car) return { title: "Modelo não encontrado" }
 
     return {
-        title: `${car.name} | Volkswagen`,
+        title: `${car.name} | Volkswagen do Brasil`,
         description: car.tagline ?? car.description ?? `Conheça o ${car.name}.`,
     }
 }

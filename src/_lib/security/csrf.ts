@@ -14,7 +14,7 @@ function generateCSRFToken(): string {
 
 export async function csrfProtection(request: NextRequest): Promise<NextResponse | null> {
     const method = request.method.toUpperCase()
-    if (request.nextUrl.pathname === "/api/auth/csrf") return null
+    if (request.nextUrl.pathname === "/api/csrf") return null
     if (!["POST", "PUT", "PATCH", "DELETE"].includes(method)) return null
 
     const cookieStore = await cookies()

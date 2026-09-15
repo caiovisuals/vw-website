@@ -39,7 +39,8 @@ export default function Setting() {
             <div className="flex flex-col lg:flex-row gap-8">
                 <div id="canvas" className="h-full max-h-250 w-full lg:w-[65%] relative">
                     <div className="relative min-h-100 max-h-200 h-150 w-full rounded-xl overflow-hidden">
-                        <Image src={isInteriorView ? "/assets/settings/interna.png" : "/assets/settings/base.jpg"} alt={isInteriorView ? "Interior do Jetta" : "Jetta Foto"}  className="object-cover" draggable="false" fill />
+                        <Image src="/assets/cars/jetta/config/base.jpg" alt="Jetta Foto" className={`object-cover transition-normal ${isInteriorView ? "opacity-0" : "opacity-100"}`} draggable="false" fill />
+                        <Image src="/assets/cars/jetta/config/internal.jpg" alt="Interior do Jetta" className={`object-cover transition-normal ${isInteriorView ? "opacity-100" : "opacity-0"}`} draggable="false" fill />
                     </div>
                     <button 
                         onClick={() => setIsInteriorView(prev => !prev)} 

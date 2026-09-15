@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { ZodError } from "zod"
+import { AuthError } from "@/_lib/utils/authError"
 
 export type ApiSuccess<T = unknown> = {
     success: true
@@ -69,6 +70,9 @@ export async function handleRoute<T>(
         return await fn()
     } catch (err) {
         if (err instanceof ZodError) return fromZodError(err) as NextResponse<ApiError>
+        if (err instanceof AuthError) {
+            return (err.statusCode === 403 ? forbidden() : unauthorized()) as NextResponse<ApiError>
+        }
         console.error("[API Error]", err)
         return serverError() as NextResponse<ApiError>
     }

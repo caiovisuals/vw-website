@@ -3,6 +3,8 @@ import { cookies } from "next/headers"
 import { prisma } from "@/_lib/prisma"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
 import { ROLE_HIERARCHY, SESSION_COOKIE, type Role } from "@/_lib/utils/sessionConstants"
+import { AuthError } from "@/_lib/utils/authError"
+export { AuthError } from "@/_lib/utils/authError"
 export type { Role } from "@/_lib/utils/sessionConstants"
 export { SESSION_COOKIE } from "@/_lib/utils/sessionConstants"
 
@@ -100,14 +102,4 @@ export async function requireRole(role: Role): Promise<SessionUser> {
     }
 
     return user
-}
-
-export class AuthError extends Error {
-    constructor(
-        message: string,
-        public statusCode: 401 | 403 = 401
-    ) {
-        super(message)
-        this.name = "AuthError"
-    }
 }

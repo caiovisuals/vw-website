@@ -5,7 +5,9 @@ export default function UsefulLayout({ children }: Readonly<{ children: React.Re
     return (
         <div className="flex flex-col">
             <Header />
-            {children}
+            <div className="min-h-[100vh]">
+                {children}
+            </div>
             <Footer />
         </div>
     )

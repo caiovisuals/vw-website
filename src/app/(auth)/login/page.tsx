@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { Suspense, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/_lib/contexts/AuthContext"
 import { useLanguage } from "@/_lib/contexts/LanguageContext"
 import { getCSRFToken } from "@/_hooks/useCSRF"
@@ -10,10 +10,14 @@ import ShowPassword from "@/_components/ui/ShowPassword"
 
 type FieldErrors = Partial<Record<"email" | "password", string>>
 
-export default function Login() {
+function LoginForm() {
     const { refetch } = useAuth()
     const router = useRouter()
+    const searchParams = useSearchParams()
     const { t } = useLanguage()
+
+    const rawNext = searchParams.get("next")
+    const nextPath = rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/home"
 
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -60,7 +64,7 @@ export default function Login() {
             }
  
             await refetch()
-            router.push("/home")
+            router.push(nextPath)
             router.refresh()
         } catch {
             setGlobalError("Erro de conexão. Tente novamente.")
@@ -114,5 +118,13 @@ export default function Login() {
                 </div>
             </form>
         </div>
+    )
+}
+
+export default function Login() {
+    return (
+        <Suspense fallback={<div className="min-h-[75vh]" />}>
+            <LoginForm />
+        </Suspense>
     )
 }

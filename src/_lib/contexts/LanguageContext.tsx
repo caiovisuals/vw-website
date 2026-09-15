@@ -3,9 +3,9 @@
 import {
     createContext,
     useContext,
-    useState,
     useEffect,
     useCallback,
+    useSyncExternalStore,
     type ReactNode,
 } from "react"
 import { translations, type Locale, type Translations } from "@/_lib/i18n/translations"
@@ -22,7 +22,7 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
 
-function resolveInitialLocale(): Locale {
+function resolvePreferredLocale(): Locale {
     if (typeof window === "undefined") return DEFAULT_LOCALE
 
     const stored = localStorage.getItem(STORAGE_KEY) as Locale | null
@@ -36,25 +36,50 @@ function resolveInitialLocale(): Locale {
     return match ?? DEFAULT_LOCALE
 }
 
+let currentLocale: Locale | null = null
+const listeners = new Set<() => void>()
+
+function getSnapshot(): Locale {
+    if (currentLocale === null) currentLocale = resolvePreferredLocale()
+    return currentLocale
+}
+
+function getServerSnapshot(): Locale {
+    return DEFAULT_LOCALE
+}
+
+function subscribe(listener: () => void): () => void {
+    listeners.add(listener)
+    return () => listeners.delete(listener)
+}
+
+function writeLocale(next: Locale): void {
+    currentLocale = next
+    try {
+        localStorage.setItem(STORAGE_KEY, next)
+    } catch {
+        // localStorage pode estar indisponível (modo privado); o idioma da
+        // sessão atual continua valendo.
+    }
+    listeners.forEach((listener) => listener())
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-    const [locale, setLocaleState] = useState<Locale>(() => resolveInitialLocale())
+    const locale = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
     useEffect(() => {
         document.documentElement.lang = locale
     }, [locale])
 
     const setLocale = useCallback((next: Locale) => {
-        setLocaleState(next)
-        localStorage.setItem(STORAGE_KEY, next)
-        document.documentElement.lang = next
+        writeLocale(next)
     }, [])
 
     const toggleLocale = useCallback(() => {
         const locales = Object.keys(translations) as Locale[]
         const currentIndex = locales.indexOf(locale)
-        const next = locales[(currentIndex + 1) % locales.length]
-        setLocale(next)
-    }, [locale, setLocale])
+        writeLocale(locales[(currentIndex + 1) % locales.length])
+    }, [locale])
 
     const value: LanguageContextValue = {
         locale,
