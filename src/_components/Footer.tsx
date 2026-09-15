@@ -87,9 +87,10 @@ export default function Footer() {
             </div>
             <div className="w-full h-0.5 bg-[var(--white-background)]"/>
             <div className="flex flex-row items-center justify-between">
-                <span><b>Volkswagen</b> - {t.footer.madeWith}{" "}
-                    <Link href="https://www.caiovisuals.com" target="_blank" className="hover:opacity-75 transition-fast">
-                        <b>Caiovisuals</b>
+                <span>
+                    <b>Volkswagen</b> - {t.footer.madeWith}{" "}
+                    <Link href="https://www.caiothedev.com" target="_blank" className="hover:opacity-75 transition-fast">
+                        <b>caiothedev</b>
                     </Link>
                 </span>
                 <button onClick={toggleLocale} className="flex flex-row gap-2 items-center justify-center border-2 border-[var(--white-border)] hover:bg-[var(--white-background)]/15 hover:border-[var(--white-border-hover)] px-2.5 py-1.5 rounded-2xl transition-normal cursor-pointer">

@@ -11,6 +11,7 @@ const cars = [
     {
         id: 1,
         name: "Jetta",
+        slug: "jetta",
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/jetta/jetta.webp"
@@ -18,6 +19,7 @@ const cars = [
     {
         id: 2,
         name: "Nivus",
+        slug: "nivus",
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/nivus/nivus.webp"
@@ -25,6 +27,7 @@ const cars = [
     {
         id: 3,
         name: "T-Cross",
+        slug: "t-cross",
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/t-cross/t-cross.webp"
@@ -32,6 +35,7 @@ const cars = [
     {
         id: 4,
         name: "Taos",
+        slug: "taos",
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/taos/taos.webp"
@@ -39,6 +43,7 @@ const cars = [
     {
         id: 5,
         name: "Polo",
+        slug: "polo",
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/polo/polo.webp"
@@ -46,6 +51,7 @@ const cars = [
     {
         id: 6,
         name: "Saveiro",
+        slug: "saveiro",
         fuel: "flex",
         transmission: "manual",
         image: "/assets/cars/saveiro/saveiro.webp"
@@ -53,6 +59,7 @@ const cars = [
     {
         id: 7,
         name: "ID.4",
+        slug: "id4",
         fuel: "electric",
         transmission: "automatic",
         image: "/assets/cars/id4/id4.webp"
@@ -60,6 +67,7 @@ const cars = [
     {
         id: 8,
         name: "Amarok",
+        slug: "amarok",
         fuel: "flex",
         transmission: "automatic",
         image: "/assets/cars/amarok/amarok.webp"
@@ -245,7 +253,7 @@ export default function BuildYourModel() {
                     ) : (
                         filteredCars.map(car => (
                             <Link 
-                                href="/build-your-model/setting"
+                                href={`/build-your-model/setting/${car.slug}`}
                                 key={car.id}
                                 className="group relative flex flex-col gap-3 rounded-2xl py-5 px-5.5 cursor-pointer"
                             >   

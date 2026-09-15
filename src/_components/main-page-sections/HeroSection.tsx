@@ -56,7 +56,7 @@ export default function HeroSection() {
         <section id="hero" className="relative flex flex-col h-[calc(100vh-100px)] md:h-[calc(100vh-124px)] overflow-hidden">
             <video
                 ref={videoRef}
-                className="absolute inset-0 w-full h-full object-cover z-9 bg-black/75 transition-normal"
+                className="absolute inset-0 w-full h-full object-cover z-9 bg-[#151623]/75 transition-normal"
                 src={slides[currentSlide].video}
                 autoPlay
                 loop={false}

@@ -89,7 +89,7 @@ export default function ModelsSection() {
                                 <div>
                                     <h2 className="text-xl font-semibold text-center">{car.name}</h2>
                                 </div>
-                                <Link href="/build-your-model/setting" onClick={(e) => e.stopPropagation()} className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
+                                <Link href={`/build-your-model/setting/${car.slug}`} onClick={(e) => e.stopPropagation()} className="px-8 py-1.5 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-2xl transition-normal active:95 w-fit opacity-0 group-hover:opacity-100 scale-y-95 translate-y-2 group-hover:scale-y-100 group-hover:translate-y-0">
                                     Montar o seu
                                 </Link>
                             </li>

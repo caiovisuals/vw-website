@@ -283,8 +283,14 @@ const cars: CarSeed[] = [
         isFeatured: true,
         year: 2026,
         imageUrl: "/assets/cars/jetta/jetta.webp",
-        interiorImageUrl: "/assets/cars/jetta/banner.webp",
-        colors: colors("/assets/cars/jetta/jetta.webp"),
+        interiorImageUrl: "/assets/cars/jetta/config/internal.jpg",
+        colors: {
+            create: [
+                { name: "Branco Cristal", hexCode: "#F2F2F2", price: 0, isDefault: true, imageUrl: "/assets/cars/jetta/config/white.jpg" },
+                { name: "Preto Ninja", hexCode: "#111213", price: PAINT_METALLIC, isDefault: false, imageUrl: "/assets/cars/jetta/config/black.jpg" },
+                { name: "Azul Glacial", hexCode: "#BFD3D0", price: PAINT_PREMIUM, isDefault: false, imageUrl: "/assets/cars/jetta/config/glacial.jpg" },
+            ],
+        },
         wheels: {
             create: [
                 { name: "Roda Aro 18 Mallory", sizeInch: 18, price: 0, isDefault: true },

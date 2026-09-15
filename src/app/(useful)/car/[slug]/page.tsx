@@ -52,7 +52,7 @@ export default async function Car({ params }: Params) {
                         {car.tagline && <h2 className="text-xl vw-font">{car.tagline}</h2>}
                     </div>
                     <div>
-                        <Link href={`/build-your-model/setting?model=${car.slug}`} className="px-8 py-2 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-xl transition-normal active:95">
+                        <Link href={`/build-your-model/setting/${car.slug}`} className="px-8 py-2 text-[var(--white-text)] bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] rounded-xl transition-normal active:95">
                             Tenho Interesse
                         </Link>
                     </div>

@@ -128,10 +128,6 @@ export const translations = {
             }
         },
 
-        home: {
-
-        },
-
         // Build Your Model page
         buildYourModel: {
             title: "Monte seu Modelo",
@@ -163,8 +159,62 @@ export const translations = {
             contactDealer: "Contatar Concessionária VW",
             save: "Salvar",
             createCode: "Criar código de customização",
-            priceDisclaimer:
-                "Os valores não incluem frete doméstico. Preços públicos sugeridos. Valores válidos para versões básicas. Consulte um revendedor sobre a disponibilidade de sua configuração.",
+            priceDisclaimer: "Os valores não incluem frete doméstico. Preços públicos sugeridos. Valores válidos para versões básicas. Consulte um revendedor sobre a disponibilidade de sua configuração.",
+            models: "Modelos",
+            included: "Incluso",
+            rim: "Aro",
+            selectedCount: "{count} selecionada(s)",
+            restart: "Recomeçar configuração",
+            saving: "Salvando...",
+            generating: "Gerando...",
+            savedWithCode: "Configuração salva no seu perfil. Código {code}.",
+            codeCopied: "Código {code} copiado para a área de transferência.",
+            codeCreated: "Seu código de customização é {code}.",
+            saveError: "Não foi possível salvar a configuração.",
+            viewInterior: "Ver interior",
+            viewExterior: "Ver exterior",
+            exteriorAlt: "{car} na cor {color}",
+            interiorAlt: "Interior do {car}",
+            technicalDataTitle: "Dados Técnicos do {car}",
+            technicalDataEmpty: "Dados técnicos ainda não disponíveis para este modelo.",
+            close: "Fechar",
+            technicalDataGroups: {
+                engine: "Motor e desempenho",
+                consumption: "Consumo",
+                dimensions: "Dimensões",
+                suspension: "Suspensão e freios",
+            },
+            technicalDataLabels: {
+                engineDisplacement: "Motor",
+                enginePower: "Potência",
+                engineTorque: "Torque",
+                acceleration0to100: "0 a 100 km/h",
+                topSpeed: "Velocidade máxima",
+                fuelConsumptionCity: "Cidade",
+                fuelConsumptionHwy: "Estrada",
+                tankCapacity: "Tanque",
+                wheelbase: "Entre-eixos",
+                length: "Comprimento",
+                width: "Largura",
+                height: "Altura",
+                curbWeight: "Peso em ordem de marcha",
+                cargoVolume: "Porta-malas",
+                frontSuspension: "Suspensão dianteira",
+                rearSuspension: "Suspensão traseira",
+                brakes: "Freios",
+            },
+            contactModal: {
+                name: "Nome",
+                email: "E-mail",
+                phone: "Telefone (opcional)",
+                message: "Mensagem (opcional)",
+                submit: "Enviar solicitação",
+                sending: "Enviando...",
+                defaultMessage: "Tenho interesse no {car} configurado por {price}.",
+                defaultMessageWithCode: "Tenho interesse no {car} configurado por {price} (código {code}).",
+                success: "Solicitação enviada! Uma concessionária entrará em contato sobre o seu {car}.",
+                error: "Não foi possível enviar sua solicitação.",
+            },
         },
 
         conditions:{
@@ -315,7 +365,7 @@ export const translations = {
 
         initialPage: {
             ModelsSection: {
-
+                
             },
             FeaturedSection: {
 
@@ -323,10 +373,6 @@ export const translations = {
             ServicesSection: {
                 
             }
-        },
-
-        home: {
-
         },
 
         // Build Your Model page
@@ -360,8 +406,62 @@ export const translations = {
             contactDealer: "Contact VW Dealer",
             save: "Save",
             createCode: "Create customization code",
-            priceDisclaimer:
-                "Prices do not include domestic shipping. Suggested public prices. Prices valid for base versions. Consult a dealer for the availability of your configuration.",
+            priceDisclaimer: "Prices do not include domestic shipping. Suggested public prices. Prices valid for base versions. Consult a dealer for the availability of your configuration.",
+            models: "Models",
+            included: "Included",
+            rim: "Rim",
+            selectedCount: "{count} selected",
+            restart: "Restart configuration",
+            saving: "Saving...",
+            generating: "Generating...",
+            savedWithCode: "Configuration saved to your profile. Code {code}.",
+            codeCopied: "Code {code} copied to the clipboard.",
+            codeCreated: "Your customization code is {code}.",
+            saveError: "We could not save your configuration.",
+            viewInterior: "View interior",
+            viewExterior: "View exterior",
+            exteriorAlt: "{car} in {color}",
+            interiorAlt: "{car} interior",
+            technicalDataTitle: "{car} technical data",
+            technicalDataEmpty: "Technical data is not available for this model yet.",
+            close: "Close",
+            technicalDataGroups: {
+                engine: "Engine and performance",
+                consumption: "Consumption",
+                dimensions: "Dimensions",
+                suspension: "Suspension and brakes",
+            },
+            technicalDataLabels: {
+                engineDisplacement: "Engine",
+                enginePower: "Power",
+                engineTorque: "Torque",
+                acceleration0to100: "0 to 100 km/h",
+                topSpeed: "Top speed",
+                fuelConsumptionCity: "City",
+                fuelConsumptionHwy: "Highway",
+                tankCapacity: "Fuel tank",
+                wheelbase: "Wheelbase",
+                length: "Length",
+                width: "Width",
+                height: "Height",
+                curbWeight: "Curb weight",
+                cargoVolume: "Cargo volume",
+                frontSuspension: "Front suspension",
+                rearSuspension: "Rear suspension",
+                brakes: "Brakes",
+            },
+            contactModal: {
+                name: "Name",
+                email: "E-mail",
+                phone: "Phone (optional)",
+                message: "Message (optional)",
+                submit: "Send request",
+                sending: "Sending...",
+                defaultMessage: "I am interested in the {car} configured for {price}.",
+                defaultMessageWithCode: "I am interested in the {car} configured for {price} (code {code}).",
+                success: "Request sent! A dealer will contact you about your {car}.",
+                error: "We could not send your request.",
+            },
         },
 
         conditions:{
@@ -397,3 +497,9 @@ export const translations = {
 } satisfies Record<Locale, unknown>
 
 export type Translations = (typeof translations)["pt-BR"]
+
+export function interpolate(template: string, values: Record<string, string | number>): string {
+    return template.replace(/\{(\w+)\}/g, (match, key) =>
+        key in values ? String(values[key]) : match
+    )
+}
