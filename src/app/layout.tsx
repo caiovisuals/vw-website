@@ -14,16 +14,34 @@ const geologica = Geologica({
 export const metadata: Metadata = {
     title: "Volkswagen do Brasil | Hatch, Sedan, SUVW, Picape, Elétrico. Tudo o que você imaginar!",
     description: "Bem-vindo ao website da Volkswagen. Encontre a sua maquina favorita e descubra o melhor do conforto, tecnologia e robustez que somente um Volkswagen oferece.",
+    applicationName: "Volkswagen Brasil",
     keywords: [
-        "volkswagen", "volks", "caiovisuals"
+        "volkswagen", "volks", "volkswagen brasil",
+        "caiothedev"
     ],
     openGraph: {
         type: "website",
         locale: "pt_BR",
+        alternateLocale: ["en_US","es-ES"],
+        url: "/",
+        siteName: "Volkswagen do Brasil",
+        title: "Volkswagen do Brasil | Carros, SUVs, Picapes e Elétricos",
+        description: "Conheça os carros Volkswagen do Brasil e encontre o modelo ideal para você.",
+        images: [
+            {
+                url: "/assets/ogimage.png",
+                width: 1200,
+                height: 630,
+                alt: "Volkswagen do Brasil",
+            },
+        ],
         countryName: "Brasil",
     },
     twitter: {
         card: "summary_large_image",
+        title: "Volkswagen do Brasil | Carros, SUVs, Picapes e Elétricos",
+        description: "Conheça os carros Volkswagen do Brasil e encontre o modelo ideal para você.",
+        images: ["/assets/ogimage.png"],
         site: "@caioba2007",
     },
     robots: {
@@ -34,6 +52,10 @@ export const metadata: Metadata = {
             follow: true,
             "max-image-preview": "large",
         },
+    },
+    icons: {
+        icon: "/icon.png",
+        apple: "/apple-touch-icon.png",
     },
     other: {
         "google": "notranslate",
@@ -59,7 +81,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                                 "https://www.facebook.com/volkswagendobrasil",
                                 "https://www.instagram.com/volkswagen",
                                 "https:/www.youtube.com/@volkswagendobrasil",
-                                "https://www.linkedin.com/company/volkswagen-do-brasil"
+                                "https://www.linkedin.com/company/volkswagen-do-brasil",
+                                "https://caiothedev.com"
                             ],
                             "contactPoint": {
                                 "@type": "ContactPoint",
