@@ -23,6 +23,20 @@
     --light-blue: #6EA9E3;
 }
 
+@theme inline {
+    --white-background: var(--white-background);
+    --black-background: var(--black-background);
+    --white-text: var(--white-text);
+    --white-text-hover: var(--white-text-hover);
+    --white-border: var(--white-border);
+    --white-border-hover: var(--white-border-hover);
+    --black-text: var(--black-text);
+    --black-text-hover: var(--black-text-hover);
+    --dark-blue: var(--dark-blue);
+    --medium-blue: var(--medium-blue);
+    --light-blue: var(--light-blue);
+}
+
 html {
     scroll-behavior: smooth;
 }

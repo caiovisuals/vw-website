@@ -23,11 +23,11 @@ export default function UsefulError({
             <div className="flex flex-row items-center justify-center gap-4">
                 <button
                     onClick={reset}
-                    className="px-5 py-2.5 bg-[var(--vw-blue)] text-white hover:opacity-90 rounded-xl font-semibold transition"
+                    className="px-6 py-2 text-[var(--white-text)] bg-[var(--dark-blue)] hover:opacity-90 rounded-xl font-semibold transition"
                 >
                     Tentar novamente
                 </button>
-                <Link href="/" className="px-5 py-2.5 border-2 border-gray-300 hover:bg-gray-50 rounded-xl font-semibold transition">
+                <Link href="/" className="px-6 py-2 border-2 border-gray-300 hover:bg-gray-50 rounded-xl font-semibold transition">
                     Início
                 </Link>
             </div>

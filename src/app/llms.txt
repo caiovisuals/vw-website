@@ -1,0 +1,15 @@
+# VOLKSWAGEN BRASIL (CAIOTHEDEV)
+
+> Independent Volkswagen Brazil-inspired full-stack web application created by Caio Oliveira for study, experimentation, and portfolio purposes.
+
+## Project
+
+VW Website is a full-stack web application that recreates and expands the digital experience of an automotive brand website, inspired by the Volkswagen Brazil portal.
+The project simulates a production-oriented automotive platform, including vehicle discovery, vehicle configuration, dealership search, customer simulations, authentication, lead generation, and staff administration.
+This is an independent fan-made project. It is NOT an official Volkswagen website, product, service, or platform, and it has no official affiliation with Volkswagen.
+
+## Elsewhere
+
+- [Volkswagen Brasil](https://www.vw.com.br/pt.html): Official Volkswagen Brazil website
+- [Volkswagen Ofertas](https://ofertas.vw.com.br): Official Volkswagen Brazil offers and vehicle deals
+- [caiothedev](https://caiothedev.com): Portfolio of the project's creator, Caio Oliveira
