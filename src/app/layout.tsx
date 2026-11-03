@@ -4,6 +4,7 @@ import { AuthProvider } from "@/_lib/contexts/AuthContext"
 import { LanguageProvider } from "@/_lib/contexts/LanguageContext"
 import Script from "next/script"
 import ScrollToTop from "@/_components/ScrollToTop"
+import { SITE_URL } from "@/_lib/utils/siteUrl"
 import "./globals.css"
 
 const geologica = Geologica({
@@ -12,7 +13,8 @@ const geologica = Geologica({
 })
 
 export const metadata: Metadata = {
-    title: "Volkswagen do Brasil | Hatch, Sedan, SUVW, Picape, Elétrico. Tudo o que você imaginar!",
+    metadataBase: new URL(SITE_URL),
+    title: "Volkswagen do Brasil | Hatch, Sedan, SUV, Picape, Elétrico. Tudo o que você imaginar!",
     description: "Bem-vindo ao website da Volkswagen. Encontre a sua maquina favorita e descubra o melhor do conforto, tecnologia e robustez que somente um Volkswagen oferece.",
     applicationName: "Volkswagen Brasil",
     keywords: [
@@ -74,8 +76,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
-                            "@type": "Organization",
-                            "name": "Volkswagen Brasil",
+                            "@type": "WebSite",
+                            "name": "Volkswagen Brasil Website",
                             "inLanguage": ["pt-BR", "en-US"],
                             "sameAs": [
                                 "https://www.facebook.com/volkswagendobrasil",

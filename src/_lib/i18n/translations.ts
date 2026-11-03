@@ -108,7 +108,7 @@ export const translations = {
             },
             taos: {
                 title: "Um carro com superpoderes",
-                subtitle: "O SUVW com nota máxima em segurança e interna superconfortável.",
+                subtitle: "O SUV com nota máxima em segurança e interna superconfortável.",
             },
             polo: {
                 title: "Mais que um carro, um Polo",
@@ -355,7 +355,7 @@ export const translations = {
             },
             taos: {
                 title: "A car with superpowers",
-                subtitle: "The SUVW with top safety rating and super comfortable interior space.",
+                subtitle: "The SUV with top safety rating and super comfortable interior space.",
             },
             polo: {
                 title: "More than a car, a Polo",
