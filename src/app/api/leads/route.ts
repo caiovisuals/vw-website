@@ -51,8 +51,8 @@ export async function GET(req: NextRequest) {
             status:   searchParams.get("status")   ?? undefined,
             dealerId: searchParams.get("dealerId") ?? undefined,
             carId:    searchParams.get("carId")    ?? undefined,
-            page:     searchParams.get("page"),
-            limit:    searchParams.get("limit"),
+            page:     searchParams.get("page") ?? undefined,
+            limit:    searchParams.get("limit") ?? undefined,
         })
 
         const where = {

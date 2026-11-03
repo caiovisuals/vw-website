@@ -1,9 +1,14 @@
 import Header from "@/_components/Header"
 import Footer from "@/_components/Footer"
+import { redirect } from "next/navigation"
+import { getCurrentUser } from "@/_lib/utils/session"
 
 export const dynamic = "force-dynamic"
 
-export default function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    const user = await getCurrentUser()
+    if (!user) redirect("/login?next=/home")
+        
     return (
         <div className="flex flex-col">
             <Header />

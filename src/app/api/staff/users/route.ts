@@ -19,8 +19,8 @@ export async function GET(req: NextRequest) {
         const query = querySchema.parse({
             search: searchParams.get("search") ?? undefined,
             role:   searchParams.get("role")   ?? undefined,
-            page:   searchParams.get("page"),
-            limit:  searchParams.get("limit"),
+            page:   searchParams.get("page") ?? undefined,
+            limit:  searchParams.get("limit") ?? undefined,
         })
 
         const where = {

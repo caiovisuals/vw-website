@@ -38,8 +38,8 @@ export async function GET(req: NextRequest) {
         const query = dealerQuerySchema.parse({
             city: searchParams.get("city") ?? undefined,
             state: searchParams.get("state") ?? undefined,
-            page: searchParams.get("page"),
-            limit: searchParams.get("limit"),
+            page: searchParams.get("page") ?? undefined,
+            limit: searchParams.get("limit") ?? undefined,
         })
 
         const where = {

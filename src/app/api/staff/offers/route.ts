@@ -1,19 +1,29 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest } from "next/server"
 import { prisma } from "@/_lib/prisma"
+import { created, handleRoute } from "@/_lib/utils/apiResponse"
+import { requireRole } from "@/_lib/utils/session"
+import { createOfferSchema } from "@/_lib/validations/offers"
+import { auditLog } from "@/_lib/utils/auditLog"
+import { getRequestMeta } from "@/_lib/security/requestHelpers"
 
 export async function POST(req: NextRequest) {
-    const body = await req.json()
+    return handleRoute(async () => {
+        const actor = await requireRole("STAFF")
 
-    const offer = await prisma.offer.create({
-        data: {
-            ...body,
-            price: Number(body.price),
-            discount: body.discount ? Number(body.discount) : null,
-            validUntil: body.validUntil ? new Date(body.validUntil) : null,
-        },
+        const data = createOfferSchema.parse(await req.json())
+        const offer = await prisma.offer.create({ data })
+
+        const { ip } = await getRequestMeta(req)
+        await auditLog({
+            actorId: actor.id,
+            actorEmail: actor.email,
+            action: "OFFER_CREATED",
+            targetId: offer.id,
+            targetType: "Offer",
+            metadata: { title: offer.title, model: offer.model },
+            ip,
+        })
+
+        return created(offer, "Oferta criada.")
     })
-
-    return NextResponse.json(offer)
 }
-
-export async function DELETE(req: NextRequest) {}

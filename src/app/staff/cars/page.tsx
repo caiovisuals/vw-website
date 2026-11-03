@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
+import { api } from "@/_lib/utils/apiClient"
 
 type FuelType = "FLEX" | "ELECTRIC" | "HYBRID" | "GASOLINE" | "DIESEL"
 type TransmissionType = "MANUAL" | "AUTOMATIC" | "CVT"
@@ -62,20 +63,16 @@ export default function StaffCars() {
                 imageUrl: form.imageUrl || undefined,
                 interiorImageUrl: form.interiorImageUrl || undefined,
             }
-            const res = await fetch("/api/cars", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify(payload),
-            })
-            const json = await res.json()
+            
+            const res = await api.post("/api/cars", payload)
+            
             if (res.ok) {
                 setFormSuccess("Carro cadastrado com sucesso!")
                 setForm({ ...emptyForm })
                 setShowForm(false)
                 fetchCars()
             } else {
-                setFormError(json.error ?? "Erro ao cadastrar carro.")
+                setFormError(res.error ?? "Erro ao cadastrar carro.")
             }
         } finally {
             setFormLoading(false)
@@ -83,22 +80,16 @@ export default function StaffCars() {
     }
 
     async function toggleActive(slug: string, current: boolean) {
-        await fetch(`/api/cars/${slug}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ isActive: !current }),
-        })
+        const res = await api.patch(`/api/cars/${slug}`, { isActive: !current })
+        if (!res.ok) return
+
         setCars(prev => prev.map(c => c.slug === slug ? { ...c, isActive: !current } : c))
     }
 
     async function toggleFeatured(slug: string, current: boolean) {
-        await fetch(`/api/cars/${slug}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ isFeatured: !current }),
-        })
+        const res = await api.patch(`/api/cars/${slug}`, { isFeatured: !current })
+        if (!res.ok) return
+        
         setCars(prev => prev.map(c => c.slug === slug ? { ...c, isFeatured: !current } : c))
     }
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
+import { api } from "@/_lib/utils/apiClient"
 
 interface Dealer {
     id: string; name: string; address: string; city: string; state: string
@@ -60,20 +61,16 @@ export default function StaffDealers() {
                 phone: form.phone || undefined,
                 email: form.email || undefined,
             }
-            const res = await fetch("/api/dealers", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify(payload),
-            })
-            const json = await res.json()
+
+            const res = await api.post("/api/dealers", payload)
+
             if (res.ok) {
                 setFormSuccess("Concessionária cadastrada!")
                 setForm({ ...emptyForm })
                 setShowForm(false)
                 fetchDealers()
             } else {
-                setFormError(json.error ?? "Erro ao cadastrar.")
+                setFormError(res.error ?? "Erro ao cadastrar.")
             }
         } finally {
             setFormLoading(false)
@@ -81,12 +78,9 @@ export default function StaffDealers() {
     }
 
     async function toggleActive(id: string, current: boolean) {
-        await fetch(`/api/dealers/${id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ isActive: !current }),
-        })
+        const res = await api.patch(`/api/dealers/${id}`, { isActive: !current })
+        if (!res.ok) return
+        
         setDealers(prev => prev.map(d => d.id === id ? { ...d, isActive: !current } : d))
     }
 

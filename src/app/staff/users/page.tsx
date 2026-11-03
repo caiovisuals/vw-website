@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useState, useCallback } from "react"
+import { api } from "@/_lib/utils/apiClient"
 
 type Role = "USER" | "STAFF" | "ADMIN"
 
@@ -73,12 +74,8 @@ export default function StaffUsers() {
     async function changeRole(userId: string, newRole: Role) {
         setEditLoading(true)
         try {
-            const res = await fetch(`/api/staff/users/${userId}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({ role: newRole }),
-            })
+            const res = await api.patch(`/api/staff/users/${userId}`, { role: newRole })
+            
             if (res.ok) {
                 setUsers(prev => prev.map(u => u.id === userId ? { ...u, role: newRole } : u))
                 setEditingRole(null)

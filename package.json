@@ -10,6 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
     "db:seed": "prisma db seed",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",

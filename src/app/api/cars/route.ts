@@ -19,11 +19,11 @@ export async function GET(req: NextRequest) {
         const filters = carFiltersSchema.parse({
             fuel: searchParams.getAll("fuel"),
             transmission: searchParams.getAll("transmission"),
-            featured: searchParams.get("featured"),
-            minPrice: searchParams.get("minPrice"),
-            maxPrice: searchParams.get("maxPrice"),
-            page: searchParams.get("page"),
-            limit: searchParams.get("limit"),
+            featured: searchParams.get("featured") ?? undefined,
+            minPrice: searchParams.get("minPrice") ?? undefined,
+            maxPrice: searchParams.get("maxPrice") ?? undefined,
+            page: searchParams.get("page") ?? undefined,
+            limit: searchParams.get("limit") ?? undefined,
         })
 
         const where = {

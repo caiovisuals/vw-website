@@ -2,19 +2,14 @@ import { NextRequest, NextResponse } from "next/server"
 import { detectSuspiciousActivity } from "@/_lib/security/suspicious"
 import { isRateLimited, rateLimitHeaders } from "@/_lib/security/rateLimit"
 import { getRequestMeta } from "@/_lib/security/requestHelpers"
-import { SESSION_COOKIE, ROLE_LEVEL } from "@/_lib/utils/sessionConstants"
+import { SESSION_COOKIE } from "@/_lib/utils/sessionConstants"
 import { csrfProtection } from "@/_lib/security/csrf"
-import { jwtVerify } from "jose"
 
-const AUTH_ROUTES = [
+const PROTECTED_ROUTES = [
     "/api/me",
     "/api/configurations",
+    "/api/staff",
     "/home",
-    "/home/profile",
-]
-
-const STAFF_ROUTES = [
-    "/api/staff/users",
     "/staff",
 ]
 
@@ -25,22 +20,12 @@ const AUTH_API_ROUTES = [
     "/api/auth/reset-password",
 ]
 
-async function getRoleFromToken(token: string): Promise<string | null> {
-    try {
-        const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET)
-        const { payload } = await jwtVerify(token, secret)
-        return typeof payload.role === "string" ? payload.role : null
-    } catch {
-        return null
-    }
-}
-
 function buildSecurityHeaders(nonce: string): Record<string, string> {
     const isProd = process.env.NODE_ENV === "production"
 
     const csp = [
         "default-src 'self'",
-        `script-src 'self' 'nonce-${nonce}' maps.googleapis.com`,
+        `script-src 'self' 'nonce-${nonce}' maps.googleapis.com${isProd ? "" : " 'unsafe-eval'"}`,
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: maps.gstatic.com maps.googleapis.com *.googleapis.com",
         "connect-src 'self' maps.googleapis.com *.sentry.io",
@@ -69,7 +54,7 @@ function applySecurityHeaders(response: NextResponse, headers: Record<string, st
     }
 }
 
-function denyAccess(req: NextRequest, status: 401 | 403, error: string): NextResponse {
+function denyAccess(req: NextRequest, status: 401, error: string): NextResponse {
     if (req.nextUrl.pathname.startsWith("/api/")) {
         return new NextResponse(
             JSON.stringify({ success: false, error }),
@@ -82,7 +67,7 @@ function denyAccess(req: NextRequest, status: 401 | 403, error: string): NextRes
     return NextResponse.redirect(loginUrl)
 }
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
     const { pathname } = req.nextUrl
     const { ip } = await getRequestMeta(req)
 
@@ -125,23 +110,10 @@ export async function middleware(req: NextRequest) {
     }
     
     const token = req.cookies.get(SESSION_COOKIE)?.value
-    const role = token ? await getRoleFromToken(token) : null
-
-    const needsAuth  = AUTH_ROUTES.some(r  => pathname.startsWith(r))
-    const needsStaff = STAFF_ROUTES.some(r => pathname.startsWith(r))
+    const isProtected = PROTECTED_ROUTES.some(r => pathname === r || pathname.startsWith(`${r}/`))
  
-    if (needsAuth && !token) {
+    if (isProtected && !token) {
         return denyAccess(req, 401, "Não autorizado.")
-    }
-
-    if (needsStaff) {
-        if (!token) {
-            return denyAccess(req, 401, "Não autorizado.")
-        }
-
-        if (!role || ROLE_LEVEL[role] < ROLE_LEVEL.STAFF) {
-            return denyAccess(req, 403, "Acesso negado.")
-        }
     }
 
     const nonce = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("base64")

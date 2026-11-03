@@ -55,6 +55,36 @@ A aplicação web full-stack que replica a experiência do site oficial. O proje
 - Fortalecer o portfólio com um projeto de alto nível, demonstrando capacidade técnica e atenção a detalhes
 - Aumentar visibilidade profissional e criar uma oportunidade de ser notado por empresas como a Volkswagen
 
+## Como Rodar
+
+Pré-requisitos: **Node.js 20.9+** (recomendado 22) e **PostgreSQL**.
+
+```bash
+git clone https://github.com/caiovisuals/vw-website.git
+cd vw-website
+npm install
+cp .env.example .env   # preencha as variáveis (ver abaixo)
+npm run db:migrate     # aplica as migrations
+npm run db:seed        # popula carros, concessionárias, ofertas e usuários
+npm run dev            # http://localhost:3000
+```
+
+Usuários criados pelo seed (apenas para desenvolvimento):
+
+| Role | E-mail | Senha |
+|---|---|---|
+| ADMIN | admin@vwwebsite.dev | Admin1234 |
+| STAFF | staff@vwwebsite.dev | Staff1234 |
+| USER | cliente@vwwebsite.dev | Cliente1234 |
+
+### Segurança e Autorização
+
+O proxy (`src/proxy.ts`, antigo middleware) só faz um pré-filtro: exige o cookie de sessão em `/home`, `/staff`, `/api/me`, `/api/configurations` e `/api/staff/*`. A validação real da sessão e do papel do usuário acontece no servidor, com `requireAuth` e `requireRole` nas rotas de API e nos layouts de `/home` e `/staff`. Toda requisição que altera dados (`POST`, `PUT`, `PATCH`, `DELETE`) para `/api` precisa do header `x-csrf-token`. No front, use o cliente `api` de `src/_lib/utils/apiClient.ts`, que envia o token automaticamente.
+
+### CI
+
+O workflow `.github/workflows/ci.yml` roda lint, typecheck e testes em todo push para `main` e em todo pull request.
+
 ## Testes
 
 Testes unitários com **Vitest** + Testing Library, em `src/__tests__/`:
@@ -118,6 +148,30 @@ A full-stack web application replicating the official site's experience. The pro
 - Simulate real business workflows, such as vehicle configuration and lead generation
 - Strengthen my portfolio with a high-level project that demonstrates technical proficiency and attention to detail
 - Increase professional visibility and create an opportunity to be noticed by companies like Volkswagen
+
+## Getting Started
+
+Requirements: **Node.js 20.9+** (22 recommended) and **PostgreSQL**.
+
+```bash
+git clone https://github.com/caiovisuals/vw-website.git
+cd vw-website
+npm install
+cp .env.example .env   # fill in the variables (see below)
+npm run db:migrate     # apply migrations
+npm run db:seed        # seed cars, dealers, offers and users
+npm run dev            # http://localhost:3000
+```
+
+Seeded users (development only): `admin@vwwebsite.dev` / `Admin1234`, `staff@vwwebsite.dev` / `Staff1234`, `cliente@vwwebsite.dev` / `Cliente1234`.
+
+### Security and Authorization
+
+The proxy (`src/proxy.ts`, formerly middleware) only performs a pre-check: it requires the session cookie on `/home`, `/staff`, `/api/me`, `/api/configurations` and `/api/staff/*`. The actual session and role checks run on the server, through `requireAuth` and `requireRole` in API routes and the `/home` and `/staff` layouts. Every state-changing request (`POST`, `PUT`, `PATCH`, `DELETE`) to `/api` needs the `x-csrf-token` header. On the client, use the `api` helper from `src/_lib/utils/apiClient.ts`, which sends the token automatically.
+
+### CI
+
+The `.github/workflows/ci.yml` workflow runs lint, typecheck and tests on every push to `main` and on every pull request.
 
 ## Tests
 
