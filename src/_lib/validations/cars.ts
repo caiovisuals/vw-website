@@ -42,7 +42,11 @@ export const createCarSchema = z.object({
     interiorImageUrl: z.string().url().optional(),
 })
 
-export const updateCarSchema = createCarSchema.partial()
+export const updateCarSchema = createCarSchema.partial().extend({
+    isElectric: z.boolean().optional(),
+    isFeatured: z.boolean().optional(),
+    isActive: z.boolean().optional(),
+})
 
 export type CarFilters = z.infer<typeof carFiltersSchema>
 export type SaveConfigInput = z.infer<typeof saveConfigSchema>

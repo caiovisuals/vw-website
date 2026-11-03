@@ -24,4 +24,5 @@ Thank you for considering contributing to the project. This project was develope
 - Respect the existing architecture before proposing structural changes
 - If you encounter a bug, check if it has already been reported before opening an issue
 
-by caiothevisual
+by caiothedev<br/>
+#contributing #code

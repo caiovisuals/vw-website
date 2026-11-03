@@ -5,11 +5,7 @@ Este é um projeto independente, desenvolvido por um fã da marca para fins de e
 
 ## Capturas de Telas
 
-![Menu Principal](public/assets/screenshots/1.png)
-
-![Modo Solo](public/assets/screenshots/2.png)
-
-![Modo Multiplayer](public/assets/screenshots/3.png)
+![Página principal](public/assets/screenshots/1.png)
 
 ## Visão Geral
  
