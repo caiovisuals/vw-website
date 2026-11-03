@@ -73,6 +73,11 @@ export default function HeroSection() {
                     </h2>
                 </div>
             </div>
+            <a href="#models" aria-label="Rolar para baixo" className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-[var(--white-text)] animate-bounce">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
+            </a>
         </section>
     )
 }
