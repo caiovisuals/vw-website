@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 15
 
     # Valores fictícios: o `prisma.config.ts` e o schema do @t3-oss/env exigem
-    # essas variáveis, mas nenhum passo do CI conecta ao banco.
+    # essas variáveis, mas nenhum passo do CI conecta ao banco (nem o build).
     env:
       DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
       NEXTAUTH_SECRET: ci-secret-with-at-least-32-characters
@@ -45,3 +45,10 @@ jobs:
 
       - name: Testes
         run: npm test
+
+      # Sem banco no CI: páginas que consultam o Prisma em build (ex.: sitemap)
+      # caem no fallback e o build precisa passar mesmo assim.
+      - name: Build
+        run: npx next build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1

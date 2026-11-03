@@ -83,7 +83,11 @@ O proxy (`src/proxy.ts`, antigo middleware) só faz um pré-filtro: exige o cook
 
 ### CI
 
-O workflow `.github/workflows/ci.yml` roda lint, typecheck e testes em todo push para `main` e em todo pull request.
+O workflow `.github/workflows/ci.yml` roda lint, typecheck, testes e `next build` em todo push para `main` e em todo pull request.
+
+### Deploy e migrations
+
+Na Vercel, o script `vercel-build` substitui o `build`: gera o Prisma Client, aplica as migrations pendentes (`prisma migrate deploy`) e roda o `next build`. As migrations só são aplicadas quando `VERCEL_ENV=production`, para que deploys de preview não alterem o banco de produção. Em outro provedor, defina `MIGRATE_ON_BUILD=true` e use `npm run vercel-build`, ou rode `npm run db:deploy` antes do build.
 
 ## Testes
 

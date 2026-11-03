@@ -4,10 +4,12 @@ import ModelsSection from "@/_components/main-page-sections/ModelsSection"
 import FeaturedSection from "@/_components/main-page-sections/FeaturedSection"
 import ServicesSection from "@/_components/main-page-sections/ServicesSection"
 import Footer from "@/_components/Footer"
+import OrganizationJsonLd from "@/_components/seo/OrganizationJsonLd"
 
 export default function Home() {
     return (
         <>
+            <OrganizationJsonLd />
             <Header />
             <HeroSection />
             <ModelsSection />
